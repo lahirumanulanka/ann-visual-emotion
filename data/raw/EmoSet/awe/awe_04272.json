@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_04272",
+  "emotion": "awe",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "beach",
+  "object": [
+    "Rose"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

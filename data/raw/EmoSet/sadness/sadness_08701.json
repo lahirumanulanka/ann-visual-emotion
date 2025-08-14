@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_08701",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Flowerpot",
+    "Jeans",
+    "Table"
+  ],
+  "facial_expression": "sad"
+}

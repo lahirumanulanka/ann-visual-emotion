@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_07513",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "scene": "stage",
+  "object": [
+    "Microphone"
+  ],
+  "facial_expression": "happy"
+}

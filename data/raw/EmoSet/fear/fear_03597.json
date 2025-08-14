@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_03597",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "lawn",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "angry"
+}

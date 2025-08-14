@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_10946",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "street",
+  "object": [
+    "Swimwear",
+    "Sunglasses",
+    "Bicycle wheel"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "awe_05061",
+  "emotion": "awe",
+  "brightness": 0.4,
+  "colorfulness": 0.3,
+  "scene": "doorway",
+  "object": [
+    "Tiara",
+    "Fashion accessory",
+    "Flower"
+  ],
+  "facial_expression": "happy"
+}

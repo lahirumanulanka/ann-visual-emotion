@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_09017",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "airplane_cabin",
+  "object": [
+    "Fashion accessory"
+  ],
+  "facial_expression": "surprise"
+}

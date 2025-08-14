@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_06957",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "lawn",
+  "object": [
+    "Jeans",
+    "Food"
+  ],
+  "facial_expression": "happy"
+}

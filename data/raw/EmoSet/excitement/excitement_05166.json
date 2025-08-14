@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_05166",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Motorcycle",
+    "Sunglasses"
+  ],
+  "facial_expression": "happy",
+  "human_action": "motorcycling"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_16022",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.7,
+  "scene": "discotheque",
+  "object": [
+    "Beer"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "drinking beer"
+}

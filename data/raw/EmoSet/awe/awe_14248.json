@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_14248",
+  "emotion": "awe",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "conference_center",
+  "object": [
+    "Bottle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "answering questions"
+}

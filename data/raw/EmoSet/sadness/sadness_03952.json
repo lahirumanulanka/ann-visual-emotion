@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_03952",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.3,
+  "object": [
+    "Flower",
+    "Flowerpot"
+  ],
+  "facial_expression": "sad"
+}

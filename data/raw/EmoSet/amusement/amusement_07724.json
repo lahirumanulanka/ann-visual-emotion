@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_07724",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "object": [
+    "Shirt",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

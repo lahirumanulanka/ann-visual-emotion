@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_15745",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Jeans",
+    "Trousers",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

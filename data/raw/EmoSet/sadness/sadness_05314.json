@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_05314",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Picture frame",
+    "Furniture"
+  ],
+  "facial_expression": "sad",
+  "human_action": "hugging"
+}

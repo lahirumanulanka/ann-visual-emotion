@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03818",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "scene": "parking_lot",
+  "object": [
+    "Car",
+    "Wheel",
+    "Jacket"
+  ],
+  "facial_expression": "surprise"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_02638",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Tree",
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

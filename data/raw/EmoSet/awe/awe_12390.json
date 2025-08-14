@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_12390",
+  "emotion": "awe",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Seafood",
+    "Drink"
+  ],
+  "facial_expression": "happy",
+  "human_action": "dining"
+}

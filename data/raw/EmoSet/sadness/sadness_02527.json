@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_02527",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Scarf"
+  ],
+  "facial_expression": "sad"
+}

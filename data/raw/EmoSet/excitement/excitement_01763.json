@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01763",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "street",
+  "object": [
+    "Car",
+    "Wheel"
+  ],
+  "facial_expression": "surprise"
+}

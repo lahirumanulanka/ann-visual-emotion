@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_07928",
+  "emotion": "anger",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "scene": "restaurant",
+  "object": [
+    "Tableware",
+    "Drink",
+    "Table"
+  ],
+  "facial_expression": "disgust"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_00036",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Wheel",
+    "Bicycle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding a bike"
+}

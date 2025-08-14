@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_04072",
+  "emotion": "fear",
+  "brightness": 0.1,
+  "colorfulness": 0.2,
+  "object": [
+    "Land vehicle"
+  ],
+  "facial_expression": "fear",
+  "human_action": "driving car"
+}

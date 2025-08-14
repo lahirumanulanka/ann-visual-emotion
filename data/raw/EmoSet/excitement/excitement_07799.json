@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_07799",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "plaza",
+  "object": [
+    "Tree",
+    "Sunglasses",
+    "Palm tree"
+  ],
+  "facial_expression": "happy"
+}

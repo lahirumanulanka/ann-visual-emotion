@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_12838",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "lawn",
+  "object": [
+    "Plant",
+    "Kangaroo",
+    "Carnivore"
+  ],
+  "facial_expression": "happy",
+  "human_action": "petting animal (not cat)"
+}

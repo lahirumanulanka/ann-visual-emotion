@@ -1,0 +1,14 @@
+{
+  "image_id": "fear_05827",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.3,
+  "scene": "street",
+  "object": [
+    "Mobile phone",
+    "Jeans",
+    "Building"
+  ],
+  "facial_expression": "happy",
+  "human_action": "texting"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_02520",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.0,
+  "object": [
+    "Jeans",
+    "Plant"
+  ],
+  "facial_expression": "sad",
+  "human_action": "smoking"
+}

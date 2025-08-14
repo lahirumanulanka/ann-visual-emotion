@@ -1,0 +1,10 @@
+{
+  "image_id": "anger_08230",
+  "emotion": "anger",
+  "brightness": 0.2,
+  "colorfulness": 0.4,
+  "object": [
+    "Musical instrument"
+  ],
+  "facial_expression": "angry"
+}

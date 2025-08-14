@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_06647",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "plaza",
+  "object": [
+    "Sunglasses",
+    "Car"
+  ],
+  "facial_expression": "angry"
+}

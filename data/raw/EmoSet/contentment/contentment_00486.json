@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_00486",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "lake",
+  "object": [
+    "Tree",
+    "Camera",
+    "Coat"
+  ],
+  "facial_expression": "happy"
+}

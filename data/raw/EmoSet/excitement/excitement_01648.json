@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_01648",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "slum",
+  "object": [
+    "Plant",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

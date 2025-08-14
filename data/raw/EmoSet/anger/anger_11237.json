@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_11237",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Trousers"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

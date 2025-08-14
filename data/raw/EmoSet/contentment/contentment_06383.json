@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_06383",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "restaurant",
+  "object": [
+    "Hat",
+    "Food",
+    "Chair"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_09540",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Plant",
+    "Jacket"
+  ],
+  "facial_expression": "sad"
+}

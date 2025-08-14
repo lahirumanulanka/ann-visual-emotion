@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_10663",
+  "emotion": "excitement",
+  "brightness": 0.2,
+  "colorfulness": 0.6,
+  "scene": "discotheque",
+  "object": [
+    "Drink"
+  ],
+  "facial_expression": "happy"
+}

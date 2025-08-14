@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_16954",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Flag",
+    "Window"
+  ],
+  "facial_expression": "happy"
+}

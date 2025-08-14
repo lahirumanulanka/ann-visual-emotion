@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_02059",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Drink",
+    "Beer"
+  ],
+  "facial_expression": "happy"
+}

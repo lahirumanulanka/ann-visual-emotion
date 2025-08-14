@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_00236",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Plant",
+    "Fashion accessory",
+    "Necklace"
+  ],
+  "facial_expression": "happy"
+}

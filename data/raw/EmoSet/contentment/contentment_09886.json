@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_09886",
+  "emotion": "contentment",
+  "brightness": 0.8,
+  "colorfulness": 0.4,
+  "object": [
+    "Houseplant",
+    "Food",
+    "Window"
+  ],
+  "facial_expression": "happy",
+  "human_action": "making a sandwich"
+}

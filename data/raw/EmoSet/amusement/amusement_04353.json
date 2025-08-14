@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_04353",
+  "emotion": "amusement",
+  "brightness": 0.8,
+  "colorfulness": 0.7,
+  "scene": "water_park",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

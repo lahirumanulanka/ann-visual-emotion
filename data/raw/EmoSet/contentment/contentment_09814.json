@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_09814",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "river",
+  "object": [
+    "Tree",
+    "Animal"
+  ],
+  "facial_expression": "happy"
+}

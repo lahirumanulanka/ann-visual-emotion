@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_03808",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "campus",
+  "object": [
+    "Tree",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "pumping fist"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_09909",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "scene": "delicatessen",
+  "object": [
+    "Chair",
+    "Convenience store"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

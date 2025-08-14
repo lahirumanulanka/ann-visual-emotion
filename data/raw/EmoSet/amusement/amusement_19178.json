@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_19178",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Umbrella"
+  ],
+  "facial_expression": "happy"
+}

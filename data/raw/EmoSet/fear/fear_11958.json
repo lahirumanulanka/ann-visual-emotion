@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_11958",
+  "emotion": "fear",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Coat",
+    "Jacket"
+  ],
+  "facial_expression": "happy"
+}

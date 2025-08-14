@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_01837",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "rope_bridge",
+  "object": [
+    "Plant",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "swinging on something"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_10457",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "object": [
+    "Window",
+    "Building"
+  ],
+  "facial_expression": "happy"
+}

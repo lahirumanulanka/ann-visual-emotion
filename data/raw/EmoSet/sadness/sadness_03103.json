@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_03103",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Christmas tree"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

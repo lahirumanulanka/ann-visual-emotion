@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01245",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Jeans",
+    "Table"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "stretching arm"
+}

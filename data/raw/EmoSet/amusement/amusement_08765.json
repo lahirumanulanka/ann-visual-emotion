@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_08765",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

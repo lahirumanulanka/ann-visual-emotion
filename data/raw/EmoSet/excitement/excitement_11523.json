@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_11523",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "park",
+  "object": [
+    "Jacket",
+    "Sunglasses",
+    "Tree"
+  ],
+  "facial_expression": "surprise"
+}

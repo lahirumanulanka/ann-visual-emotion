@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_09714",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "stage",
+  "object": [
+    "Hat",
+    "Fedora"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "playing guitar"
+}

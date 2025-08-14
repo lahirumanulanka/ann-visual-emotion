@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_08134",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Mug",
+    "Coffee cup",
+    "Drink"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_01681",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.0,
+  "scene": "wheat_field",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "angry"
+}

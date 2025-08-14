@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_07229",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "bus_interior",
+  "object": [
+    "Jeans"
+  ],
+  "facial_expression": "surprise"
+}

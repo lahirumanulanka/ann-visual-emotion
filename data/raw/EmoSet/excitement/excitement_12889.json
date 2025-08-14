@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_12889",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "farm",
+  "object": [
+    "Plant",
+    "Jeans"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding or walking with horse"
+}

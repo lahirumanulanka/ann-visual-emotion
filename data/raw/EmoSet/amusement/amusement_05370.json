@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_05370",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.9,
+  "object": [
+    "Fashion accessory",
+    "Wine glass"
+  ],
+  "facial_expression": "happy",
+  "human_action": "tasting beer"
+}

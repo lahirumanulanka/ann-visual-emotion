@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_05782",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "forest_road",
+  "object": [
+    "Wheel",
+    "Wheel",
+    "Tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "motorcycling"
+}

@@ -1,0 +1,10 @@
+{
+  "image_id": "amusement_08543",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_00282",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.9,
+  "scene": "stage",
+  "object": [
+    "Fashion accessory",
+    "Necklace"
+  ],
+  "facial_expression": "happy"
+}

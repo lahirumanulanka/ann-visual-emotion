@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_02370",
+  "emotion": "sadness",
+  "brightness": 0.2,
+  "colorfulness": 0.0,
+  "scene": "bus_interior",
+  "object": [
+    "Land vehicle",
+    "Jeans",
+    "Chair"
+  ],
+  "facial_expression": "sad"
+}

@@ -1,0 +1,14 @@
+{
+  "image_id": "amusement_17203",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "park",
+  "object": [
+    "Skirt",
+    "Trousers",
+    "Helmet"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

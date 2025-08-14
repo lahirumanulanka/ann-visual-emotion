@@ -1,0 +1,13 @@
+{
+  "image_id": "awe_10172",
+  "emotion": "awe",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "forest",
+  "object": [
+    "Tree",
+    "Flower",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy"
+}

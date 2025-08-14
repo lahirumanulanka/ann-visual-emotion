@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_16403",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "corridor",
+  "object": [
+    "Door"
+  ],
+  "facial_expression": "happy"
+}

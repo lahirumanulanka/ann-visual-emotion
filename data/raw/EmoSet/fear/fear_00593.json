@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_00593",
+  "emotion": "fear",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "object": [
+    "Fashion accessory",
+    "Fedora"
+  ],
+  "facial_expression": "happy"
+}

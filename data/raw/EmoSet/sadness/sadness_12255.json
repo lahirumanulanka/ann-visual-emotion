@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_12255",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "plaza",
+  "object": [
+    "Jeans",
+    "Fashion accessory"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

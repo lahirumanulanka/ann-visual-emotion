@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_18215",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "scene": "stage",
+  "object": [
+    "Poster",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "singing"
+}

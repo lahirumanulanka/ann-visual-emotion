@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_04245",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Scarf",
+    "Plant"
+  ],
+  "facial_expression": "surprise"
+}

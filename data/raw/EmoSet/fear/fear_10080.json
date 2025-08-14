@@ -1,0 +1,13 @@
+{
+  "image_id": "fear_10080",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "boardwalk",
+  "object": [
+    "Shorts",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

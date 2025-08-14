@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_05905",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "botanical_garden",
+  "object": [
+    "Flower",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

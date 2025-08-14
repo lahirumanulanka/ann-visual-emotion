@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_00601",
+  "emotion": "anger",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "object": [
+    "Wheel",
+    "Hat"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

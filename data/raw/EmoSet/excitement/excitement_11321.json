@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_11321",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "street",
+  "object": [
+    "Hat"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "carrying baby"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_09567",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Hat",
+    "Trousers"
+  ],
+  "facial_expression": "sad"
+}

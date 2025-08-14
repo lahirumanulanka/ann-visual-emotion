@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_13148",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "car_interior",
+  "object": [
+    "Land vehicle",
+    "Car"
+  ],
+  "facial_expression": "happy"
+}

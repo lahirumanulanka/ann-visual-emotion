@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_06379",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Shorts",
+    "Hat"
+  ],
+  "facial_expression": "happy"
+}

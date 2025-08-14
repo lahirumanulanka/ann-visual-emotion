@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_04194",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "scene": "park",
+  "object": [
+    "Jeans",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

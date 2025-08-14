@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_15729",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Jeans",
+    "High heels"
+  ],
+  "facial_expression": "happy"
+}

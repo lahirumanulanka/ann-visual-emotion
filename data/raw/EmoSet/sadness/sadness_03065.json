@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_03065",
+  "emotion": "sadness",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Toy",
+    "Tree"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

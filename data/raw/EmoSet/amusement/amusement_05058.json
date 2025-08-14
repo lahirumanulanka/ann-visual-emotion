@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_05058",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Tree",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_07077",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "stage",
+  "object": [
+    "Microphone",
+    "Violin"
+  ],
+  "facial_expression": "happy"
+}

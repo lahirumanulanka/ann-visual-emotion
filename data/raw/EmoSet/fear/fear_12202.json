@@ -1,0 +1,10 @@
+{
+  "image_id": "fear_12202",
+  "emotion": "fear",
+  "brightness": 0.2,
+  "colorfulness": 0.5,
+  "object": [
+    "Food"
+  ],
+  "facial_expression": "surprise"
+}

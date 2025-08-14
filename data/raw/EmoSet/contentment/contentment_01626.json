@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_01626",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Tree",
+    "Sunglasses"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

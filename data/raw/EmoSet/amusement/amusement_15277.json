@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_15277",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Balloon",
+    "Chair"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

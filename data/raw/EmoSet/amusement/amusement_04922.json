@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_04922",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Shelf",
+    "Book"
+  ],
+  "facial_expression": "happy"
+}

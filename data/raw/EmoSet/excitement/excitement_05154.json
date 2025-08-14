@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_05154",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "coast",
+  "object": [
+    "Jeans",
+    "Tree"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "stretching arm"
+}

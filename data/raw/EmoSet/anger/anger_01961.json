@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_01961",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "patio",
+  "object": [
+    "Chair",
+    "Food",
+    "Tree"
+  ],
+  "facial_expression": "surprise"
+}

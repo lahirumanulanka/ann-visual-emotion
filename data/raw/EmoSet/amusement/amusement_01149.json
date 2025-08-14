@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_01149",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Guitar",
+    "Fashion accessory",
+    "Musical instrument"
+  ],
+  "facial_expression": "happy"
+}

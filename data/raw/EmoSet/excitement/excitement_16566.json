@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_16566",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "ocean",
+  "object": [
+    "Personal flotation device",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

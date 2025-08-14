@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_10787",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Suit",
+    "Car",
+    "Shirt"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_00200",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Sports uniform",
+    "Fashion accessory",
+    "Miniskirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "cheerleading"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_04432",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "athletic_field",
+  "object": [
+    "Sports uniform",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

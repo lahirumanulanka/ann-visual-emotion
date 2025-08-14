@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_01391",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "object": [
+    "Window",
+    "Tree",
+    "Dog"
+  ],
+  "facial_expression": "happy",
+  "human_action": "petting animal (not cat)"
+}

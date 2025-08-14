@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_18741",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Drum",
+    "Sunglasses",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "singing"
+}

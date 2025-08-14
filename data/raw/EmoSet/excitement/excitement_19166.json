@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_19166",
+  "emotion": "excitement",
+  "brightness": 0.2,
+  "colorfulness": 0.3,
+  "scene": "stage",
+  "object": [
+    "Musical instrument"
+  ],
+  "facial_expression": "happy",
+  "human_action": "tapping guitar"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_12294",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "forest_path",
+  "object": [
+    "Bicycle",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

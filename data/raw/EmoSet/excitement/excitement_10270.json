@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_10270",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.4,
+  "scene": "wave",
+  "object": [
+    "Swimwear",
+    "Sunglasses"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "surfing water"
+}

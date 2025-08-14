@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_10994",
+  "emotion": "sadness",
+  "brightness": 0.3,
+  "colorfulness": 0.3,
+  "object": [
+    "Drink"
+  ],
+  "facial_expression": "sad",
+  "human_action": "smoking"
+}

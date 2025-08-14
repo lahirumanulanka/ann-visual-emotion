@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_08901",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Food",
+    "Table",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "dining"
+}

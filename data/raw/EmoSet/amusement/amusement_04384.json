@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_04384",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "object": [
+    "Jeans",
+    "Tree",
+    "Hat"
+  ],
+  "facial_expression": "happy"
+}

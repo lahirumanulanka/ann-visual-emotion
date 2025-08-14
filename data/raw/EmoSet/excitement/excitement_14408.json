@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_14408",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "object": [
+    "Microphone",
+    "Drink",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "drinking shots"
+}

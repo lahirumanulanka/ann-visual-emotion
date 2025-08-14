@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_10774",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.3,
+  "object": [
+    "Necklace",
+    "Hat"
+  ],
+  "facial_expression": "surprise"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_01862",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Fashion accessory",
+    "Food"
+  ],
+  "facial_expression": "sad",
+  "human_action": "dining"
+}

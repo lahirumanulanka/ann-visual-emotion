@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_10352",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Necklace",
+    "Flower"
+  ],
+  "facial_expression": "happy"
+}

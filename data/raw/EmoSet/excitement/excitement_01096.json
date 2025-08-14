@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_01096",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Tree",
+    "Wheel",
+    "Bicycle wheel"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding a bike"
+}

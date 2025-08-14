@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_08423",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "bar",
+  "object": [
+    "Jeans",
+    "Drink",
+    "Coat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

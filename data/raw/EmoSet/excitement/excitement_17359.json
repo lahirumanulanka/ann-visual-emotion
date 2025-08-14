@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_17359",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Flower",
+    "Glasses",
+    "Sunflower"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "stretching arm"
+}

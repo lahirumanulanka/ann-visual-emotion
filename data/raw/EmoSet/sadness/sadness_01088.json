@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_01088",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.0,
+  "scene": "forest",
+  "object": [
+    "Scarf"
+  ],
+  "facial_expression": "sad"
+}

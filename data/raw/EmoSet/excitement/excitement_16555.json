@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_16555",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Suit",
+    "Balloon",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

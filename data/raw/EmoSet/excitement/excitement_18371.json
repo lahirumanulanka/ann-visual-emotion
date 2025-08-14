@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_18371",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "object": [
+    "Car"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "reading newspaper"
+}

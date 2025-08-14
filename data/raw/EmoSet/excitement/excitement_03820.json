@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_03820",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Miniskirt",
+    "Hat",
+    "Fashion accessory"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

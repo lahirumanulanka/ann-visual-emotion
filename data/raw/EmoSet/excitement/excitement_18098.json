@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_18098",
+  "emotion": "excitement",
+  "brightness": 0.8,
+  "colorfulness": 0.6,
+  "scene": "crosswalk",
+  "object": [
+    "Car",
+    "Wheel",
+    "Shorts"
+  ],
+  "facial_expression": "happy"
+}

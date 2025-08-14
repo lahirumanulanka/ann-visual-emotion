@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_07052",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Shorts",
+    "Jeans",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

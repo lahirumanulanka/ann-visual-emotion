@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_08103",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "picnic_area",
+  "object": [
+    "Palm tree",
+    "Food"
+  ],
+  "facial_expression": "happy",
+  "human_action": "barbequing"
+}

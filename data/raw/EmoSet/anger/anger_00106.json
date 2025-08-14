@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_00106",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.3,
+  "scene": "phone_booth",
+  "object": [
+    "Jacket",
+    "Land vehicle"
+  ],
+  "facial_expression": "disgust"
+}

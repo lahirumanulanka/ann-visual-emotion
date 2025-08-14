@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_09160",
+  "emotion": "contentment",
+  "brightness": 0.2,
+  "colorfulness": 0.5,
+  "scene": "car_interior",
+  "object": [
+    "Land vehicle",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "baby waking up"
+}

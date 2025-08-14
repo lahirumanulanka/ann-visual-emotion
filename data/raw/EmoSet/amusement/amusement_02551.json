@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_02551",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Tree",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "arranging flowers"
+}

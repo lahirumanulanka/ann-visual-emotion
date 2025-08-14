@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_12222",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.3,
+  "scene": "kitchen",
+  "object": [
+    "Houseplant",
+    "Flowerpot",
+    "Plate"
+  ],
+  "facial_expression": "happy",
+  "human_action": "making a sandwich"
+}

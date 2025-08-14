@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_06331",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Flower"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_14172",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "lawn",
+  "object": [
+    "Plant",
+    "Tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "petting animal (not cat)"
+}

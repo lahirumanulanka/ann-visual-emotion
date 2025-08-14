@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_06832",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "field_road",
+  "object": [
+    "Wheel"
+  ],
+  "facial_expression": "happy",
+  "human_action": "motorcycling"
+}

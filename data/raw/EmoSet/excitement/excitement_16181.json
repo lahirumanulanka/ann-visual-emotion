@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_16181",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Tie",
+    "Tree",
+    "Sunglasses"
+  ],
+  "facial_expression": "happy",
+  "human_action": "giving or receiving award"
+}

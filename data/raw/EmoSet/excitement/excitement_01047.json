@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01047",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "beach",
+  "object": [
+    "Trousers",
+    "Shorts"
+  ],
+  "facial_expression": "happy"
+}

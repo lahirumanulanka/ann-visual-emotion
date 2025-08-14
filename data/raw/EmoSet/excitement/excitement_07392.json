@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_07392",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Car",
+    "House"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "carrying baby"
+}

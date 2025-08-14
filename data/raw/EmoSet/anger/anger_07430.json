@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_07430",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Fashion accessory"
+  ],
+  "facial_expression": "disgust"
+}

@@ -1,0 +1,14 @@
+{
+  "image_id": "amusement_03981",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Tree",
+    "Scarf",
+    "Jacket"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

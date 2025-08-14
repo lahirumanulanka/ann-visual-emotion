@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_02224",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "field",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "exercising arm"
+}

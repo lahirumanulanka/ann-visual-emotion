@@ -1,0 +1,13 @@
+{
+  "image_id": "awe_01955",
+  "emotion": "awe",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "yard",
+  "object": [
+    "Chair",
+    "Flower",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

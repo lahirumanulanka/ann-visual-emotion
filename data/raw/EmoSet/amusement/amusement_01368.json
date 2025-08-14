@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_01368",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.8,
+  "object": [
+    "Ice cream"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating ice cream"
+}

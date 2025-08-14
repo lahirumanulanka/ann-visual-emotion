@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_11813",
+  "emotion": "excitement",
+  "brightness": 0.8,
+  "colorfulness": 0.3,
+  "scene": "ski_slope",
+  "object": [
+    "Tree",
+    "Snowboard",
+    "Helmet"
+  ],
+  "facial_expression": "happy",
+  "human_action": "skiing"
+}

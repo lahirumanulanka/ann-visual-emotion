@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_00921",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "scene": "stage",
+  "object": [
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "belly dancing"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_02022",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.8,
+  "scene": "boardwalk",
+  "object": [
+    "Sports uniform"
+  ],
+  "facial_expression": "happy",
+  "human_action": "stretching arm"
+}

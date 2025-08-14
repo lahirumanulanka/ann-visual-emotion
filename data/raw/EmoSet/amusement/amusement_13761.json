@@ -1,0 +1,14 @@
+{
+  "image_id": "amusement_13761",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "balcony",
+  "object": [
+    "Palm tree",
+    "Tree",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

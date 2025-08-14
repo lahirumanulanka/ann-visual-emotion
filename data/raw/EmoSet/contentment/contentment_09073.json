@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_09073",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Tree",
+    "House"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating ice cream"
+}

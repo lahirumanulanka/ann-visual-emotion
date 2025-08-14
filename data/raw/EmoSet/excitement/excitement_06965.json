@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_06965",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Drum",
+    "Jeans"
+  ],
+  "facial_expression": "happy",
+  "human_action": "singing"
+}

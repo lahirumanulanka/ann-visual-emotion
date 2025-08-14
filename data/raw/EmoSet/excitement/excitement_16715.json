@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_16715",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "rainforest",
+  "object": [
+    "Helmet"
+  ],
+  "facial_expression": "happy",
+  "human_action": "abseiling"
+}

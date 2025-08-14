@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_11745",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "temple",
+  "object": [
+    "House",
+    "Trousers"
+  ],
+  "facial_expression": "happy"
+}

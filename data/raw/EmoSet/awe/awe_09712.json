@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_09712",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Chair",
+    "Table",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy"
+}

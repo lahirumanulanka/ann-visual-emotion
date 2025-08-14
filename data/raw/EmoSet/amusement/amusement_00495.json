@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_00495",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Hat",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "catching or throwing baseball"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_00251",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.8,
+  "scene": "bar",
+  "object": [
+    "Juice",
+    "Drink"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_04977",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "yard",
+  "object": [
+    "Bottle",
+    "Drink",
+    "Jeans"
+  ],
+  "facial_expression": "happy"
+}

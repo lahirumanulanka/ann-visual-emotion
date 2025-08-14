@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_19309",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Guitar",
+    "Microphone",
+    "Saxophone"
+  ],
+  "facial_expression": "happy"
+}

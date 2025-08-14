@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_14156",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Helmet",
+    "Parachute"
+  ],
+  "facial_expression": "happy",
+  "human_action": "paragliding"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_06314",
+  "emotion": "sadness",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "office",
+  "object": [
+    "Table",
+    "Flowerpot",
+    "Houseplant"
+  ],
+  "facial_expression": "sad"
+}

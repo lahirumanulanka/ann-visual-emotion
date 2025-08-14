@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_05592",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.8,
+  "object": [
+    "Fashion accessory",
+    "Fedora"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

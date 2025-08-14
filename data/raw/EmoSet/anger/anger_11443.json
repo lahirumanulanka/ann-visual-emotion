@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_11443",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "object": [
+    "Wheel",
+    "Tree",
+    "Land vehicle"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

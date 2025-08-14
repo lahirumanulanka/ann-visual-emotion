@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_08654",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Bottle",
+    "Table"
+  ],
+  "facial_expression": "happy"
+}

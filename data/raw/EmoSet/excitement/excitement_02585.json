@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_02585",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "boat_deck",
+  "object": [
+    "Fish",
+    "Hat",
+    "Sun hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "catching fish"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_09101",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "cemetery",
+  "object": [
+    "Tree",
+    "Flower",
+    "Coat"
+  ],
+  "facial_expression": "sad"
+}

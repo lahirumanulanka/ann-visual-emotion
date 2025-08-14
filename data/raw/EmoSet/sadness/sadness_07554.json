@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_07554",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "fountain",
+  "object": [
+    "Building",
+    "Coat",
+    "Window"
+  ],
+  "facial_expression": "sad"
+}

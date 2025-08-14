@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_10580",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "discotheque",
+  "object": [
+    "Fashion accessory"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "hugging"
+}

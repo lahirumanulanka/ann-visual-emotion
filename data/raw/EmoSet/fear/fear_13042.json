@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_13042",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "doorway",
+  "object": [
+    "Jeans"
+  ],
+  "facial_expression": "surprise"
+}

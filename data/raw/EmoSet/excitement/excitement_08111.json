@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_08111",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Land vehicle",
+    "High heels",
+    "Wheel"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_06629",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "supermarket",
+  "object": [
+    "Drink"
+  ],
+  "facial_expression": "happy"
+}

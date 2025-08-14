@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_09291",
+  "emotion": "sadness",
+  "brightness": 0.3,
+  "colorfulness": 0.3,
+  "object": [
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "sad"
+}

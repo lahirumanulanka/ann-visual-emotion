@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_17041",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Table",
+    "Bottle",
+    "Miniskirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "drinking"
+}

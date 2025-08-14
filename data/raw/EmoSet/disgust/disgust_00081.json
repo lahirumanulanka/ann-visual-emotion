@@ -1,0 +1,12 @@
+{
+  "image_id": "disgust_00081",
+  "emotion": "disgust",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Bottle",
+    "Drink",
+    "Sunglasses"
+  ],
+  "facial_expression": "disgust"
+}

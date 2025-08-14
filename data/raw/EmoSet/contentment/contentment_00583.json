@@ -1,0 +1,11 @@
+{
+  "image_id": "contentment_00583",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "House",
+    "Building"
+  ],
+  "facial_expression": "happy"
+}

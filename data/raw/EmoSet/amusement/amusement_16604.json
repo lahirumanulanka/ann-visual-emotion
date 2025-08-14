@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_16604",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "scene": "stage",
+  "object": [
+    "Guitar"
+  ],
+  "facial_expression": "happy"
+}

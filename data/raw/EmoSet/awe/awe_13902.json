@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_13902",
+  "emotion": "awe",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Tie",
+    "Coat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

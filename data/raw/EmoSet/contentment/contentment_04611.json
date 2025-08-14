@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_04611",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.3,
+  "object": [
+    "Furniture",
+    "Drawer",
+    "Jeans"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

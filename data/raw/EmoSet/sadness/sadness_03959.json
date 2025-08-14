@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_03959",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "scene": "staircase",
+  "object": [
+    "Stairs"
+  ],
+  "facial_expression": "sad"
+}

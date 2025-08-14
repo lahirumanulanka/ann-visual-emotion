@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_00149",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "athletic_field",
+  "object": [
+    "Sports uniform",
+    "Shorts"
+  ],
+  "facial_expression": "happy"
+}

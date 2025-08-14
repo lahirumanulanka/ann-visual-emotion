@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_08331",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Skirt",
+    "Hat"
+  ],
+  "facial_expression": "sad"
+}

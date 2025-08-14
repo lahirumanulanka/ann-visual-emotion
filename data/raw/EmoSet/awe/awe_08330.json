@@ -1,0 +1,13 @@
+{
+  "image_id": "awe_08330",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "object": [
+    "Suit",
+    "Flower",
+    "Car"
+  ],
+  "facial_expression": "happy",
+  "human_action": "pumping fist"
+}

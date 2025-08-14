@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_18643",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "mountain_path",
+  "object": [
+    "Plant",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

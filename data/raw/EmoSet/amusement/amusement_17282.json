@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_17282",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Tree",
+    "Flag",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

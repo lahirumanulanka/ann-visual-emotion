@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_01150",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Chair",
+    "Table"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

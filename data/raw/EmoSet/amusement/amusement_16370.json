@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_16370",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "carrousel",
+  "object": [
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "swinging on something"
+}

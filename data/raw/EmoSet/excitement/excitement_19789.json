@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_19789",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.9,
+  "object": [
+    "Sunglasses",
+    "Sports uniform"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding a bike"
+}

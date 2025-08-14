@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_05493",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "mountain_path",
+  "object": [
+    "Jacket"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_13229",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "stage",
+  "object": [
+    "Skirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "belly dancing"
+}

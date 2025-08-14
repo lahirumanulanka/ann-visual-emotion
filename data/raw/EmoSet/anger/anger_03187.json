@@ -1,0 +1,14 @@
+{
+  "image_id": "anger_03187",
+  "emotion": "anger",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Jacket",
+    "Jeans",
+    "Car"
+  ],
+  "facial_expression": "happy",
+  "human_action": "marching"
+}

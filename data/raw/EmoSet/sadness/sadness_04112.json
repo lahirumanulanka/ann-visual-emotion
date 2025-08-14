@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_04112",
+  "emotion": "sadness",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Tie",
+    "Window"
+  ],
+  "facial_expression": "sad"
+}

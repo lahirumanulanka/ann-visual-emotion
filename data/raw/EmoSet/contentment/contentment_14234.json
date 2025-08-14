@@ -1,0 +1,11 @@
+{
+  "image_id": "contentment_14234",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Food",
+    "Snack"
+  ],
+  "facial_expression": "happy"
+}

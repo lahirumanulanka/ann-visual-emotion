@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_02677",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Suit",
+    "House",
+    "Plant"
+  ],
+  "facial_expression": "angry"
+}

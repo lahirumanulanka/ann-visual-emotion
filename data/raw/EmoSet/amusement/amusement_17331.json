@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_17331",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Tree",
+    "Drink"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

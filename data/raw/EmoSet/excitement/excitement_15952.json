@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_15952",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 1.0,
+  "object": [
+    "Wheel",
+    "Balloon"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

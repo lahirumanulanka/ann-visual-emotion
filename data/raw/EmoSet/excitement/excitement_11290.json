@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_11290",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "mountain_path",
+  "object": [
+    "Bicycle",
+    "Tree",
+    "Bicycle wheel"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding mountain bike"
+}

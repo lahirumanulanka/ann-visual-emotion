@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_04390",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Ball",
+    "Furniture",
+    "Shorts"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

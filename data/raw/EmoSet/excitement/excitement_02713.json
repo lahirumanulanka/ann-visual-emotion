@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_02713",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "park",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding a bike"
+}

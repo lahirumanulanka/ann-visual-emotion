@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_03686",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Animal"
+  ],
+  "facial_expression": "happy",
+  "human_action": "petting animal (not cat)"
+}

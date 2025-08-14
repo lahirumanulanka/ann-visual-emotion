@@ -1,0 +1,14 @@
+{
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "ruff.enable": true,
+  "ruff.lint.args": ["--select=E,F,I,B", "--exclude=notebooks"],
+  "editor.formatOnSave": true,
+  "[python]": { "editor.defaultFormatter": "ms-python.python" },
+  "[json][jsonc][yaml][markdown]": { "editor.formatOnSave": true },
+  "jupyter.askForKernelRestart": false,
+  "files.exclude": { "**/__pycache__": true, "data/**": true, "models/**": false },
+  "mermaid.preview.maxWidth": 1200
+}

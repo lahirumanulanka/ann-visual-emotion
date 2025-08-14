@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_05264",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.8,
+  "scene": "plaza",
+  "object": [
+    "Sunglasses",
+    "Helmet"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

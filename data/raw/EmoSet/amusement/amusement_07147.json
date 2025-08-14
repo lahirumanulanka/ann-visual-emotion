@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_07147",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Doll",
+    "Car",
+    "Land vehicle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

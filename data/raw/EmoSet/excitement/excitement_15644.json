@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_15644",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "campsite",
+  "object": [
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "cooking on campfire"
+}

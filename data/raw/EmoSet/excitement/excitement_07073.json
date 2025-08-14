@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_07073",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Furniture"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "laughing"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_13108",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Hat",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

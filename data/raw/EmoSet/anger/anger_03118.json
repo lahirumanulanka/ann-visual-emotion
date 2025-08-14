@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_03118",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Building",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "marching"
+}

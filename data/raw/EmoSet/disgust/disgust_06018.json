@@ -1,0 +1,10 @@
+{
+  "image_id": "disgust_06018",
+  "emotion": "disgust",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Computer mouse"
+  ],
+  "facial_expression": "disgust"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_07754",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Book",
+    "Toy",
+    "Bookcase"
+  ],
+  "facial_expression": "happy"
+}

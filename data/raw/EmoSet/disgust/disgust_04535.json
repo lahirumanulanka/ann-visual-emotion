@@ -1,0 +1,11 @@
+{
+  "image_id": "disgust_04535",
+  "emotion": "disgust",
+  "brightness": 0.4,
+  "colorfulness": 0.3,
+  "scene": "lawn",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "angry"
+}

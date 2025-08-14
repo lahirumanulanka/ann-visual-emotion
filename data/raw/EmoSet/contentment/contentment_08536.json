@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_08536",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "bookstore",
+  "object": [
+    "Flower",
+    "Book",
+    "Shelf"
+  ],
+  "facial_expression": "happy"
+}

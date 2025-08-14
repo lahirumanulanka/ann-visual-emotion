@@ -1,0 +1,14 @@
+{
+  "image_id": "amusement_08798",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "porch",
+  "object": [
+    "Jeans",
+    "Tree",
+    "Window"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

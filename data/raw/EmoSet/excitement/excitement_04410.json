@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_04410",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "scene": "street",
+  "object": [
+    "Jacket",
+    "Car",
+    "Van"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "swinging legs"
+}

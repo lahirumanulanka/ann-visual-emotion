@@ -1,0 +1,12 @@
+{
+  "image_id": "fear_02564",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Table",
+    "Kitchen & dining room table"
+  ],
+  "facial_expression": "happy",
+  "human_action": "finger snapping"
+}

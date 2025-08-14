@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_13517",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "water_park",
+  "object": [
+    "Swimwear"
+  ],
+  "facial_expression": "happy"
+}

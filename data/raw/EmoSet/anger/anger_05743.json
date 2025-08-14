@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_05743",
+  "emotion": "anger",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Jeans",
+    "Jacket"
+  ],
+  "facial_expression": "surprise"
+}

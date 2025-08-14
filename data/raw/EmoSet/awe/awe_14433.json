@@ -1,0 +1,14 @@
+{
+  "image_id": "awe_14433",
+  "emotion": "awe",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Tree",
+    "Flower",
+    "Rose"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

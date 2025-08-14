@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_10871",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.7,
+  "scene": "discotheque",
+  "object": [
+    "Hat",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_11000",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Table",
+    "Flowerpot"
+  ],
+  "facial_expression": "happy"
+}

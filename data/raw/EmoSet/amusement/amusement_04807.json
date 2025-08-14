@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_04807",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Fast food",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "tasting food"
+}

@@ -1,0 +1,10 @@
+{
+  "image_id": "disgust_06493",
+  "emotion": "disgust",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Tableware"
+  ],
+  "facial_expression": "angry"
+}

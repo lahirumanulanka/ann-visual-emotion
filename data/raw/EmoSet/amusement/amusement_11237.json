@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_11237",
+  "emotion": "amusement",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "object": [
+    "Christmas tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

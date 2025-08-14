@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03483",
+  "emotion": "excitement",
+  "brightness": 0.8,
+  "colorfulness": 0.6,
+  "scene": "park",
+  "object": [
+    "Necklace",
+    "Tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

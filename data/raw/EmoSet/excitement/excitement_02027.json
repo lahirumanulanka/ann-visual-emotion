@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_02027",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "object": [
+    "Toy",
+    "Teddy bear",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "exercising arm"
+}

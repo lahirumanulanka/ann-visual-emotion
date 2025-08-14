@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_02028",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.0,
+  "scene": "bazaar",
+  "object": [
+    "Chair"
+  ],
+  "facial_expression": "sad"
+}

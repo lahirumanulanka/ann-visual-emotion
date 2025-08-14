@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_02865",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Fashion accessory",
+    "Drink"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

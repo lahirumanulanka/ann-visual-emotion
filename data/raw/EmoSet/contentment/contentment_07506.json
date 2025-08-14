@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_07506",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "beach",
+  "object": [
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

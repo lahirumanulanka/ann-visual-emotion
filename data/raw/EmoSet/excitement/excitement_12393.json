@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_12393",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Food",
+    "Tableware",
+    "Poster"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

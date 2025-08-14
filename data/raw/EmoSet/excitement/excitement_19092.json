@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_19092",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "canyon",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "rock climbing"
+}

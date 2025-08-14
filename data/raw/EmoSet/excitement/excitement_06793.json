@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_06793",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Balloon",
+    "Scarf",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

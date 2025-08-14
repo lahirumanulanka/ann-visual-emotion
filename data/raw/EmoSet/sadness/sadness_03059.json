@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_03059",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Tie",
+    "Suit",
+    "Musical instrument"
+  ],
+  "facial_expression": "sad",
+  "human_action": "playing drums"
+}

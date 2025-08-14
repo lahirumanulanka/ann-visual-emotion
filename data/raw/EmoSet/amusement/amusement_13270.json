@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_13270",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Table",
+    "Baked goods",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating cake"
+}

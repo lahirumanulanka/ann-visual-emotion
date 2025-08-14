@@ -1,0 +1,11 @@
+{
+  "image_id": "contentment_03871",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "childs_room",
+  "object": [
+    "Drawer"
+  ],
+  "facial_expression": "happy"
+}

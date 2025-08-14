@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_04265",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "French fries",
+    "Baked goods"
+  ],
+  "facial_expression": "sad"
+}

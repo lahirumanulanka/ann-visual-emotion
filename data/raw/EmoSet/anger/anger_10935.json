@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_10935",
+  "emotion": "anger",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "boxing_ring",
+  "object": [
+    "Sports equipment",
+    "Shorts"
+  ],
+  "facial_expression": "angry",
+  "human_action": "boxing "
+}

@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_03173",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "slum",
+  "object": [
+    "Scarf",
+    "Tree",
+    "Fashion accessory"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "carrying baby"
+}

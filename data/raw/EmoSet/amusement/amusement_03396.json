@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_03396",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "car_interior",
+  "object": [
+    "Car",
+    "Land vehicle",
+    "Drink"
+  ],
+  "facial_expression": "happy"
+}

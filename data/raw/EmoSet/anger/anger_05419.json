@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_05419",
+  "emotion": "anger",
+  "brightness": 0.2,
+  "colorfulness": 0.3,
+  "object": [
+    "Microphone"
+  ],
+  "facial_expression": "sad",
+  "human_action": "singing"
+}

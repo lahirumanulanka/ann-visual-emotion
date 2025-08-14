@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_09473",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "slum",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

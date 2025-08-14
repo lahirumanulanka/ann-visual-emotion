@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_03717",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Flag"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

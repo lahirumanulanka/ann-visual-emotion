@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_15012",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "kitchen",
+  "object": [
+    "Drawer",
+    "Cupboard"
+  ],
+  "facial_expression": "happy",
+  "human_action": "tasting food"
+}

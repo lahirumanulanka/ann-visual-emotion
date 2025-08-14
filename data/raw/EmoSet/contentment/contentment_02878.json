@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_02878",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Drink",
+    "Fashion accessory",
+    "Apple"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

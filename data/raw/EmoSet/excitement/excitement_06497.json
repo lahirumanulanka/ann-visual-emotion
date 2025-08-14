@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_06497",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Sunglasses",
+    "Skirt"
+  ],
+  "facial_expression": "happy"
+}

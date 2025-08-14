@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_06467",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Fashion accessory",
+    "Christmas tree",
+    "Chair"
+  ],
+  "facial_expression": "happy"
+}

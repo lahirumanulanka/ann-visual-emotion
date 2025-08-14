@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_12287",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "lawn",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

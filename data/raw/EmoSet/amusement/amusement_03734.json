@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_03734",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Bicycle helmet",
+    "Sports uniform",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

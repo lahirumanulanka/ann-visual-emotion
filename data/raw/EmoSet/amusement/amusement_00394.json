@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_00394",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.8,
+  "scene": "toyshop",
+  "object": [
+    "Toy"
+  ],
+  "facial_expression": "happy"
+}

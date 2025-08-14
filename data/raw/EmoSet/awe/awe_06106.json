@@ -1,0 +1,14 @@
+{
+  "image_id": "awe_06106",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Chair",
+    "Jeans",
+    "Window"
+  ],
+  "facial_expression": "happy",
+  "human_action": "playing accordion"
+}

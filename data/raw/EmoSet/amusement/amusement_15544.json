@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_15544",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "kitchen",
+  "object": [
+    "Food"
+  ],
+  "facial_expression": "happy"
+}

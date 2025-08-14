@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_03977",
+  "emotion": "sadness",
+  "brightness": 0.3,
+  "colorfulness": 0.0,
+  "object": [
+    "Musical instrument",
+    "Hat"
+  ],
+  "facial_expression": "sad",
+  "human_action": "playing accordion"
+}

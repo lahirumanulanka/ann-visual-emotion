@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_19316",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Flower",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

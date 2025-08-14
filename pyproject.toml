@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "ann-visual-emotion"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+	"torch>=2.2",
+	"torchvision>=0.17",
+	"numpy",
+	"pandas",
+	"scikit-learn",
+	"opencv-python",
+	"matplotlib",
+	"tqdm",
+	"fastapi",
+	"uvicorn[standard]",
+	"pydantic",
+	"shap",
+	"lime",
+	"albumentations",
+	"hydra-core",
+	"mlflow"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

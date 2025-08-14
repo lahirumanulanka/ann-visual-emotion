@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_06472",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "scene": "restaurant",
+  "object": [
+    "Cocktail",
+    "Drink",
+    "Bottle"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "celebrating"
+}

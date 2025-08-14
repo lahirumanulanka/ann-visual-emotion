@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_01184",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "pond",
+  "object": [
+    "House"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

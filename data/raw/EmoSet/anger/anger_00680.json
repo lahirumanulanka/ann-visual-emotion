@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_00680",
+  "emotion": "anger",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "car_interior",
+  "object": [
+    "Car",
+    "Land vehicle"
+  ],
+  "facial_expression": "surprise"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_06622",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Toy",
+    "Doll"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

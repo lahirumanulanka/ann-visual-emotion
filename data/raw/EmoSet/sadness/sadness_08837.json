@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_08837",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.8,
+  "object": [
+    "Window",
+    "Tree"
+  ],
+  "facial_expression": "sad",
+  "human_action": "playing ukulele"
+}

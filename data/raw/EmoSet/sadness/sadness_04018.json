@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_04018",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "object": [
+    "Tie",
+    "Chair"
+  ],
+  "facial_expression": "sad",
+  "human_action": "reading newspaper"
+}

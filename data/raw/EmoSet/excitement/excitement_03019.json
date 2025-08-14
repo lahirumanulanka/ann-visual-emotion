@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03019",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "crosswalk",
+  "object": [
+    "Jeans",
+    "Building",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

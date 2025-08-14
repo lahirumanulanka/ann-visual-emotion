@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_11473",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Saucer",
+    "Food"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

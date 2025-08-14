@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_11136",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Sun hat",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_06933",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "football_field",
+  "object": [
+    "Shorts",
+    "Sports equipment",
+    "Ball"
+  ],
+  "facial_expression": "happy",
+  "human_action": "kicking soccer ball"
+}

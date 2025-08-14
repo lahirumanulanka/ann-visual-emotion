@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_17441",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "object": [
+    "Hat",
+    "Tree",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "sticking tongue out"
+}

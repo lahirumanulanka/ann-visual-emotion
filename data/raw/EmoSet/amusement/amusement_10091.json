@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_10091",
+  "emotion": "amusement",
+  "brightness": 0.9,
+  "colorfulness": 0.5,
+  "scene": "beach",
+  "object": [
+    "Shorts",
+    "Skirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "kicking soccer ball"
+}

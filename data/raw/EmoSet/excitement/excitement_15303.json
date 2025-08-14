@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_15303",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "scene": "parking_lot",
+  "object": [
+    "Dog",
+    "Car",
+    "Jeans"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

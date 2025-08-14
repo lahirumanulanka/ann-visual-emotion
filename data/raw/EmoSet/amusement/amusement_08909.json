@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_08909",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Tiara",
+    "Crown"
+  ],
+  "facial_expression": "happy"
+}

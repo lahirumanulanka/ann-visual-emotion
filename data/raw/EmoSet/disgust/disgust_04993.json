@@ -1,0 +1,10 @@
+{
+  "image_id": "disgust_04993",
+  "emotion": "disgust",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Drink"
+  ],
+  "facial_expression": "disgust"
+}

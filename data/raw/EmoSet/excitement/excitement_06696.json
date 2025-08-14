@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_06696",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "scene": "bar",
+  "object": [
+    "Glasses"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

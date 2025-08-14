@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_09523",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 1.0,
+  "scene": "street",
+  "object": [
+    "Fashion accessory",
+    "Tiara",
+    "Crown"
+  ],
+  "facial_expression": "surprise"
+}

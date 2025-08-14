@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_02636",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Wheelchair",
+    "Wheel",
+    "Jacket"
+  ],
+  "facial_expression": "angry"
+}

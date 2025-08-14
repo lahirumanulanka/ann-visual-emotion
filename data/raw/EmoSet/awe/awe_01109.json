@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_01109",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "object": [
+    "Fedora",
+    "Hat",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy"
+}

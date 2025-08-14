@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_12394",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Shirt"
+  ],
+  "facial_expression": "fear",
+  "human_action": "sticking tongue out"
+}

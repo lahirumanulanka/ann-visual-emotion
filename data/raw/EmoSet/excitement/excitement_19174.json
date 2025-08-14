@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_19174",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Bicycle wheel",
+    "Car",
+    "Wheel"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

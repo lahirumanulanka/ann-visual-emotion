@@ -1,0 +1,11 @@
+{
+  "image_id": "awe_00131",
+  "emotion": "awe",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Boat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

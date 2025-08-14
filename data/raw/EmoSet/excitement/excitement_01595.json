@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01595",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Building",
+    "Window",
+    "Chair"
+  ],
+  "facial_expression": "surprise"
+}

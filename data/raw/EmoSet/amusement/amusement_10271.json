@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_10271",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Wine glass",
+    "Food",
+    "Fast food"
+  ],
+  "facial_expression": "happy",
+  "human_action": "dining"
+}

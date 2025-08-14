@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_13615",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Jeans",
+    "Shorts",
+    "Trousers"
+  ],
+  "facial_expression": "happy"
+}

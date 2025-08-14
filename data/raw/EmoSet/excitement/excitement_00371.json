@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_00371",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "object": [
+    "Tree",
+    "Plant"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "bouncing on trampoline"
+}

@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_02909",
+  "emotion": "contentment",
+  "brightness": 0.8,
+  "colorfulness": 0.5,
+  "scene": "beach",
+  "object": [
+    "Fashion accessory",
+    "Flower",
+    "Skirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

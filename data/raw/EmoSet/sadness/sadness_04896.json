@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_04896",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Hat",
+    "Fedora"
+  ],
+  "facial_expression": "sad"
+}

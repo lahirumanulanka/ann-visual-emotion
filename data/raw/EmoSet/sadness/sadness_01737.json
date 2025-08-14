@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_01737",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Handbag"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

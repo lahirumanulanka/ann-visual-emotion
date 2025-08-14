@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_15045",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 1.0,
+  "object": [
+    "Car",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

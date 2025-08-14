@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_10989",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "boat_deck",
+  "object": [
+    "Boat",
+    "Boat"
+  ],
+  "facial_expression": "happy"
+}

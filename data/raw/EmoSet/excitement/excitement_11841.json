@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_11841",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.9,
+  "scene": "music_studio",
+  "object": [
+    "Headphones"
+  ],
+  "facial_expression": "happy"
+}

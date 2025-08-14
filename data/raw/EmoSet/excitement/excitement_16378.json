@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_16378",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.4,
+  "scene": "wheat_field",
+  "object": [
+    "Jeans",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

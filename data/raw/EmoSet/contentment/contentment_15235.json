@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_15235",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Rose",
+    "Plant",
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01680",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Flower",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

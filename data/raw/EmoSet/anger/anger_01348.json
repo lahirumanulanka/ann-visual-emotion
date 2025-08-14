@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_01348",
+  "emotion": "anger",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "street",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

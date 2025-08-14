@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_11644",
+  "emotion": "awe",
+  "brightness": 0.7,
+  "colorfulness": 0.3,
+  "object": [
+    "Rose",
+    "Flower",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

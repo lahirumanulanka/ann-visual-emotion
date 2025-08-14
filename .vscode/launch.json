@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Train (configs/train.yaml)",
+  "type": "debugpy",
+      "request": "launch",
+      "module": "src.training.train",
+      "args": ["--config", "configs/train.yaml"],
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "API (FastAPI)",
+  "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["src.api.main:app", "--reload", "--port", "8000"],
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

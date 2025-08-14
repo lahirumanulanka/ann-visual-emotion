@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_10040",
+  "emotion": "anger",
+  "brightness": 0.1,
+  "colorfulness": 0.5,
+  "object": [
+    "Tie",
+    "Coat"
+  ],
+  "facial_expression": "disgust"
+}

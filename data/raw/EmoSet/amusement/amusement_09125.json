@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_09125",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "ice_skating_rink",
+  "object": [
+    "Jeans",
+    "Coat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "ice skating"
+}

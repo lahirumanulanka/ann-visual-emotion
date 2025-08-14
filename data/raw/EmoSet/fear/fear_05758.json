@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_05758",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "street",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

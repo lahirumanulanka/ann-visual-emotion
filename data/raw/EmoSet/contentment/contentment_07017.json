@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_07017",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Tree",
+    "Jeans",
+    "Scarf"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

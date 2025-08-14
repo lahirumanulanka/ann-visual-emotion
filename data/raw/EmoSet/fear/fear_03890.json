@@ -1,0 +1,12 @@
+{
+  "image_id": "fear_03890",
+  "emotion": "fear",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "scene": "street",
+  "object": [
+    "Jacket",
+    "Fashion accessory"
+  ],
+  "facial_expression": "angry"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_15761",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.2,
+  "scene": "lawn",
+  "object": [
+    "Skirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

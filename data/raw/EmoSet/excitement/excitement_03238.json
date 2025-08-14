@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_03238",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.6,
+  "object": [
+    "Bicycle helmet",
+    "Sports uniform"
+  ],
+  "facial_expression": "happy",
+  "human_action": "pumping fist"
+}

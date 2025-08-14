@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_11530",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Trousers",
+    "Boot"
+  ],
+  "facial_expression": "angry",
+  "human_action": "carrying baby"
+}

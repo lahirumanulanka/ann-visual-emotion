@@ -1,0 +1,12 @@
+{
+  "image_id": "fear_11247",
+  "emotion": "fear",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "lawn",
+  "object": [
+    "Window",
+    "Jeans"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_10977",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Fast food",
+    "Sunglasses"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating burger"
+}

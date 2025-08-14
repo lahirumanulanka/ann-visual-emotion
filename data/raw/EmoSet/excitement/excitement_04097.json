@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_04097",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.3,
+  "scene": "beach",
+  "object": [
+    "Jeans",
+    "Trousers"
+  ],
+  "facial_expression": "happy",
+  "human_action": "jogging"
+}

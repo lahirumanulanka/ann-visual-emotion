@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_00341",
+  "emotion": "contentment",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "scene": "florist_shop",
+  "object": [
+    "Flowerpot",
+    "Furniture",
+    "Houseplant"
+  ],
+  "facial_expression": "happy"
+}

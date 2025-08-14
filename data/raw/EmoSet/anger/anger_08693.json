@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_08693",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Window",
+    "Building"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

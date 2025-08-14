@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_07869",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Furniture",
+    "Fashion accessory",
+    "Tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

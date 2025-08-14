@@ -1,0 +1,11 @@
+{
+  "image_id": "fear_11531",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "scene": "street",
+  "object": [
+    "Car"
+  ],
+  "facial_expression": "angry"
+}

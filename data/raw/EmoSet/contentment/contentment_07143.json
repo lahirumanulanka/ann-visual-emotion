@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_07143",
+  "emotion": "contentment",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "object": [
+    "Tree",
+    "Fashion accessory",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

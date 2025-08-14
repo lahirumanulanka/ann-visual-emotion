@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_05916",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Cat",
+    "Flowerpot"
+  ],
+  "facial_expression": "happy",
+  "human_action": "petting cat"
+}

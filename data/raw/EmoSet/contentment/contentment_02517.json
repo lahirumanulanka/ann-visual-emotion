@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_02517",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "ocean",
+  "object": [
+    "Fedora",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

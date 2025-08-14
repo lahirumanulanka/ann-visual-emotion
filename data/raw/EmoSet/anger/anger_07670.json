@@ -1,0 +1,12 @@
+{
+  "image_id": "anger_07670",
+  "emotion": "anger",
+  "brightness": 0.3,
+  "colorfulness": 0.6,
+  "object": [
+    "Table",
+    "Lamp",
+    "Furniture"
+  ],
+  "facial_expression": "disgust"
+}

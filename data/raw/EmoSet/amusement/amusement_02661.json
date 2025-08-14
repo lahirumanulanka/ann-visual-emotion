@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_02661",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.8,
+  "object": [
+    "Plant",
+    "Horse",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "riding or walking with horse"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_00297",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Jeans",
+    "Shirt",
+    "Tie"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

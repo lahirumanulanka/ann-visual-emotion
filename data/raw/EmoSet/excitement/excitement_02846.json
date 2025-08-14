@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_02846",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Sports uniform",
+    "Jeans",
+    "Sunglasses"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

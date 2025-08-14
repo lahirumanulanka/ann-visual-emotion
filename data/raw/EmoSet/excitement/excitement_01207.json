@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_01207",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Palm tree"
+  ],
+  "facial_expression": "happy",
+  "human_action": "using remote controller (not gaming)"
+}

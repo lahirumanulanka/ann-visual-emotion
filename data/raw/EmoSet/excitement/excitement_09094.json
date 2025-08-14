@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_09094",
+  "emotion": "excitement",
+  "brightness": 0.2,
+  "colorfulness": 0.8,
+  "object": [
+    "Microphone"
+  ],
+  "facial_expression": "happy",
+  "human_action": "playing guitar"
+}

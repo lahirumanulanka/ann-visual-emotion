@@ -1,0 +1,11 @@
+{
+  "image_id": "awe_07985",
+  "emotion": "awe",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Flower",
+    "Skyscraper"
+  ],
+  "facial_expression": "happy"
+}

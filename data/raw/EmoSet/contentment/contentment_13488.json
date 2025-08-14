@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_13488",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "canal",
+  "object": [
+    "Building",
+    "Tree",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "stretching arm"
+}

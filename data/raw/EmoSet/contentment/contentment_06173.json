@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_06173",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "scene": "orchard",
+  "object": [
+    "Plant",
+    "Fruit"
+  ],
+  "facial_expression": "happy",
+  "human_action": "picking fruit"
+}

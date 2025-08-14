@@ -1,0 +1,14 @@
+{
+  "image_id": "contentment_12137",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "balcony",
+  "object": [
+    "Window",
+    "Food",
+    "House"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating ice cream"
+}

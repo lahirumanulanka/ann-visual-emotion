@@ -1,0 +1,13 @@
+{
+  "image_id": "fear_02381",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "street",
+  "object": [
+    "Wheel",
+    "Jeans",
+    "Wheel"
+  ],
+  "facial_expression": "angry"
+}

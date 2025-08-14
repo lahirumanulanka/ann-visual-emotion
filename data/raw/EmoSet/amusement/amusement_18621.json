@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_18621",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Umbrella",
+    "Flag",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

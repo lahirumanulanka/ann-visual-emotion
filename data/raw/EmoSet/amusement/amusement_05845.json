@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_05845",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Sports uniform",
+    "Balloon"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "lint", "type": "shell", "command": "ruff check ." },
+    { "label": "format", "type": "shell", "command": "ruff format ." },
+    { "label": "test", "type": "shell", "command": "pytest -q" },
+    { "label": "prep-data", "type": "shell", "command": "python scripts/prepare_data.py" },
+    { "label": "evaluate", "type": "shell", "command": "python -m src.evaluation.evaluate --config configs/eval.yaml" }
+  ]
+}

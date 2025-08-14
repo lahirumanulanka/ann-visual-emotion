@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_01833",
+  "emotion": "excitement",
+  "brightness": 0.2,
+  "colorfulness": 0.5,
+  "object": [
+    "Drum",
+    "Coat"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_04678",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.6,
+  "scene": "carrousel",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "happy"
+}

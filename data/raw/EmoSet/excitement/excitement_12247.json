@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_12247",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "staircase",
+  "object": [
+    "Tree",
+    "Window"
+  ],
+  "facial_expression": "happy"
+}

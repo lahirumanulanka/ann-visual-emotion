@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_04979",
+  "emotion": "amusement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Fashion accessory",
+    "Necklace"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_00373",
+  "emotion": "contentment",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "object": [
+    "Jacket",
+    "Shirt"
+  ],
+  "facial_expression": "happy",
+  "human_action": "swinging on something"
+}

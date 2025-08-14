@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_19100",
+  "emotion": "excitement",
+  "brightness": 0.8,
+  "colorfulness": 0.7,
+  "object": [
+    "Land vehicle",
+    "Wheel"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_05530",
+  "emotion": "excitement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "scene": "plaza",
+  "object": [
+    "Boot",
+    "Window"
+  ],
+  "facial_expression": "happy"
+}

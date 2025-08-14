@@ -1,0 +1,12 @@
+{
+  "image_id": "fear_03906",
+  "emotion": "fear",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Car",
+    "Scarf",
+    "Wheel"
+  ],
+  "facial_expression": "surprise"
+}

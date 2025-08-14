@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_05955",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Hat",
+    "Wine glass",
+    "Table"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

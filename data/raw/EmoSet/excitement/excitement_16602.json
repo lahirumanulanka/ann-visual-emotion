@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_16602",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Bottle",
+    "Hat",
+    "Drink"
+  ],
+  "facial_expression": "angry"
+}

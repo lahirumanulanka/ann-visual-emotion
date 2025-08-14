@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_10675",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Handgun",
+    "Jeans",
+    "Weapon"
+  ],
+  "facial_expression": "happy"
+}

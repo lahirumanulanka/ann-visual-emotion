@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_14539",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Building",
+    "Land vehicle",
+    "House"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

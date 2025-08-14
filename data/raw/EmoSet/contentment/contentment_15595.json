@@ -1,0 +1,11 @@
+{
+  "image_id": "contentment_15595",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Toy"
+  ],
+  "facial_expression": "happy"
+}

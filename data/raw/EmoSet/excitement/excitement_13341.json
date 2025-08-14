@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_13341",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "object": [
+    "Drum",
+    "Musical instrument"
+  ],
+  "facial_expression": "happy",
+  "human_action": "playing guitar"
+}

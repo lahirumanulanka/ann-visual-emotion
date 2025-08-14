@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_18620",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Wheel",
+    "Roller skates",
+    "Balloon"
+  ],
+  "facial_expression": "happy"
+}

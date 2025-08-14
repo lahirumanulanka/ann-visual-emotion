@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_02034",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.5,
+  "object": [
+    "Goggles",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

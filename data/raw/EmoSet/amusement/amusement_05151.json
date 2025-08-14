@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_05151",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.7,
+  "object": [
+    "Food"
+  ],
+  "facial_expression": "happy",
+  "human_action": "sticking tongue out"
+}

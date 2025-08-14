@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_17761",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Jacket",
+    "Scarf"
+  ],
+  "facial_expression": "happy"
+}

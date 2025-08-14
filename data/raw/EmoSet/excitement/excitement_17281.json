@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_17281",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "football_field",
+  "object": [
+    "Helmet"
+  ],
+  "facial_expression": "happy"
+}

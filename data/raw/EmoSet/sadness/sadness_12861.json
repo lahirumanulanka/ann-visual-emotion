@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_12861",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.4,
+  "object": [
+    "Tableware",
+    "Jeans"
+  ],
+  "facial_expression": "sad",
+  "human_action": "dining"
+}

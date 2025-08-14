@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_06472",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "botanical_garden",
+  "object": [
+    "Sunflower",
+    "Tree",
+    "Sun hat"
+  ],
+  "facial_expression": "happy"
+}

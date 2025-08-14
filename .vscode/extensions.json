@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-toolsai.jupyter",
+    "charliermarsh.ruff",
+    "ms-azuretools.vscode-docker",
+    "dotenv.dotenv-vscode",
+    "redhat.vscode-yaml",
+    "eamodio.gitlens",
+    "github.vscode-github-actions",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    "rangav.vscode-thunder-client",
+    "ms-vscode-remote.remote-containers",
+    "mhutchie.git-graph",
+    "streetsidesoftware.code-spell-checker",
+    "Iterative.dvc",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "anger_05224",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Hat",
+    "Tree",
+    "Jeans"
+  ],
+  "facial_expression": "angry",
+  "human_action": "marching"
+}

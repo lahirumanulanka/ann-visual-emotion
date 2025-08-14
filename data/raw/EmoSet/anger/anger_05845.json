@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_05845",
+  "emotion": "anger",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Chair",
+    "Plant"
+  ],
+  "facial_expression": "disgust"
+}

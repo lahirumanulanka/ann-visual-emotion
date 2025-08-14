@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_09502",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "beach",
+  "object": [
+    "Helmet"
+  ],
+  "facial_expression": "happy"
+}

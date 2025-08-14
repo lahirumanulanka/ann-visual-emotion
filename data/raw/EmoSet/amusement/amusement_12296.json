@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_12296",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "House",
+    "Window"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

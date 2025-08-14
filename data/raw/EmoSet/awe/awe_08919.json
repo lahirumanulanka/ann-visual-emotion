@@ -1,0 +1,11 @@
+{
+  "image_id": "awe_08919",
+  "emotion": "awe",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "scene": "church",
+  "object": [
+    "Flower"
+  ],
+  "facial_expression": "happy"
+}

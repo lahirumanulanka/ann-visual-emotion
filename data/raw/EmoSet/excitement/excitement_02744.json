@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_02744",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Jacket"
+  ],
+  "facial_expression": "happy",
+  "human_action": "cheerleading"
+}

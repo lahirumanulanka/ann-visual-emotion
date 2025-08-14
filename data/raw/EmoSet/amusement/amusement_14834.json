@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_14834",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "object": [
+    "Balloon",
+    "Tree",
+    "Cake"
+  ],
+  "facial_expression": "happy",
+  "human_action": "eating cake"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_13699",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "discotheque",
+  "object": [
+    "Drink",
+    "Jeans"
+  ],
+  "facial_expression": "happy",
+  "human_action": "kissing"
+}

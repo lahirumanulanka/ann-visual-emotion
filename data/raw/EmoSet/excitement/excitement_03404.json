@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03404",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "mountain_path",
+  "object": [
+    "Sunglasses",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "swinging legs"
+}

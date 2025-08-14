@@ -1,0 +1,11 @@
+{
+  "image_id": "contentment_02641",
+  "emotion": "contentment",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "scene": "wheat_field",
+  "object": [
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

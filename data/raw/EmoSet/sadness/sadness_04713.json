@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_04713",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "dining_room",
+  "object": [
+    "Table"
+  ],
+  "facial_expression": "sad",
+  "human_action": "crying"
+}

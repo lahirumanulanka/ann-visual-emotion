@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_01523",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Hat",
+    "Tree",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "pumping fist"
+}

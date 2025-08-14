@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_05212",
+  "emotion": "anger",
+  "brightness": 0.2,
+  "colorfulness": 0.0,
+  "object": [
+    "Fashion accessory",
+    "Shirt"
+  ],
+  "facial_expression": "angry"
+}

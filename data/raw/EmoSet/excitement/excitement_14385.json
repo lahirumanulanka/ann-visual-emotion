@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_14385",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "street",
+  "object": [
+    "Car",
+    "Coat",
+    "Scarf"
+  ],
+  "facial_expression": "surprise"
+}

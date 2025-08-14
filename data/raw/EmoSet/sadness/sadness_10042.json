@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_10042",
+  "emotion": "sadness",
+  "brightness": 0.4,
+  "colorfulness": 0.2,
+  "scene": "cemetery",
+  "object": [
+    "Flowerpot",
+    "Rose"
+  ],
+  "facial_expression": "sad"
+}

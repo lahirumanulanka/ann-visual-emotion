@@ -1,0 +1,12 @@
+{
+  "image_id": "sadness_03642",
+  "emotion": "sadness",
+  "brightness": 0.3,
+  "colorfulness": 0.0,
+  "object": [
+    "Coffee cup",
+    "Table",
+    "Tableware"
+  ],
+  "facial_expression": "sad"
+}

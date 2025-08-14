@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03196",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Car",
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "laughing"
+}

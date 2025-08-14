@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_03346",
+  "emotion": "excitement",
+  "brightness": 0.8,
+  "colorfulness": 0.8,
+  "object": [
+    "Window",
+    "Necklace"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

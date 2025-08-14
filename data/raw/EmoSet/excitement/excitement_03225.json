@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_03225",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.2,
+  "object": [
+    "Ball"
+  ],
+  "facial_expression": "happy",
+  "human_action": "kicking soccer ball"
+}

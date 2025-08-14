@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_17682",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Shirt",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_12709",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "playground",
+  "object": [
+    "Sports equipment",
+    "Shorts"
+  ],
+  "facial_expression": "happy",
+  "human_action": "pull ups"
+}

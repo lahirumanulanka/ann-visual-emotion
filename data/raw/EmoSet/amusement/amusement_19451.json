@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_19451",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.9,
+  "object": [
+    "Table",
+    "Fast food"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_05894",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "scene": "lake",
+  "object": [
+    "Houseplant",
+    "Flower",
+    "Sun hat"
+  ],
+  "facial_expression": "happy"
+}

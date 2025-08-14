@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_14506",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "scene": "park",
+  "object": [
+    "Tree",
+    "Tiara"
+  ],
+  "facial_expression": "happy"
+}

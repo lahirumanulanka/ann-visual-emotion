@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_00119",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "balcony",
+  "object": [
+    "Tree",
+    "Cocktail",
+    "Plant"
+  ],
+  "facial_expression": "sad"
+}

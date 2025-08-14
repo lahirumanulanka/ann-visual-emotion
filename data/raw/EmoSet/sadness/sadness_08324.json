@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_08324",
+  "emotion": "sadness",
+  "brightness": 0.8,
+  "colorfulness": 0.6,
+  "scene": "ski_slope",
+  "object": [
+    "Jacket"
+  ],
+  "facial_expression": "sad"
+}

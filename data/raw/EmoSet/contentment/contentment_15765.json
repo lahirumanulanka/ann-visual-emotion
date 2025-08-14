@@ -1,0 +1,13 @@
+{
+  "image_id": "contentment_15765",
+  "emotion": "contentment",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Jacket",
+    "Jeans",
+    "Chair"
+  ],
+  "facial_expression": "happy",
+  "human_action": "swinging legs"
+}

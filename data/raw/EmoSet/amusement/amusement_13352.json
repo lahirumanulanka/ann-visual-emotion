@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_13352",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Suit",
+    "Wine glass"
+  ],
+  "facial_expression": "surprise"
+}

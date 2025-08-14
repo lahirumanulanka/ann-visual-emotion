@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_00744",
+  "emotion": "amusement",
+  "brightness": 0.6,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Hat",
+    "Cowboy hat"
+  ],
+  "facial_expression": "happy"
+}

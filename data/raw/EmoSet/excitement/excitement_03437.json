@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_03437",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Couch",
+    "Jeans",
+    "Loveseat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

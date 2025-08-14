@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_02284",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.5,
+  "object": [
+    "Microphone",
+    "Hat",
+    "Tree"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "marching"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "awe_00075",
+  "emotion": "awe",
+  "brightness": 0.6,
+  "colorfulness": 0.4,
+  "object": [
+    "Flower",
+    "Suit"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

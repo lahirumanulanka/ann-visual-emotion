@@ -1,0 +1,14 @@
+{
+  "image_id": "awe_08584",
+  "emotion": "awe",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "forest",
+  "object": [
+    "Suit",
+    "Flower",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

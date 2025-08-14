@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_09300",
+  "emotion": "anger",
+  "brightness": 0.7,
+  "colorfulness": 0.2,
+  "object": [
+    "Laptop",
+    "Table"
+  ],
+  "facial_expression": "angry"
+}

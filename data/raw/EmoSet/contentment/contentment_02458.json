@@ -1,0 +1,12 @@
+{
+  "image_id": "contentment_02458",
+  "emotion": "contentment",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "scene": "lobby",
+  "object": [
+    "House"
+  ],
+  "facial_expression": "happy",
+  "human_action": "carrying baby"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "awe_06133",
+  "emotion": "awe",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "scene": "church",
+  "object": [
+    "Rose",
+    "Tie",
+    "Flower"
+  ],
+  "facial_expression": "happy"
+}

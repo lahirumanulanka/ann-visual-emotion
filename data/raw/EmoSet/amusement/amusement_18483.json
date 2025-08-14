@@ -1,0 +1,13 @@
+{
+  "image_id": "amusement_18483",
+  "emotion": "amusement",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "object": [
+    "Tree",
+    "Fashion accessory",
+    "Necklace"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

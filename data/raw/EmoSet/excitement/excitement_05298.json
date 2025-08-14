@@ -1,0 +1,14 @@
+{
+  "image_id": "excitement_05298",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Jeans",
+    "Swimwear",
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

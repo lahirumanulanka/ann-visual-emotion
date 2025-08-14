@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_05807",
+  "emotion": "amusement",
+  "brightness": 0.8,
+  "colorfulness": 0.7,
+  "object": [
+    "Cake",
+    "Tableware"
+  ],
+  "facial_expression": "happy",
+  "human_action": "blowing out candles"
+}

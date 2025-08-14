@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_04974",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.8,
+  "scene": "street",
+  "object": [
+    "Fashion accessory",
+    "Bicycle wheel"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_13973",
+  "emotion": "excitement",
+  "brightness": 0.3,
+  "colorfulness": 0.5,
+  "scene": "bar",
+  "object": [
+    "Tie",
+    "Plant"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

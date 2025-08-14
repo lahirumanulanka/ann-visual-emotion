@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_04667",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 1.0,
+  "scene": "street",
+  "object": [
+    "Skyscraper",
+    "Building"
+  ],
+  "facial_expression": "happy"
+}

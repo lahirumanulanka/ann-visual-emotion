@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_01881",
+  "emotion": "anger",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Tree",
+    "Trousers"
+  ],
+  "facial_expression": "happy"
+}

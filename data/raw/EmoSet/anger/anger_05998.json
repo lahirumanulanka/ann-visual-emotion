@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_05998",
+  "emotion": "anger",
+  "brightness": 0.2,
+  "colorfulness": 0.4,
+  "object": [
+    "Fashion accessory"
+  ],
+  "facial_expression": "disgust",
+  "human_action": "finger snapping"
+}

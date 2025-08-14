@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_04061",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "scene": "street",
+  "object": [
+    "Flag",
+    "Balloon"
+  ],
+  "facial_expression": "happy",
+  "human_action": "celebrating"
+}

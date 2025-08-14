@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_12421",
+  "emotion": "excitement",
+  "brightness": 0.2,
+  "colorfulness": 0.7,
+  "scene": "stage",
+  "object": [
+    "Hat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "tapping guitar"
+}

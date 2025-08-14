@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_07252",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.5,
+  "object": [
+    "Necklace",
+    "Fashion accessory"
+  ],
+  "facial_expression": "sad"
+}

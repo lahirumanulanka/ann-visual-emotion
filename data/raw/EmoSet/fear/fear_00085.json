@@ -1,0 +1,10 @@
+{
+  "image_id": "fear_00085",
+  "emotion": "fear",
+  "brightness": 0.4,
+  "colorfulness": 0.7,
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "angry"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_11873",
+  "emotion": "amusement",
+  "brightness": 0.4,
+  "colorfulness": 0.8,
+  "object": [
+    "Fashion accessory",
+    "Balloon"
+  ],
+  "facial_expression": "happy",
+  "human_action": "hugging"
+}

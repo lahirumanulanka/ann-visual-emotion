@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_06521",
+  "emotion": "sadness",
+  "brightness": 0.1,
+  "colorfulness": 0.3,
+  "object": [
+    "Bicycle wheel",
+    "Wheel"
+  ],
+  "facial_expression": "sad"
+}

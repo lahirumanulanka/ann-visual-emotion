@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_19630",
+  "emotion": "excitement",
+  "brightness": 0.4,
+  "colorfulness": 0.5,
+  "object": [
+    "Picture frame",
+    "Fashion accessory",
+    "Flower"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "celebrating"
+}

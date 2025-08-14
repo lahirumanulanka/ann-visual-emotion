@@ -1,0 +1,12 @@
+{
+  "image_id": "amusement_06316",
+  "emotion": "amusement",
+  "brightness": 0.7,
+  "colorfulness": 0.8,
+  "object": [
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

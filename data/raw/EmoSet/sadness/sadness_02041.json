@@ -1,0 +1,13 @@
+{
+  "image_id": "sadness_02041",
+  "emotion": "sadness",
+  "brightness": 0.5,
+  "colorfulness": 0.6,
+  "scene": "lawn",
+  "object": [
+    "Jeans",
+    "Wheel",
+    "Plant"
+  ],
+  "facial_expression": "sad"
+}

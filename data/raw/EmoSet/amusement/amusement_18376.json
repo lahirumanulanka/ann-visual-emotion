@@ -1,0 +1,11 @@
+{
+  "image_id": "amusement_18376",
+  "emotion": "amusement",
+  "brightness": 0.8,
+  "colorfulness": 0.7,
+  "scene": "boat_deck",
+  "object": [
+    "Sunglasses"
+  ],
+  "facial_expression": "happy"
+}

@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_02799",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Jeans",
+    "Sports uniform"
+  ],
+  "facial_expression": "happy",
+  "human_action": "laughing"
+}

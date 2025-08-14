@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_02997",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "restaurant",
+  "object": [
+    "Car",
+    "Bottle",
+    "Coffee cup"
+  ],
+  "facial_expression": "surprise"
+}

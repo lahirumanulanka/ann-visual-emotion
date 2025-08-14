@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_10226",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "library",
+  "object": [
+    "Book",
+    "Fashion accessory",
+    "Picture frame"
+  ],
+  "facial_expression": "happy"
+}

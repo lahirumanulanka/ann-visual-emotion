@@ -1,0 +1,11 @@
+{
+  "image_id": "anger_06990",
+  "emotion": "anger",
+  "brightness": 0.4,
+  "colorfulness": 0.4,
+  "object": [
+    "Coat"
+  ],
+  "facial_expression": "happy",
+  "human_action": "marching"
+}

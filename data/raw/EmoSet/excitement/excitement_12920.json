@@ -1,0 +1,12 @@
+{
+  "image_id": "excitement_12920",
+  "emotion": "excitement",
+  "brightness": 0.5,
+  "colorfulness": 0.7,
+  "object": [
+    "Land vehicle",
+    "Wheel",
+    "Plant"
+  ],
+  "facial_expression": "happy"
+}

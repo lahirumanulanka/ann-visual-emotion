@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_06518",
+  "emotion": "sadness",
+  "brightness": 0.2,
+  "colorfulness": 0.6,
+  "object": [
+    "Table",
+    "Book"
+  ],
+  "facial_expression": "sad"
+}

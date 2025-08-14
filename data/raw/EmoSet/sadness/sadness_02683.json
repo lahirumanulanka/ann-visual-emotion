@@ -1,0 +1,11 @@
+{
+  "image_id": "sadness_02683",
+  "emotion": "sadness",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "scene": "ski_slope",
+  "object": [
+    "Tree"
+  ],
+  "facial_expression": "sad"
+}

@@ -1,0 +1,11 @@
+{
+  "image_id": "excitement_07300",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.7,
+  "object": [
+    "Sun hat",
+    "Sunglasses"
+  ],
+  "facial_expression": "happy"
+}

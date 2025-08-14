@@ -1,0 +1,13 @@
+{
+  "image_id": "excitement_13622",
+  "emotion": "excitement",
+  "brightness": 0.6,
+  "colorfulness": 0.6,
+  "scene": "ice_skating_rink",
+  "object": [
+    "Skirt",
+    "Fashion accessory"
+  ],
+  "facial_expression": "happy",
+  "human_action": "ice skating"
+}

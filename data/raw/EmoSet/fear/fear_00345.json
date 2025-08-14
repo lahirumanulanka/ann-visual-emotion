@@ -1,0 +1,13 @@
+{
+  "image_id": "fear_00345",
+  "emotion": "fear",
+  "brightness": 0.3,
+  "colorfulness": 0.4,
+  "scene": "car_interior",
+  "object": [
+    "Wheel",
+    "Land vehicle"
+  ],
+  "facial_expression": "surprise",
+  "human_action": "driving car"
+}
