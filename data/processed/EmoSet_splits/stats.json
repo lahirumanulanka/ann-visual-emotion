@@ -1,55 +1,41 @@
 {
-  "num_total": 17332,
+  "num_total": 35887,
   "splits": {
     "train": {
-      "n": 13864,
+      "n": 28821,
       "by_label": {
-        "amusement": 3046,
-        "anger": 1119,
-        "awe": 491,
-        "contentment": 2512,
-        "disgust": 21,
-        "excitement": 4910,
-        "fear": 362,
-        "sadness": 1403
+        "angry": 3993,
+        "disgust": 436,
+        "fear": 4103,
+        "happy": 7164,
+        "neutral": 4982,
+        "sad": 4938,
+        "surprise": 3205
       }
     },
     "val": {
-      "n": 1734,
+      "n": 5653,
       "by_label": {
-        "amusement": 381,
-        "anger": 140,
-        "awe": 62,
-        "contentment": 314,
-        "disgust": 3,
-        "excitement": 614,
-        "fear": 45,
-        "sadness": 175
+        "angry": 768,
+        "disgust": 89,
+        "fear": 814,
+        "happy": 1460,
+        "neutral": 973,
+        "sad": 911,
+        "surprise": 638
       }
     },
     "test": {
-      "n": 1734,
+      "n": 1413,
       "by_label": {
-        "amusement": 381,
-        "anger": 140,
-        "awe": 61,
-        "contentment": 314,
-        "disgust": 3,
-        "excitement": 614,
-        "fear": 45,
-        "sadness": 176
+        "angry": 192,
+        "disgust": 22,
+        "fear": 204,
+        "happy": 365,
+        "neutral": 243,
+        "sad": 228,
+        "surprise": 159
       }
     }
-  },
-  "label_map": {
-    "amusement": 0,
-    "anger": 1,
-    "awe": 2,
-    "contentment": 3,
-    "disgust": 4,
-    "excitement": 5,
-    "fear": 6,
-    "sadness": 7
-  },
-  "raw_dir": "data/raw/EmoSet"
+  }
 }
