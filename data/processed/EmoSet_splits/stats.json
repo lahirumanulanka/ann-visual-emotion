@@ -1,43 +1,43 @@
 {
-  "num_total": 17332,
+  "num_total": 21436,
   "splits": {
     "train": {
-      "n": 13864,
+      "n": 17148,
       "by_label": {
         "amusement": 3046,
-        "anger": 1119,
-        "awe": 491,
+        "anger": 1424,
+        "awe": 1299,
         "contentment": 2512,
-        "disgust": 21,
+        "disgust": 1204,
         "excitement": 4910,
-        "fear": 362,
-        "sadness": 1403
+        "fear": 1272,
+        "sadness": 1481
       }
     },
     "val": {
-      "n": 1734,
+      "n": 2144,
       "by_label": {
         "amusement": 381,
-        "anger": 140,
-        "awe": 62,
+        "anger": 178,
+        "awe": 162,
         "contentment": 314,
-        "disgust": 3,
+        "disgust": 151,
         "excitement": 614,
-        "fear": 45,
-        "sadness": 175
+        "fear": 159,
+        "sadness": 185
       }
     },
     "test": {
-      "n": 1734,
+      "n": 2144,
       "by_label": {
         "amusement": 381,
-        "anger": 140,
-        "awe": 61,
+        "anger": 178,
+        "awe": 162,
         "contentment": 314,
-        "disgust": 3,
+        "disgust": 151,
         "excitement": 614,
-        "fear": 45,
-        "sadness": 176
+        "fear": 159,
+        "sadness": 185
       }
     }
   },
