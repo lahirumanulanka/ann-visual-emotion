@@ -1,0 +1,10 @@
+{
+  "emotion": "awe",
+  "prompt": "A photorealistic portrait of a senior non-binary person with brown skin, curly hair, showing a clear awe facial expression (astonished look), ultra-detailed RAW color photo, 85mm lens, shallow depth of field, studio portrait, highly detailed skin, pores visible, sharp eyes, soft key light, rim light, natural color grading, softbox lighting, high dynamic range, 8k master",
+  "negative_prompt": "low-res, blurry, deformed face, extra fingers, extra limbs, cropped head, over-saturated, watermark, text, logo, jpeg artifacts, disfigured, doll-like, unrealistic skin, severe shadow banding",
+  "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+  "guidance_scale": 6.0,
+  "seed": 42,
+  "clip_similarity": 0.31982421875,
+  "use_sdxl": true
+}

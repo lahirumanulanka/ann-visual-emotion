@@ -1,0 +1,10 @@
+{
+  "emotion": "disgust",
+  "prompt": "A photorealistic portrait of a young adult non-binary person with dark brown skin, straight hair, showing a clear disgust facial expression (disgusted expression), ultra-detailed RAW color photo, 85mm lens, shallow depth of field, studio portrait, highly detailed skin, pores visible, sharp eyes, soft key light, rim light, natural color grading, softbox lighting, high dynamic range, 8k master",
+  "negative_prompt": "low-res, blurry, deformed face, extra fingers, extra limbs, cropped head, over-saturated, watermark, text, logo, jpeg artifacts, disfigured, doll-like, unrealistic skin, severe shadow banding",
+  "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+  "guidance_scale": 6.0,
+  "seed": 42,
+  "clip_similarity": 0.35205078125,
+  "use_sdxl": true
+}

@@ -7,11 +7,17 @@ from pathlib import Path
 from sklearn.model_selection import StratifiedShuffleSplit
 
 
-def collect_pairs(raw_dir: Path, img_ext: str = ".jpg", filter_facial: bool = False):
+def collect_pairs(raw_dir: Path, img_exts: list[str], filter_facial: bool = False):
+    """
+    Returns (relative_image_path, label) where image path is forced to:
+      data/raw/EmoSet/<class>/<file>
+    Scans nested subfolders and supports multiple extensions.
+    """
+    exts = {e.lower() if e.startswith(".") else f".{e.lower()}" for e in img_exts}
     rows = []  # (image_path, label)
     for class_dir in sorted([p for p in raw_dir.iterdir() if p.is_dir()]):
-        for img_path in class_dir.glob(f"*{img_ext}"):
-            base = img_path.stem
+        # scan nested too
+        for img_path in (p for p in class_dir.rglob("*") if p.is_file() and p.suffix.lower() in exts):
             ann_path = img_path.with_suffix(".json")
             label = class_dir.name  # fallback: folder name
             if ann_path.exists():
@@ -23,10 +29,17 @@ def collect_pairs(raw_dir: Path, img_ext: str = ".jpg", filter_facial: bool = Fa
                         continue
                 except Exception as e:
                     warnings.warn(f"Bad JSON {ann_path}: {e}; using folder label '{label}'")
-            else:
-                warnings.warn(f"Missing JSON for {img_path}; using folder label '{label}'")
-            rows.append((str(img_path.as_posix()), label))
-    return rows
+            # Force relative path style: data/raw/EmoSet/<class>/<file>
+            rel_path = Path("data/raw/EmoSet") / img_path.relative_to(raw_dir)
+            rows.append((rel_path.as_posix(), label))
+    # de-dup (just in case)
+    seen, dedup = set(), []
+    for p, lb in rows:
+        if p not in seen:
+            dedup.append((p, lb))
+            seen.add(p)
+    return dedup
+
 
 def write_csv(out_path: Path, rows):
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -35,11 +48,14 @@ def write_csv(out_path: Path, rows):
         w.writerow(["image_path", "label"])
         w.writerows(rows)
 
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--raw_dir", default="data/raw/EmoSet", type=str)
-    ap.add_argument("--out_dir", default="data/processed/EmoSet_splits", type=str)
-    ap.add_argument("--img_ext", default=".jpg", type=str)
+    ap.add_argument("--raw_dir",   default="data/raw/EmoSet", type=str,
+                    help="Dataset root that has class folders (e.g., data/raw/EmoSet/amusement/*)")
+    ap.add_argument("--out_dir",   default="data/processed/EmoSet_splits", type=str)
+    ap.add_argument("--img_exts",  default=".jpg,.jpeg,.png", type=str,
+                    help="Comma-separated list of image extensions (e.g. .jpg,.jpeg,.png,.bmp)")
     ap.add_argument("--filter_facial", action="store_true",
                     help="Keep only samples that have 'facial_expression' in JSON")
     ap.add_argument("--seed", type=int, default=42)
@@ -49,10 +65,11 @@ def main():
 
     raw_dir = Path(args.raw_dir)
     out_dir = Path(args.out_dir)
+    img_exts = [e.strip() for e in args.img_exts.split(",") if e.strip()]
 
-    rows = collect_pairs(raw_dir, args.img_ext, args.filter_facial)
+    rows = collect_pairs(raw_dir, img_exts, args.filter_facial)
     if not rows:
-        raise SystemExit(f"No samples found in {raw_dir} with ext {args.img_ext}")
+        raise SystemExit(f"No samples found in {raw_dir} with exts {img_exts}")
 
     # labels + mapping
     labels = sorted({lb for _, lb in rows})
@@ -87,7 +104,8 @@ def main():
     # stats
     def count_by_label(rws):
         c = {}
-        for _, lb in rws: c[lb] = c.get(lb, 0) + 1
+        for _, lb in rws:
+            c[lb] = c.get(lb, 0) + 1
         return dict(sorted(c.items()))
     stats = {
         "num_total": len(rows),
@@ -100,7 +118,8 @@ def main():
         "raw_dir": str(raw_dir.as_posix())
     }
     (out_dir / "stats.json").write_text(json.dumps(stats, indent=2))
-    print(json.dumps(stats, indent=2))
+    print(json.dumps(stats, indent=2, ensure_ascii=False))
+
 
 if __name__ == "__main__":
     main()
