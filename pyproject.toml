@@ -13,6 +13,7 @@ dependencies = [
 	"scikit-learn",
 	"opencv-python",
 	"matplotlib",
+	"seaborn",
 	"tqdm",
 	"fastapi",
 	"uvicorn[standard]",
