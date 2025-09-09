@@ -2,42 +2,39 @@
   "dataset": "EmoSet_Balanced",
   "balancing_strategy": "moderate",
   "target_samples_per_class": {
-    "train": 3967,
-    "val": 793,
-    "test": 198
+    "train": 4030,
+    "val": 806,
+    "test": 201
   },
   "splits": {
     "train": {
-      "total": 23802,
+      "total": 20150,
       "by_label": {
-        "angry": 3967,
-        "fear": 3967,
-        "happy": 3967,
-        "neutral": 3967,
-        "sad": 3967,
-        "surprise": 3967
+        "angry": 4030,
+        "happy": 4030,
+        "neutral": 4030,
+        "sad": 4030,
+        "surprise": 4030
       }
     },
     "val": {
-      "total": 4758,
+      "total": 4030,
       "by_label": {
-        "angry": 793,
-        "fear": 793,
-        "happy": 793,
-        "neutral": 793,
-        "sad": 793,
-        "surprise": 793
+        "angry": 806,
+        "happy": 806,
+        "neutral": 806,
+        "sad": 806,
+        "surprise": 806
       }
     },
     "test": {
-      "total": 1188,
+      "total": 1005,
       "by_label": {
-        "angry": 198,
-        "fear": 198,
-        "happy": 198,
-        "neutral": 198,
-        "sad": 198,
-        "surprise": 198
+        "angry": 201,
+        "happy": 201,
+        "neutral": 201,
+        "sad": 201,
+        "surprise": 201
       }
     }
   },
