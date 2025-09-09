@@ -62,6 +62,21 @@ class SRCNN(nn.Module):
         x = self.conv4(x)
         
         return torch.clamp(x, 0, 1)
+    
+    def get_num_params(self, trainable_only=True):
+        """
+        Get number of parameters in the model.
+        
+        Args:
+            trainable_only (bool): If True, count only trainable parameters
+            
+        Returns:
+            int: Number of parameters
+        """
+        if trainable_only:
+            return sum(p.numel() for p in self.parameters() if p.requires_grad)
+        else:
+            return sum(p.numel() for p in self.parameters())
 
 
 class EnhancedSRCNN(nn.Module):
@@ -136,6 +151,21 @@ class EnhancedSRCNN(nn.Module):
         x = x + lr_upsampled
         
         return torch.clamp(x, 0, 1)
+    
+    def get_num_params(self, trainable_only=True):
+        """
+        Get number of parameters in the model.
+        
+        Args:
+            trainable_only (bool): If True, count only trainable parameters
+            
+        Returns:
+            int: Number of parameters
+        """
+        if trainable_only:
+            return sum(p.numel() for p in self.parameters() if p.requires_grad)
+        else:
+            return sum(p.numel() for p in self.parameters())
 
 
 class EmotionImageEnhancer:
