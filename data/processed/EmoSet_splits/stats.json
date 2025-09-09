@@ -1,11 +1,10 @@
 {
-  "num_total": 35887,
+  "num_total": 35340,
   "splits": {
     "train": {
-      "n": 28821,
+      "n": 28385,
       "by_label": {
         "angry": 3993,
-        "disgust": 436,
         "fear": 4103,
         "happy": 7164,
         "neutral": 4982,
@@ -14,10 +13,9 @@
       }
     },
     "val": {
-      "n": 5653,
+      "n": 5564,
       "by_label": {
         "angry": 768,
-        "disgust": 89,
         "fear": 814,
         "happy": 1460,
         "neutral": 973,
@@ -26,10 +24,9 @@
       }
     },
     "test": {
-      "n": 1413,
+      "n": 1391,
       "by_label": {
         "angry": 192,
-        "disgust": 22,
         "fear": 204,
         "happy": 365,
         "neutral": 243,
