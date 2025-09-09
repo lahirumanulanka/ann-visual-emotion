@@ -21,7 +21,11 @@ dependencies = [
 	"lime",
 	"albumentations",
 	"hydra-core",
-	"mlflow"
+	"mlflow",
+	"transformers>=4.30.0",
+	"diffusers>=0.21.0",
+	"accelerate",
+	"PIL"
 ]
 
 [tool.pytest.ini_options]
