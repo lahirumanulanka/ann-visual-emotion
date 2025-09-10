@@ -1,7 +1,8 @@
 {
   "angry": 0,
-  "happy": 1,
-  "neutral": 2,
-  "sad": 3,
-  "surprise": 4
+  "fear": 1,
+  "happy": 2,
+  "neutral": 3,
+  "sad": 4,
+  "surprise": 5
 }
