@@ -21,7 +21,8 @@ dependencies = [
 	"lime",
 	"albumentations",
 	"hydra-core",
-	"mlflow"
+	"mlflow",
+	"pillow"
 ]
 
 [tool.pytest.ini_options]

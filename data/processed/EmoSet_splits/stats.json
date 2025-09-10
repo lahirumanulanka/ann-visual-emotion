@@ -11,33 +11,33 @@
       "total": 23802,
       "by_label": {
         "angry": 3967,
-        "fear": 3967,
+        "fearful": 3967,
         "happy": 3967,
         "neutral": 3967,
         "sad": 3967,
-        "surprise": 3967
+        "surprised": 3967
       }
     },
     "val": {
       "total": 4758,
       "by_label": {
         "angry": 793,
-        "fear": 793,
+        "fearful": 793,
         "happy": 793,
         "neutral": 793,
         "sad": 793,
-        "surprise": 793
+        "surprised": 793
       }
     },
     "test": {
       "total": 1188,
       "by_label": {
         "angry": 198,
-        "fear": 198,
+        "fearful": 198,
         "happy": 198,
         "neutral": 198,
         "sad": 198,
-        "surprise": 198
+        "surprised": 198
       }
     }
   },
