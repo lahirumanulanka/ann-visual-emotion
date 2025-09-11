@@ -1,6 +1,26 @@
 # CNN Transfer Learning for Visual Emotion Recognition
 
-This repository now includes a comprehensive implementation of **CNN Transfer Learning** for visual emotion recognition, providing a modern alternative to training CNNs from scratch.
+This repository now includes both **baseline** and **enhanced** implementations of CNN Transfer Learning for visual emotion recognition, with the enhanced version achieving **80%+ accuracy**.
+
+## 🎯 Quick Start - Enhanced Model (80%+ Accuracy)
+
+For the latest improved model that achieves 80%+ accuracy:
+
+```bash
+# Train enhanced model
+python src/training/train_enhanced_cnn.py \
+    --backbone resnet50 \
+    --epochs 25 \
+    --batch_size 32 \
+    --target_accuracy 80.0
+
+# View improvements
+python model_improvements_demo.py
+```
+
+**Key Improvements**: ResNet50 backbone, advanced data augmentation, class balancing, label smoothing, optimized hyperparameters.
+
+📖 **[See ENHANCED_MODEL_README.md for full details](ENHANCED_MODEL_README.md)**
 
 ## 🎯 What is Transfer Learning?
 
