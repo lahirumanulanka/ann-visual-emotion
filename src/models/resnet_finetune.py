@@ -1,1 +1,0 @@
-# ResNet finetune model
