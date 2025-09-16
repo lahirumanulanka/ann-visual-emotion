@@ -1,34 +1,49 @@
 {
-  "split_counts": {
-    "train": 35003,
-    "val": 4372,
-    "test": 4381
-  },
+  "total_images": 80370,
   "class_distribution": {
     "train": {
-      "angry": 4071,
-      "fearful": 3671,
-      "happy": 10696,
-      "neutral": 6614,
-      "sad": 6003,
-      "surprised": 3948
+      "happy": 9359,
+      "neutral": 9359,
+      "sad": 9359,
+      "angry": 9393,
+      "surprised": 9394,
+      "fearful": 9394
     },
     "val": {
-      "angry": 508,
-      "fearful": 458,
-      "happy": 1337,
-      "neutral": 826,
-      "sad": 750,
-      "surprised": 493
+      "happy": 2006,
+      "neutral": 2005,
+      "sad": 2006,
+      "angry": 2013,
+      "surprised": 2013,
+      "fearful": 2013
     },
     "test": {
-      "angry": 510,
-      "fearful": 460,
-      "happy": 1337,
-      "neutral": 828,
-      "sad": 751,
-      "surprised": 495
+      "happy": 2005,
+      "neutral": 2006,
+      "sad": 2005,
+      "angry": 2014,
+      "surprised": 2013,
+      "fearful": 2013
     }
   },
-  "total": 43756
+  "overall_class_distribution": {
+    "happy": 13370,
+    "neutral": 13370,
+    "sad": 13370,
+    "angry": 13420,
+    "surprised": 13420,
+    "fearful": 13420
+  },
+  "splits_fraction": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "image_size": {
+    "width": 224,
+    "height": 224
+  },
+  "created_timestamp": "2025-09-16T14:27:17.428736Z",
+  "seed": 42,
+  "target_count_per_class": 6925
 }
