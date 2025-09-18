@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Realtime Emotion Detection</title>
+    <style>
+      body {
+        font-family: system-ui, Arial, sans-serif;
+        margin: 0;
+        padding: 1rem;
+        background: #0d1117;
+        color: #e6edf3;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      #container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      video,
+      canvas {
+        border: 2px solid #30363d;
+        border-radius: 8px;
+      }
+      #predictions {
+        min-width: 260px;
+      }
+      .bar {
+        height: 14px;
+        background: #238636;
+        border-radius: 4px;
+      }
+      .row {
+        margin-bottom: 8px;
+      }
+      .label {
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
+      #status {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+      button {
+        background: #238636;
+        color: white;
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background: #30363d;
+        cursor: not-allowed;
+      }
+      #face-box {
+        position: absolute;
+        border: 2px solid #ffa657;
+      }
+      #video-wrapper {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Realtime Emotion Detection</h1>
+    <div id="video-wrapper">
+      <video id="video" width="480" height="360" autoplay muted></video>
+      <canvas
+        id="overlay"
+        width="480"
+        height="360"
+        style="position: absolute; left: 0; top: 0"
+      ></canvas>
+    </div>
+    <div id="controls">
+      <button id="startBtn">Start</button>
+      <button id="stopBtn" disabled>Stop</button>
+      <label style="margin-left: 1rem"
+        ><input type="checkbox" id="faceToggle" checked /> Face detect</label
+      >
+    </div>
+    <div id="container">
+      <div id="predictions"></div>
+    </div>
+    <div id="status">Idle</div>
+
+    <script>
+      const video = document.getElementById("video");
+      const overlay = document.getElementById("overlay");
+      const ctx = overlay.getContext("2d");
+      const predsDiv = document.getElementById("predictions");
+      const statusEl = document.getElementById("status");
+      let running = false;
+      let loopHandle = null;
+
+      async function setupCamera() {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+        video.srcObject = stream;
+        await new Promise((r) => (video.onloadedmetadata = r));
+      }
+
+      function captureFrame() {
+        const temp = document.createElement("canvas");
+        temp.width = video.videoWidth;
+        temp.height = video.videoHeight;
+        const tctx = temp.getContext("2d");
+        tctx.drawImage(video, 0, 0, temp.width, temp.height);
+        return temp.toDataURL("image/jpeg", 0.85);
+      }
+
+      async function predict() {
+        if (!running) return;
+        try {
+          const b64 = captureFrame();
+          const detect_face = document.getElementById("faceToggle").checked;
+          const res = await fetch("/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image_base64: b64, detect_face }),
+          });
+          if (!res.ok) throw new Error(await res.text());
+          const data = await res.json();
+          renderPredictions(data);
+        } catch (err) {
+          console.error(err);
+          statusEl.textContent = "Error: " + err.message;
+        } finally {
+          loopHandle = setTimeout(predict, 300); // ~3 fps
+        }
+      }
+
+      function renderPredictions(data) {
+        statusEl.textContent = "Top: " + data.top_label;
+        predsDiv.innerHTML = "";
+        data.probabilities.slice(0, 6).forEach((p) => {
+          const row = document.createElement("div");
+          row.className = "row";
+          const label = document.createElement("div");
+          label.className = "label";
+          label.textContent = `${p.label} ${(p.probability * 100).toFixed(1)}%`;
+          const barOuter = document.createElement("div");
+          barOuter.style.background = "#30363d";
+          barOuter.style.borderRadius = "4px";
+          barOuter.style.width = "200px";
+          barOuter.style.height = "14px";
+          const bar = document.createElement("div");
+          bar.className = "bar";
+          bar.style.width = p.probability * 100 + "%";
+          barOuter.appendChild(bar);
+          row.appendChild(label);
+          row.appendChild(barOuter);
+          predsDiv.appendChild(row);
+        });
+        ctx.clearRect(0, 0, overlay.width, overlay.height);
+        if (data.face_box) {
+          const [x, y, w, h] = data.face_box;
+          ctx.strokeStyle = "#ffa657";
+          ctx.lineWidth = 2;
+          const scaleX = overlay.width / video.videoWidth;
+          const scaleY = overlay.height / video.videoHeight;
+          ctx.strokeRect(x * scaleX, y * scaleY, w * scaleX, h * scaleY);
+        }
+      }
+
+      document
+        .getElementById("startBtn")
+        .addEventListener("click", async () => {
+          if (running) return;
+          await setupCamera();
+          running = true;
+          statusEl.textContent = "Running...";
+          document.getElementById("startBtn").disabled = true;
+          document.getElementById("stopBtn").disabled = false;
+          predict();
+        });
+
+      document.getElementById("stopBtn").addEventListener("click", () => {
+        running = false;
+        statusEl.textContent = "Stopped";
+        clearTimeout(loopHandle);
+        loopHandle = null;
+        document.getElementById("startBtn").disabled = false;
+        document.getElementById("stopBtn").disabled = true;
+      });
+    </script>
+  </body>
+</html>
