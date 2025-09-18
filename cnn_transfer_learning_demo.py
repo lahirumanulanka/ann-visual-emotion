@@ -158,68 +158,148 @@ def create_data_loaders(transforms_dict, batch_size=32, dataset_size=1000):
     }
 
 
-def train_model_epoch(model, train_loader, criterion, optimizer, device):
-    """Train model for one epoch."""
-    model.train()
-    running_loss = 0.0
-    correct = 0
-    total = 0
+def train_model_epoch_with_detailed_logging(model, training_data_loader, loss_criterion, optimizer, computing_device):
+    """
+    🏋️ **Enhanced Training Function for One Epoch**
     
-    for batch_idx, (data, target) in enumerate(train_loader):
-        data, target = data.to(device), target.to(device)
+    Trains the model for one complete epoch with detailed progress monitoring
+    and clear variable naming for better code readability.
+    
+    Args:
+        model: Neural network model to train
+        training_data_loader: DataLoader containing training samples
+        loss_criterion: Loss function for optimization
+        optimizer: Optimizer for parameter updates
+        computing_device: Device (GPU/CPU) for computation
         
+    Returns:
+        tuple: (average_epoch_loss, epoch_accuracy_percentage)
+    """
+    print(f"    🚀 Starting training epoch with {len(training_data_loader)} batches...")
+    
+    # Set model to training mode
+    model.train()
+    
+    # Initialize epoch metrics
+    cumulative_epoch_loss = 0.0
+    total_correct_predictions = 0
+    total_samples_processed = 0
+    
+    # Process each batch in the training dataset
+    for batch_index, (input_images, target_labels) in enumerate(training_data_loader):
+        # Transfer data to the computing device (GPU/CPU)
+        input_images = input_images.to(computing_device)
+        target_labels = target_labels.to(computing_device)
+        
+        # Reset gradients from previous iteration
         optimizer.zero_grad()
-        output = model(data)
-        loss = criterion(output, target)
-        loss.backward()
+        
+        # Forward pass: compute model predictions
+        model_predictions = model(input_images)
+        
+        # Calculate loss between predictions and true labels
+        batch_loss = loss_criterion(model_predictions, target_labels)
+        
+        # Backward pass: compute gradients
+        batch_loss.backward()
+        
+        # Update model parameters
         optimizer.step()
         
-        running_loss += loss.item()
-        _, predicted = torch.max(output.data, 1)
-        total += target.size(0)
-        correct += (predicted == target).sum().item()
+        # Accumulate loss for epoch average
+        cumulative_epoch_loss += batch_loss.item()
         
-        if batch_idx % 10 == 0:
-            print(f'    Batch {batch_idx}/{len(train_loader)}: '
-                  f'Loss = {loss.item():.4f}, '
-                  f'Acc = {100.*correct/total:.2f}%')
-            
-        # Early termination for demo
-        if batch_idx >= 20:  # Only train on first 20 batches for demo
+        # Calculate accuracy for this batch
+        _, predicted_class_indices = torch.max(model_predictions.data, 1)
+        total_samples_processed += target_labels.size(0)
+        total_correct_predictions += (predicted_class_indices == target_labels).sum().item()
+        
+        # Print detailed progress every 10 batches
+        if batch_index % 10 == 0:
+            current_accuracy_percentage = 100.0 * total_correct_predictions / total_samples_processed
+            print(f'    📊 Batch {batch_index:3d}/{len(training_data_loader)} | '
+                  f'Loss: {batch_loss.item():.4f} | '
+                  f'Accuracy: {current_accuracy_percentage:6.2f}% | '
+                  f'Samples: {total_samples_processed:5d}')
+        
+        # Early termination for demo purposes (remove in production)
+        if batch_index >= 20:  # Only train on first 20 batches for demo
+            print(f"    ⚡ Early termination at batch {batch_index} for demo purposes")
             break
     
-    epoch_loss = running_loss / min(len(train_loader), 21)
-    epoch_acc = 100. * correct / total
+    # Calculate final epoch metrics
+    average_epoch_loss = cumulative_epoch_loss / min(len(training_data_loader), 21)
+    epoch_accuracy_percentage = 100.0 * total_correct_predictions / total_samples_processed
     
-    return epoch_loss, epoch_acc
+    print(f"    ✅ Training epoch completed: Loss={average_epoch_loss:.4f}, Accuracy={epoch_accuracy_percentage:.2f}%")
+    
+    return average_epoch_loss, epoch_accuracy_percentage
 
 
-def validate_model(model, val_loader, criterion, device):
-    """Validate model."""
+def validate_model_with_comprehensive_metrics(model, validation_data_loader, loss_criterion, computing_device):
+    """
+    🔍 **Enhanced Validation Function with Detailed Metrics**
+    
+    Evaluates the model on validation data with comprehensive logging
+    and clear variable naming for better understanding.
+    
+    Args:
+        model: Neural network model to validate
+        validation_data_loader: DataLoader containing validation samples
+        loss_criterion: Loss function for evaluation
+        computing_device: Device (GPU/CPU) for computation
+        
+    Returns:
+        tuple: (average_validation_loss, validation_accuracy_percentage)
+    """
+    print(f"    🔍 Starting validation on {len(validation_data_loader)} batches...")
+    
+    # Set model to evaluation mode (disables dropout, batch norm training mode)
     model.eval()
-    running_loss = 0.0
-    correct = 0
-    total = 0
     
+    # Initialize validation metrics
+    cumulative_validation_loss = 0.0
+    total_correct_predictions = 0
+    total_samples_evaluated = 0
+    
+    # Disable gradient computation for efficiency during validation
     with torch.no_grad():
-        for batch_idx, (data, target) in enumerate(val_loader):
-            data, target = data.to(device), target.to(device)
-            output = model(data)
-            loss = criterion(output, target)
+        for batch_index, (input_images, target_labels) in enumerate(validation_data_loader):
+            # Transfer data to the computing device
+            input_images = input_images.to(computing_device)
+            target_labels = target_labels.to(computing_device)
             
-            running_loss += loss.item()
-            _, predicted = torch.max(output.data, 1)
-            total += target.size(0)
-            correct += (predicted == target).sum().item()
+            # Forward pass: compute model predictions
+            model_predictions = model(input_images)
             
-            # Early termination for demo
-            if batch_idx >= 10:  # Only validate on first 10 batches for demo
+            # Calculate validation loss
+            batch_loss = loss_criterion(model_predictions, target_labels)
+            
+            # Accumulate metrics
+            cumulative_validation_loss += batch_loss.item()
+            _, predicted_class_indices = torch.max(model_predictions.data, 1)
+            total_samples_evaluated += target_labels.size(0)
+            total_correct_predictions += (predicted_class_indices == target_labels).sum().item()
+            
+            # Print progress every 5 batches during validation
+            if batch_index % 5 == 0 and batch_index > 0:
+                current_accuracy = 100.0 * total_correct_predictions / total_samples_evaluated
+                print(f'    📈 Validation Batch {batch_index:3d}/{len(validation_data_loader)} | '
+                      f'Accuracy: {current_accuracy:6.2f}% | '
+                      f'Samples: {total_samples_evaluated:5d}')
+            
+            # Early termination for demo purposes (remove in production)
+            if batch_index >= 10:  # Only validate on first 10 batches for demo
+                print(f"    ⚡ Early termination at batch {batch_index} for demo purposes")
                 break
     
-    epoch_loss = running_loss / min(len(val_loader), 11)
-    epoch_acc = 100. * correct / total
+    # Calculate final validation metrics
+    average_validation_loss = cumulative_validation_loss / min(len(validation_data_loader), 11)
+    validation_accuracy_percentage = 100.0 * total_correct_predictions / total_samples_evaluated
     
-    return epoch_loss, epoch_acc
+    print(f"    ✅ Validation completed: Loss={average_validation_loss:.4f}, Accuracy={validation_accuracy_percentage:.2f}%")
+    
+    return average_validation_loss, validation_accuracy_percentage
 
 
 def compare_models():
@@ -304,10 +384,10 @@ def compare_models():
         # Train baseline model
         print("Training Baseline CNN...")
         start_time = time.time()
-        train_loss, train_acc = train_model_epoch(
+        train_loss, train_acc = train_model_epoch_with_detailed_logging(
             baseline_model, train_loader_baseline, criterion, baseline_optimizer, device
         )
-        val_loss, val_acc = validate_model(
+        val_loss, val_acc = validate_model_with_comprehensive_metrics(
             baseline_model, val_loader_baseline, criterion, device
         )
         baseline_time = time.time() - start_time
@@ -324,10 +404,10 @@ def compare_models():
         # Train transfer learning model
         print("\nTraining Transfer Learning CNN...")
         start_time = time.time()
-        train_loss, train_acc = train_model_epoch(
+        train_loss, train_acc = train_model_epoch_with_detailed_logging(
             transfer_model, train_loader_transfer, criterion, transfer_optimizer, device
         )
-        val_loss, val_acc = validate_model(
+        val_loss, val_acc = validate_model_with_comprehensive_metrics(
             transfer_model, val_loader_transfer, criterion, device
         )
         transfer_time = time.time() - start_time
