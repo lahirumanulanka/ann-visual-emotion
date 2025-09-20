@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Large model files should not be committed - symlink or copy locally
+assets/models/*.onnx
+assets/models/*.pth
