@@ -1,0 +1,49 @@
+{
+  "total_images": 80190,
+  "class_distribution": {
+    "train": {
+      "angry": 9356,
+      "fearful": 9356,
+      "happy": 9355,
+      "neutral": 9355,
+      "sad": 9355,
+      "surprised": 9355
+    },
+    "val": {
+      "angry": 2004,
+      "fearful": 2005,
+      "happy": 2005,
+      "neutral": 2005,
+      "sad": 2005,
+      "surprised": 2005
+    },
+    "test": {
+      "angry": 2005,
+      "fearful": 2004,
+      "happy": 2005,
+      "neutral": 2005,
+      "sad": 2005,
+      "surprised": 2005
+    }
+  },
+  "overall_class_distribution": {
+    "angry": 13365,
+    "fearful": 13365,
+    "happy": 13365,
+    "neutral": 13365,
+    "sad": 13365,
+    "surprised": 13365
+  },
+  "splits_fraction": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "image_size": {
+    "width": 224,
+    "height": 224
+  },
+  "created_timestamp": "2025-09-23T19:38:38.863550Z",
+  "seed": 42,
+  "target_count_per_class": 13365
+}
