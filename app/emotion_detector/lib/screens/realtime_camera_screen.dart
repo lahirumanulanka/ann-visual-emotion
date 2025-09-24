@@ -16,6 +16,12 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
   List<CameraDescription> _cameras = [];
   bool _isCameraInitialized = false;
   bool _isProcessingStarted = false;
+  // Cooldown handling: pause frame processing for a period after an emotion is announced
+  static const Duration _cooldownDuration = Duration(seconds: 10);
+  bool _cooldownActive = false;
+  DateTime? _cooldownEndsAt;
+  Timer? _cooldownTimer;
+  int _cooldownRemaining = 0; // seconds
 
   final RealtimeEmotionService _emotionService = RealtimeEmotionService();
   StreamSubscription<RealtimeEmotionResult>? _emotionSubscription;
@@ -112,11 +118,21 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
       _statusMessage = 'Detecting emotions in real-time...';
     });
     _emotionSubscription = _emotionService.startRealtimeDetection().listen(
-          (result) => mounted ? setState(() => _currentResult = result) : null,
-          onError: (error) =>
-              setState(() => _statusMessage = 'Detection error: $error'),
-        );
+      (result) {
+        if (!mounted) return;
+        // Update current result always so bounding box & overlay stay fresh
+        setState(() => _currentResult = result);
+        // If we're already in cooldown, don't trigger a new announcement/cooldown
+        if (_cooldownActive) return;
+        // Start cooldown now that we've "announced" this emotion
+        _startCooldown();
+      },
+      onError: (error) =>
+          setState(() => _statusMessage = 'Detection error: $error'),
+    );
     _cameraController!.startImageStream((CameraImage image) {
+      // Skip frame processing while on cooldown to avoid re-announcing same emotion
+      if (_cooldownActive) return;
       _emotionService.processFrame(image);
     });
   }
@@ -130,6 +146,7 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     _cameraController?.stopImageStream();
     _emotionSubscription?.cancel();
     _emotionService.stopRealtimeDetection();
+    _cancelCooldown();
   }
 
   void _stopCamera() {
@@ -137,6 +154,33 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     _cameraController?.dispose();
     _cameraController = null;
     _isCameraInitialized = false;
+  }
+
+  void _startCooldown() {
+    _cooldownActive = true;
+    _cooldownEndsAt = DateTime.now().add(_cooldownDuration);
+    _cooldownRemaining = _cooldownDuration.inSeconds;
+    _cooldownTimer?.cancel();
+    _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (!mounted) return;
+      final now = DateTime.now();
+      final remaining = _cooldownEndsAt!.difference(now).inSeconds;
+      if (remaining <= 0) {
+        setState(() {
+          _cooldownActive = false;
+          _cooldownRemaining = 0;
+        });
+        t.cancel();
+      } else {
+        setState(() => _cooldownRemaining = remaining);
+      }
+    });
+  }
+
+  void _cancelCooldown() {
+    _cooldownTimer?.cancel();
+    _cooldownActive = false;
+    _cooldownRemaining = 0;
   }
 
   Widget _buildEmotionIcon(String emotion) {
@@ -287,7 +331,9 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
                   child: Text(
                     _currentResult != null
                         ? (_currentResult!.faceDetected
-                            ? 'Face detected! Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)'
+                            ? _cooldownActive
+                                ? 'Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)  (cooldown ${_cooldownRemaining}s)'
+                                : 'Face detected! Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)'
                             : 'Looking for faces...')
                         : _statusMessage,
                     style: TextStyle(
