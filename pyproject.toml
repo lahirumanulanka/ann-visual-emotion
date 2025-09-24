@@ -25,6 +25,12 @@ dependencies = [
 	"pillow"
 ]
 
+# Optional extra tooling for cloud operations
+[project.optional-dependencies]
+gcs = [
+	"google-cloud-storage>=2.18.0",
+]
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 addopts = "-q"
