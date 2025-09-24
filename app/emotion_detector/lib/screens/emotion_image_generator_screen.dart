@@ -1,9 +1,12 @@
 import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:math' as math;
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
+import 'package:image_picker/image_picker.dart';
+import '../services/face_detection_emotion_service.dart';
 
 /// Simple emotion image generator using the bundled classification ONNX model
 /// as an entropy source. Since the provided `model.onnx` is a classifier (not a
@@ -321,56 +324,243 @@ class EmotionImageGeneratorScreen extends StatefulWidget {
   const EmotionImageGeneratorScreen({super.key});
 
   @override
-  State<EmotionImageGeneratorScreen> createState() =>
-      _EmotionImageGeneratorScreenState();
+  State<EmotionImageGeneratorScreen> createState() => _EmotionImageGeneratorScreenState();
 }
 
-class _EmotionImageGeneratorScreenState
-    extends State<EmotionImageGeneratorScreen> {
+class _EmotionImageGeneratorScreenState extends State<EmotionImageGeneratorScreen> {
+  // Existing synthetic generator (kept for fallback / entropy & emotions list)
   final EmotionImageGeneratorService _service = EmotionImageGeneratorService();
-  bool _loading = true;
+  // Face detection for reading original emotion (pseudo) and face bbox
+  final FaceDetectionEmotionService _faceService = FaceDetectionEmotionService();
+  final ImagePicker _picker = ImagePicker();
+
+  bool _loading = true; // initialization
   String? _error;
-  String? _selectedEmotion;
-  Uint8List? _imageBytes;
-  bool _generating = false;
+  String? _selectedEmotion; // target emotion
+  String? _originalDetectedEmotion; // detected from uploaded image
+  double? _originalConfidence;
+
+  File? _inputImageFile; // original picked file
+  Uint8List? _transformedImageBytes; // result of transformation
+  bool _processing = false; // busy flag
+  bool _faceFound = false;
+  int _faceCount = 0;
 
   @override
   void initState() {
     super.initState();
-    _init();
+    _initializeAll();
   }
 
-  Future<void> _init() async {
+  Future<void> _initializeAll() async {
     try {
-      await _service.initialize();
-      setState(() {
-        _loading = false;
-      });
+      await Future.wait([
+        _service.initialize(),
+        _faceService.initialize(),
+      ]);
+      setState(() { _loading = false; });
     } catch (e) {
-      setState(() {
-        _error = e.toString();
-        _loading = false;
-      });
+      setState(() { _error = 'Init failed: $e'; _loading = false; });
     }
   }
 
-  Future<void> _generate() async {
-    if (_selectedEmotion == null) return;
-    setState(() {
-      _generating = true;
-    });
+  Future<void> _pickImage() async {
     try {
-      final bytes = await _service.generate(_selectedEmotion!);
+      final picked = await _picker.pickImage(source: ImageSource.gallery);
+      if (picked == null) return;
       setState(() {
-        _imageBytes = bytes;
+        _inputImageFile = File(picked.path);
+        _originalDetectedEmotion = null;
+        _originalConfidence = null;
+        _transformedImageBytes = null;
+        _faceFound = false;
+        _faceCount = 0;
+      });
+      await _detectOriginalEmotion();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Pick image failed: $e')));
+    }
+  }
+
+  Future<void> _detectOriginalEmotion() async {
+    if (_inputImageFile == null) return;
+    try {
+      setState(() { _processing = true; });
+      final r = await _faceService.detectEmotion(_inputImageFile!);
+      setState(() {
+        _originalDetectedEmotion = r.emotion;
+        _originalConfidence = r.confidence;
+        _faceFound = r.faceDetected;
+        _faceCount = r.faceCount;
       });
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Generation failed: $e')));
+      // ignore but show toast
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Detection failed: $e')));
     } finally {
-      setState(() {
-        _generating = false;
-      });
+      setState(() { _processing = false; });
+    }
+  }
+
+  Future<void> _transformToTarget() async {
+    if (_inputImageFile == null || _selectedEmotion == null) return;
+    try {
+      setState(() { _processing = true; });
+      final originalBytes = await _inputImageFile!.readAsBytes();
+      final original = img.decodeImage(originalBytes);
+      if (original == null) throw 'Cannot decode image';
+
+      // For simplicity we re-run detection for a face bbox if any (largest) using same logic as in face service (can't directly access bbox list, so approximate by reusing its cropping heuristic) --> We'll duplicate minimal code for cropping entire image if no face.
+      // Instead of internal face list (private), we just apply a global transformation + localized overlays heuristically centered.
+
+      final transformed = img.copyResize(original, width: original.width, height: original.height); // clone
+
+      // Apply global adjustments & overlays based on target emotion.
+      _applyEmotionFilter(transformed, _selectedEmotion!);
+
+      final outPng = img.encodePng(transformed);
+      setState(() { _transformedImageBytes = Uint8List.fromList(outPng); });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Transform failed: $e')));
+    } finally {
+      setState(() { _processing = false; });
+    }
+  }
+
+  void _applyEmotionFilter(img.Image image, String emotion) {
+    switch (emotion.toLowerCase()) {
+      case 'happy':
+        _adjustBrightness(image, 1.15);
+        _tint(image, 255, 220, 100, strength: 0.12);
+        _overlaySmile(image, smile: true);
+        break;
+      case 'sad':
+        _adjustBrightness(image, 0.9);
+        _adjustContrast(image, 0.85);
+        _tint(image, 60, 90, 150, strength: 0.18);
+        _overlaySmile(image, smile: false);
+        break;
+      case 'angry':
+        _adjustContrast(image, 1.25);
+        _tint(image, 255, 60, 40, strength: 0.20);
+        _overlayEyebrows(image, angle: -0.35);
+        _overlaySmile(image, smile: false, arcStart: 205, arcEnd: 335);
+        break;
+      case 'surprised':
+        _adjustBrightness(image, 1.12);
+        _adjustContrast(image, 1.05);
+        _tint(image, 255, 230, 120, strength: 0.10);
+        _overlayMouthCircle(image);
+        break;
+      case 'fearful':
+        _adjustContrast(image, 1.10);
+        _tint(image, 140, 120, 200, strength: 0.15);
+        _overlayMouthCircle(image, jitter: true);
+        break;
+      case 'neutral':
+      default:
+        _adjustContrast(image, 0.98);
+        _tint(image, 200, 200, 200, strength: 0.05);
+    }
+  }
+
+  void _adjustBrightness(img.Image imgIn, double factor) {
+    for (int y = 0; y < imgIn.height; y++) {
+      for (int x = 0; x < imgIn.width; x++) {
+        final p = imgIn.getPixel(x, y);
+        int r = (p.r * factor).clamp(0, 255).toInt();
+        int g = (p.g * factor).clamp(0, 255).toInt();
+        int b = (p.b * factor).clamp(0, 255).toInt();
+        imgIn.setPixelRgba(x, y, r, g, b, p.a);
+      }
+    }
+  }
+
+  void _adjustContrast(img.Image imgIn, double factor) {
+    // Contrast adjustment about mid-point 128
+    for (int y = 0; y < imgIn.height; y++) {
+      for (int x = 0; x < imgIn.width; x++) {
+        final p = imgIn.getPixel(x, y);
+        int r = ((p.r - 128) * factor + 128).clamp(0, 255).toInt();
+        int g = ((p.g - 128) * factor + 128).clamp(0, 255).toInt();
+        int b = ((p.b - 128) * factor + 128).clamp(0, 255).toInt();
+        imgIn.setPixelRgba(x, y, r, g, b, p.a);
+      }
+    }
+  }
+
+  void _tint(img.Image imgIn, int tr, int tg, int tb, {double strength = 0.1}) {
+    for (int y = 0; y < imgIn.height; y++) {
+      for (int x = 0; x < imgIn.width; x++) {
+        final p = imgIn.getPixel(x, y);
+        final r = (p.r * (1 - strength) + tr * strength).clamp(0, 255).toInt();
+        final g = (p.g * (1 - strength) + tg * strength).clamp(0, 255).toInt();
+        final b = (p.b * (1 - strength) + tb * strength).clamp(0, 255).toInt();
+        imgIn.setPixelRgba(x, y, r, g, b, p.a);
+      }
+    }
+  }
+
+  void _overlaySmile(img.Image imgIn, {required bool smile, int arcStart = 20, int arcEnd = 160}) {
+    final cx = imgIn.width ~/ 2;
+    final cy = (imgIn.height * 0.60).round();
+    final w = (imgIn.width * 0.35).round();
+    final h = (imgIn.height * 0.25).round();
+    final start = smile ? arcStart : 200;
+    final end = smile ? arcEnd : 340;
+    final color = img.ColorUint8.rgb(255, 255, 255);
+    int? prevX; int? prevY;
+    for (int i = 0; i <= 120; i++) {
+      final t = start + (end - start) * (i / 120);
+      final rad = t * math.pi / 180;
+      final x = cx + (w / 2) * math.cos(rad);
+      final y = cy + (h / 2) * math.sin(rad);
+      if (prevX != null) {
+        img.drawLine(imgIn, x1: prevX, y1: prevY!, x2: x.round(), y2: y.round(), color: color, thickness: 6);
+      }
+      prevX = x.round(); prevY = y.round();
+    }
+  }
+
+  void _overlayEyebrows(img.Image imgIn, {double angle = -0.3}) {
+    final cx = imgIn.width ~/ 2;
+    final cy = (imgIn.height * 0.42).round();
+    final half = (imgIn.width * 0.18).round();
+    final offsetY = (imgIn.height * 0.05).round();
+    final color = img.ColorUint8.rgb(255, 255, 255);
+    // left brow
+    img.drawLine(imgIn,
+        x1: cx - half - 40,
+        y1: cy - offsetY,
+        x2: cx - 40,
+        y2: (cy - offsetY + half * math.tan(angle)).round(),
+        color: color,
+        thickness: 5);
+    // right brow
+    img.drawLine(imgIn,
+        x1: cx + half + 40,
+        y1: cy - offsetY,
+        x2: cx + 40,
+        y2: (cy - offsetY - half * math.tan(angle)).round(),
+        color: color,
+        thickness: 5);
+  }
+
+  void _overlayMouthCircle(img.Image imgIn, {bool jitter = false}) {
+    final cx = imgIn.width ~/ 2;
+    final cy = (imgIn.height * 0.60).round();
+    final baseR = (math.min(imgIn.width, imgIn.height) * 0.09).round();
+    final color = img.ColorUint8.rgb(255, 255, 255);
+    // start point
+    double ang0 = 0;
+    int prevX = (cx + baseR * math.cos(ang0)).round();
+    int prevY = (cy + baseR * math.sin(ang0)).round();
+    for (int i = 1; i <= 120; i++) {
+      final ang = (i / 120) * math.pi * 2;
+      final r = jitter ? (baseR + (math.sin(i.toDouble()) * 3).round()) : baseR;
+      final x = (cx + r * math.cos(ang)).round();
+      final y = (cy + r * math.sin(ang)).round();
+      img.drawLine(imgIn, x1: prevX, y1: prevY, x2: x, y2: y, color: color, thickness: 5);
+      prevX = x; prevY = y;
     }
   }
 
@@ -387,12 +577,73 @@ class _EmotionImageGeneratorScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Emotion Image Generator',
-              style: Theme.of(context).textTheme.headlineSmall),
+          Text('Emotion Image Transformer', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: 8),
-          Text(
-              'Select an emotion below, then tap Generate to create a stylized image. (Prototype logic using model bytes as seed)'),
-          const SizedBox(height: 16),
+          Text('1. Pick an image  2. Detect original emotion  3. Choose a target emotion  4. Apply transformation.'),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            children: [
+              ElevatedButton.icon(
+                onPressed: _processing ? null : _pickImage,
+                icon: const Icon(Icons.photo_library),
+                label: const Text('Pick Image'),
+              ),
+              if (_inputImageFile != null)
+                TextButton.icon(
+                  onPressed: _processing ? null : () {
+                    setState(() { _inputImageFile = null; _transformedImageBytes = null; _originalDetectedEmotion = null;});
+                  },
+                  icon: const Icon(Icons.delete_outline),
+                  label: const Text('Remove'),
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          if (_inputImageFile != null) ...[
+            Row(
+              children: [
+                Expanded(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.file(_inputImageFile!, fit: BoxFit.cover),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: _transformedImageBytes == null
+                        ? Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Center(child: Text('No transform yet')),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.memory(_transformedImageBytes!, fit: BoxFit.cover),
+                          ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(_faceFound ? Icons.face_retouching_natural : Icons.info, color: _faceFound ? Colors.green : Colors.blue),
+                const SizedBox(width: 6),
+                Expanded(child: Text(_originalDetectedEmotion == null ? (_processing ? 'Analyzing...' : 'Tap Apply after selecting target emotion.') : 'Detected: ${_originalDetectedEmotion!.toUpperCase()} ${( (_originalConfidence ?? 0)*100).toStringAsFixed(1)}%  Faces: $_faceCount')),
+              ],
+            ),
+            const Divider(height: 24),
+          ],
+          Text('Target Emotion:', style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 6),
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -401,52 +652,41 @@ class _EmotionImageGeneratorScreenState
               return ChoiceChip(
                 label: Text(e),
                 selected: selected,
-                onSelected: (v) {
-                  setState(() {
-                    _selectedEmotion = v ? e : null;
-                  });
-                },
+                onSelected: (v) { if (_processing) return; setState(() { _selectedEmotion = v ? e : null; }); },
               );
             }).toList(),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Row(
             children: [
               ElevatedButton.icon(
-                onPressed:
-                    _selectedEmotion == null || _generating ? null : _generate,
-                icon: _generating
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Icon(Icons.auto_awesome),
-                label: Text(_generating ? 'Generating...' : 'Generate'),
+                onPressed: _processing || _inputImageFile == null || _selectedEmotion == null ? null : _transformToTarget,
+                icon: _processing ? const SizedBox(width:16,height:16,child:CircularProgressIndicator(strokeWidth:2)) : const Icon(Icons.auto_fix_high),
+                label: Text(_processing ? 'Processing...' : 'Apply Emotion'),
               ),
               const SizedBox(width: 12),
-              if (_imageBytes != null)
+              if (_transformedImageBytes != null)
                 TextButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      _imageBytes = null;
-                    });
-                  },
-                  icon: const Icon(Icons.clear),
-                  label: const Text('Clear'),
+                  onPressed: _processing ? null : () { setState(() { _transformedImageBytes = null; }); },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Reset Result'),
                 ),
             ],
           ),
-          const SizedBox(height: 24),
-          Expanded(
-            child: Center(
-              child: _imageBytes == null
-                  ? const Text('No image generated yet.')
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.memory(_imageBytes!, fit: BoxFit.contain),
-                    ),
-            ),
-          ),
+          const SizedBox(height: 16),
+          if (_inputImageFile == null)
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.photo_library_outlined, size: 72, color: Colors.grey),
+                    const SizedBox(height: 12),
+                    Text('Pick an image to start transforming emotions.', style: Theme.of(context).textTheme.bodyLarge),
+                  ],
+                ),
+              ),
+            ) else const SizedBox.shrink(),
         ],
       ),
     );
