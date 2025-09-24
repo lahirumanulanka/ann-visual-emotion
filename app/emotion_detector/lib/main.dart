@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'services/face_detection_emotion_service.dart';
 import 'screens/realtime_camera_screen.dart';
+import 'screens/emotion_image_generator_screen.dart';
 
 void main() {
   runApp(const EmotionDetectorApp());
@@ -38,7 +39,7 @@ class _MainTabScreenState extends State<MainTabScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -64,6 +65,10 @@ class _MainTabScreenState extends State<MainTabScreen>
               icon: Icon(Icons.video_camera_front),
               text: 'Real-time Detection',
             ),
+            Tab(
+              icon: Icon(Icons.auto_awesome),
+              text: 'Image Generator',
+            ),
           ],
         ),
       ),
@@ -72,6 +77,7 @@ class _MainTabScreenState extends State<MainTabScreen>
         children: const [
           EmotionDetectorHome(),
           RealtimeCameraScreen(),
+          EmotionImageGeneratorScreen(),
         ],
       ),
     );
@@ -267,8 +273,8 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
                   if (_faceDetected && _faceCount > 0) ...[
                     const SizedBox(width: 8.0),
                     Chip(
-                      label: Text(
-                          '${_faceCount} face${_faceCount > 1 ? 's' : ''}'),
+                      label:
+                          Text('$_faceCount face${_faceCount > 1 ? 's' : ''}'),
                       backgroundColor: Colors.green.shade100,
                     ),
                   ],
@@ -417,7 +423,7 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ],
                   ),
