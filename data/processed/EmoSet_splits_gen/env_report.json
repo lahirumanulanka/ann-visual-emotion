@@ -1,0 +1,14 @@
+{
+  "python_version": "3.12.11 (main, Jun  4 2025, 08:56:18) [GCC 11.4.0]",
+  "platform": "Linux-6.6.97+-x86_64-with-glibc2.35",
+  "torch_version": "2.8.0+cu126",
+  "diffusers_version": "0.35.1",
+  "numpy_version": "2.0.2",
+  "model_id": "runwayml/stable-diffusion-v1-5",
+  "base_seed": 20250924,
+  "prompt_dict_hash": "ad19af1a97d675f7",
+  "generation_params": {
+    "steps": 30,
+    "guidance_scale": 7.5
+  }
+}

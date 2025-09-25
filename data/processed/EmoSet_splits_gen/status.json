@@ -1,0 +1,63 @@
+{
+  "total_images": 83004,
+  "total_original": 80370,
+  "total_synthetic": 2634,
+  "synthetic_fraction": 0.031733410438051175,
+  "per_class": {
+    "angry": {
+      "original": 13420,
+      "synthetic": 414,
+      "total": 13834,
+      "synthetic_fraction": 0.0299
+    },
+    "fearful": {
+      "original": 13420,
+      "synthetic": 414,
+      "total": 13834,
+      "synthetic_fraction": 0.0299
+    },
+    "happy": {
+      "original": 13370,
+      "synthetic": 464,
+      "total": 13834,
+      "synthetic_fraction": 0.0335
+    },
+    "neutral": {
+      "original": 13370,
+      "synthetic": 464,
+      "total": 13834,
+      "synthetic_fraction": 0.0335
+    },
+    "sad": {
+      "original": 13370,
+      "synthetic": 464,
+      "total": 13834,
+      "synthetic_fraction": 0.0335
+    },
+    "surprised": {
+      "original": 13420,
+      "synthetic": 414,
+      "total": 13834,
+      "synthetic_fraction": 0.0299
+    }
+  },
+  "splits_fraction": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "image_size": {
+    "width": 224,
+    "height": 224,
+    "mode": "L"
+  },
+  "seed": 20250924,
+  "generation_model_id": "runwayml/stable-diffusion-v1-5",
+  "prompts_version_hash": "ad19af1a97d675f7",
+  "quality_thresholds": {
+    "blur_var_min": 60.0,
+    "hash_dist_max": 4,
+    "phash_size": 16
+  },
+  "created_timestamp": "2025-09-25T08:59:10.657082Z"
+}
