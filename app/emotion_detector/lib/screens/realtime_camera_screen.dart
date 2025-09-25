@@ -16,6 +16,8 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
   List<CameraDescription> _cameras = [];
   bool _isCameraInitialized = false;
   bool _isProcessingStarted = false;
+  // Disposal guard to avoid setState after dispose
+  bool _isDisposing = false;
   // Cooldown handling: pause frame processing for a period after an emotion is announced
   static const Duration _cooldownDuration = Duration(seconds: 10);
   bool _cooldownActive = false;
@@ -30,6 +32,11 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
   String _statusMessage = 'Initializing camera...';
   bool _isServiceInitialized = false;
 
+  void _safeSetState(VoidCallback fn) {
+    if (!mounted || _isDisposing) return;
+    setState(fn);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,9 +46,19 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
 
   @override
   void dispose() {
+    _isDisposing = true;
     WidgetsBinding.instance.removeObserver(this);
-    _stopCamera();
-    _emotionService.dispose();
+    // Stop streams/timers safely without triggering UI updates
+    try {
+      _cooldownTimer?.cancel();
+      _cooldownTimer = null;
+      _emotionSubscription?.cancel();
+      _emotionSubscription = null;
+      _emotionService.stopRealtimeDetection();
+      _emotionService.dispose();
+      _cameraController?.dispose();
+      _cameraController = null;
+    } catch (_) {}
     super.dispose();
   }
 
@@ -60,20 +77,20 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
 
   Future<void> _initializeServices() async {
     try {
-      setState(() {
+      _safeSetState(() {
         _statusMessage = 'Initializing emotion detection...';
       });
 
       await _emotionService.initialize();
 
-      setState(() {
+      _safeSetState(() {
         _isServiceInitialized = true;
         _statusMessage = 'Initializing camera...';
       });
 
       await _initializeCamera();
     } catch (e) {
-      setState(() {
+      _safeSetState(() {
         _statusMessage = 'Error initializing: $e';
       });
     }
@@ -83,7 +100,7 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     try {
       _cameras = await availableCameras();
       if (_cameras.isEmpty) {
-        setState(() => _statusMessage = 'No cameras available');
+        _safeSetState(() => _statusMessage = 'No cameras available');
         return;
       }
       final camera = _cameras.length > 1 ? _cameras[1] : _cameras[0];
@@ -102,48 +119,43 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
       _emotionService.updateCameraParams(
           rotationDegrees: rotationDegrees, isFrontCamera: isFront);
 
-      setState(() {
+      _safeSetState(() {
         _isCameraInitialized = true;
         _statusMessage = 'Ready! Tap "Start Detection" to begin';
       });
     } catch (e) {
-      setState(() => _statusMessage = 'Camera error: $e');
+      _safeSetState(() => _statusMessage = 'Camera error: $e');
     }
   }
 
   void _startRealtimeDetection() {
     if (!_isServiceInitialized || !_isCameraInitialized) return;
-    setState(() {
+    _safeSetState(() {
       _isProcessingStarted = true;
       _statusMessage = 'Detecting emotions in real-time...';
     });
-    _emotionSubscription = _emotionService.startRealtimeDetection().listen(
+    _emotionSubscription =
+        _emotionService.startRealtimeDetection(_cameraController!).listen(
       (result) {
-        if (!mounted) return;
+        if (!mounted || _isDisposing) return;
         // Update current result always so bounding box & overlay stay fresh
-        setState(() => _currentResult = result);
+        _safeSetState(() => _currentResult = result);
         // If we're already in cooldown, don't trigger a new announcement/cooldown
         if (_cooldownActive) return;
         // Start cooldown now that we've "announced" this emotion
         _startCooldown();
       },
       onError: (error) =>
-          setState(() => _statusMessage = 'Detection error: $error'),
+          _safeSetState(() => _statusMessage = 'Detection error: $error'),
     );
-    _cameraController!.startImageStream((CameraImage image) {
-      // Skip frame processing while on cooldown to avoid re-announcing same emotion
-      if (_cooldownActive) return;
-      _emotionService.processFrame(image);
-    });
   }
 
   void _stopRealtimeDetection() {
-    setState(() {
+    _safeSetState(() {
       _isProcessingStarted = false;
       _statusMessage = 'Detection stopped. Tap "Start Detection" to resume.';
       _currentResult = null;
     });
-    _cameraController?.stopImageStream();
     _emotionSubscription?.cancel();
     _emotionService.stopRealtimeDetection();
     _cancelCooldown();
@@ -162,17 +174,20 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     _cooldownRemaining = _cooldownDuration.inSeconds;
     _cooldownTimer?.cancel();
     _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted) return;
+      if (!mounted || _isDisposing) {
+        t.cancel();
+        return;
+      }
       final now = DateTime.now();
       final remaining = _cooldownEndsAt!.difference(now).inSeconds;
       if (remaining <= 0) {
-        setState(() {
+        _safeSetState(() {
           _cooldownActive = false;
           _cooldownRemaining = 0;
         });
         t.cancel();
       } else {
-        setState(() => _cooldownRemaining = remaining);
+        _safeSetState(() => _cooldownRemaining = remaining);
       }
     });
   }
@@ -208,76 +223,8 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     }
   }
 
-  Widget _buildFaceOverlay() {
-    if (_currentResult?.boundingBox == null || !_isCameraInitialized) {
-      return const SizedBox.shrink();
-    }
-    final boundingBox = _currentResult!.boundingBox!;
-    final controller = _cameraController!;
-    final previewSize = controller.value.previewSize;
-    if (previewSize == null) return const SizedBox.shrink();
-
-    final screenWidth = MediaQuery.of(context).size.width;
-    final previewAspect =
-        controller.value.aspectRatio; // width/height from camera
-    final previewHeight = screenWidth / previewAspect;
-
-    // Source image dimensions & rotation from the service result
-    final imageW =
-        (_currentResult!.imageWidth ?? previewSize.width.toInt()).toDouble();
-    final imageH =
-        (_currentResult!.imageHeight ?? previewSize.height.toInt()).toDouble();
-    final rot = _currentResult!.imageRotationDegrees ??
-        controller.description.sensorOrientation;
-    final isFront = _currentResult!.isFrontCamera ??
-        (controller.description.lensDirection == CameraLensDirection.front);
-
-    // ML Kit coordinates are in the input image's orientation. If rotated 90/270, swap w/h.
-    final bool swapWH = rot == 90 || rot == 270;
-    final srcW = swapWH ? imageH : imageW;
-    final srcH = swapWH ? imageW : imageH;
-
-    final scaleX = screenWidth / srcW;
-    final scaleY = previewHeight / srcH;
-
-    double left = boundingBox.left * scaleX;
-    final top = boundingBox.top * scaleY;
-    final width = boundingBox.width * scaleX;
-    final height = boundingBox.height * scaleY;
-
-    // Mirror for front camera
-    if (isFront) {
-      left = screenWidth - (left + width);
-    }
-
-    return Positioned(
-      left: left,
-      top: top,
-      width: width,
-      height: height,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: _currentResult!.faceDetected ? Colors.green : Colors.red,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(4),
-          child: Text(
-            _currentResult!.emotion.toUpperCase(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-              backgroundColor: Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // No face overlay in API-only mode
+  Widget _buildFaceOverlay() => const SizedBox.shrink();
 
   @override
   Widget build(BuildContext context) {
@@ -333,8 +280,8 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
                         ? (_currentResult!.faceDetected
                             ? _cooldownActive
                                 ? 'Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)  (cooldown ${_cooldownRemaining}s)'
-                                : 'Face detected! Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)'
-                            : 'Looking for faces...')
+                                : 'Emotion: ${_currentResult!.emotion} (${(_currentResult!.confidence * 100).toStringAsFixed(1)}%)'
+                            : 'Capturing...')
                         : _statusMessage,
                     style: TextStyle(
                       color: _currentResult?.faceDetected == true

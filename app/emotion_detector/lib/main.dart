@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'services/face_detection_emotion_service.dart';
+import 'services/hf_emotion_api_service.dart';
+import 'config/api_config.dart';
 import 'screens/realtime_camera_screen.dart';
-import 'screens/emotion_image_generator_screen.dart';
 
 void main() {
   runApp(const EmotionDetectorApp());
@@ -39,7 +39,7 @@ class _MainTabScreenState extends State<MainTabScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -65,10 +65,6 @@ class _MainTabScreenState extends State<MainTabScreen>
               icon: Icon(Icons.video_camera_front),
               text: 'Real-time Detection',
             ),
-            Tab(
-              icon: Icon(Icons.auto_awesome),
-              text: 'Image Generator',
-            ),
           ],
         ),
       ),
@@ -77,7 +73,6 @@ class _MainTabScreenState extends State<MainTabScreen>
         children: const [
           EmotionDetectorHome(),
           RealtimeCameraScreen(),
-          EmotionImageGeneratorScreen(),
         ],
       ),
     );
@@ -98,44 +93,14 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
   Map<String, double>? _allPredictions;
   bool _isLoading = false;
   String _statusMessage = '';
-  bool _faceDetected = false;
-  int _faceCount = 0;
 
   final ImagePicker _picker = ImagePicker();
-  final FaceDetectionEmotionService _emotionService =
-      FaceDetectionEmotionService();
+  final HFEmotionApiService _emotionService = HFEmotionApiService(
+    apiUrl: ApiConfig.apiUrl,
+    apiToken: ApiConfig.apiToken,
+  );
 
-  @override
-  void initState() {
-    super.initState();
-    _initializeService();
-  }
-
-  @override
-  void dispose() {
-    _emotionService.dispose();
-    super.dispose();
-  }
-
-  Future<void> _initializeService() async {
-    setState(() {
-      _isLoading = true;
-      _statusMessage = 'Initializing emotion detection...';
-    });
-
-    try {
-      await _emotionService.initialize();
-      setState(() {
-        _isLoading = false;
-        _statusMessage = 'Ready to detect emotions with face detection!';
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _statusMessage = 'Error initializing: $e';
-      });
-    }
-  }
+  // No initialization needed for API service
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -146,8 +111,6 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
           _detectedEmotion = null;
           _confidence = null;
           _allPredictions = null;
-          _faceDetected = false;
-          _faceCount = 0;
           _statusMessage =
               'Image selected. Tap "Analyze Emotion" to start detection.';
         });
@@ -164,32 +127,25 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
 
     setState(() {
       _isLoading = true;
-      _statusMessage = 'Detecting faces and analyzing emotion...';
+      _statusMessage = 'Sending image to Hugging Face API...';
     });
 
     try {
-      final result = await _emotionService.detectEmotion(_selectedImage!);
-
+      final result = await _emotionService.detectEmotion(
+        XFile(_selectedImage!.path),
+      );
       setState(() {
         _detectedEmotion = result.emotion;
         _confidence = result.confidence;
         _allPredictions = result.allPredictions;
-        _faceDetected = result.faceDetected;
-        _faceCount = result.faceCount;
         _isLoading = false;
-
-        if (result.faceDetected) {
-          _statusMessage =
-              'Face detected! Emotion: ${result.emotion} (${(result.confidence * 100).toStringAsFixed(1)}%)';
-        } else {
-          _statusMessage =
-              'No faces detected. Analyzed full image: ${result.emotion} (${(result.confidence * 100).toStringAsFixed(1)}%)';
-        }
+        _statusMessage =
+            'Emotion: ${result.emotion} (${(result.confidence * 100).toStringAsFixed(1)}%)';
       });
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _statusMessage = 'Error analyzing emotion: $e';
+        _statusMessage = 'API error: $e';
       });
     }
   }
@@ -244,40 +200,26 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
               width: double.infinity,
               padding: const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
-                color:
-                    _faceDetected ? Colors.green.shade50 : Colors.blue.shade50,
+                color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(
-                  color: _faceDetected ? Colors.green : Colors.blue,
+                  color: Colors.blue,
                   width: 1.0,
                 ),
               ),
               child: Row(
                 children: [
-                  Icon(
-                    _faceDetected ? Icons.face : Icons.info,
-                    color: _faceDetected ? Colors.green : Colors.blue,
-                  ),
+                  Icon(Icons.info, color: Colors.blue),
                   const SizedBox(width: 8.0),
                   Expanded(
                     child: Text(
                       _statusMessage,
                       style: TextStyle(
-                        color: _faceDetected
-                            ? Colors.green.shade700
-                            : Colors.blue.shade700,
+                        color: Colors.blue.shade700,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  if (_faceDetected && _faceCount > 0) ...[
-                    const SizedBox(width: 8.0),
-                    Chip(
-                      label:
-                          Text('$_faceCount face${_faceCount > 1 ? 's' : ''}'),
-                      backgroundColor: Colors.green.shade100,
-                    ),
-                  ],
                 ],
               ),
             ),
