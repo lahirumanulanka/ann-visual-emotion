@@ -1,261 +1,236 @@
-<div align="center">
+<!--
+	Consolidated project README assembled from existing documentation files:
+	- docs/eda.md
+	- docs/feature_engineering_balancing.md
+	- docs/genai_findings.md
+	- docs/model_design.md
+	- docs/xai_comparison.md
+	This is a high-level entry point. For deep dives, follow the linked docs.
+-->
 
-# ANN Visual Emotion Recognition
+# 😃 ANN Visual Emotion Recognition Platform
 
-End-to-end computer vision pipeline for multi-class human emotion recognition from images: data acquisition & curation (EmoSet + YOLO emotion style sources), preprocessing (face detection, cropping, grayscale / color conversions), dataset splitting & balancing, model training with CNN transfer learning (PyTorch / ResNet50), model explainability (SHAP / LIME foundations), export to ONNX, realtime inference API (FastAPI), and multi-platform client applications (Flutter mobile + lightweight web demo + realtime local app). 
-
-</div>
-
----
-
-## 🔍 High-Level Overview
-
-This repository brings together every stage of the ML lifecycle:
-
-| Stage | Components |
-|-------|------------|
-| Data Ingestion & Cleaning | `data/raw`, `scripts/regenerate_emoset_splits.py`, `merge_yolo_emotion.py` |
-| Preprocessing / Transformation | `crop_faces.py`, `grayscale_dataset.py`, `split_train_val.py`, `update_emotion_labels.py` |
-| Dataset Management | Processed splits in `data/processed/EmoSet_splits/` (CSV + label maps + stats) |
-| Exploration | Notebooks `01_eda.ipynb`, `02_feature_engineering_balancing.ipynb` |
-| Synthetic Data / Augmentation | `03_synthetic_gen_ai_generation.ipynb` (GenAI generation placeholder) |
-| Modeling | `CNN_with_Transfer_Learning.ipynb`, PyTorch ResNet50 fine-tuning (checkpoint in `models/best_model.pth`) |
-| Serving | `realtime_app/` (FastAPI inference service) |
-| Deployment Targets | ONNX export (`scripts/export_onnx.py`) + Flutter app (`app/emotion_detector/`) + simple web demo (`realtime_app/templates/index.html`) |
-| Explainability | Planned via SHAP / LIME (dependencies included) – doc stubs in `docs/xai_comparison.md` |
-| Experiment Tracking | MLflow directory `experiments/mlruns/` (structure present) |
-| Configuration | `pyproject.toml`, (placeholder Hydra configs under `configs/`) |
-| Automation | DVC pipeline stub `dvc.yaml` (ready for future data/model tracking) |
+End‑to‑end system for building, extending, explaining, and deploying a facial emotion recognition model. The repository integrates dataset exploration, balancing & augmentation, synthetic data generation with GenAI, advanced transfer learning, explainability (XAI), and multi‑target deployment (API, real‑time app, mobile via Flutter + ONNX).
 
 ---
-
-## 📁 Repository Structure (Curated)
-
+## 1. High‑Level Architecture
 ```
-ann-visual-emotion/
-├── app/emotion_detector/        # Flutter mobile application (multi entrypoints in lib/)
-│   ├── assets/                  # Bundled ONNX model + label map for on-device inference
-│   └── lib/                     # Dart sources (main.dart variants for experimentation)
-├── configs/                     # (Placeholders) for Hydra: data/model/train/eval configs
-├── data/
-│   ├── raw/                     # Original datasets (EmoSet, FullDataEmoSet, etc.)
-│   └── processed/               # Generated splits (EmoSet_splits with CSV + stats)
-├── deliverables/                # Presentation / packaging / media artifacts
-├── docker/                      # Dockerfiles for training + API (`Dockerfile.train`, `Dockerfile.api`)
-├── docs/                        # EDA, model design, genAI, XAI documentation (some WIP)
-├── experiments/                 # Experiment outputs; includes timestamped runs + MLflow
-├── models/                      # Trained artifacts (best_model.pth, label_map.json, model.onnx)
-├── mobile_exports/              # Export target for ONNX when running export script
-├── notebooks/                   # Jupyter notebooks for EDA, balancing, synthetic data, training
-├── realtime_app/                # FastAPI realtime inference service (face detection + prediction)
-├── scripts/                     # Data engineering, preprocessing, export & maintenance scripts
-├── src/                         # (Current) genai prompt space (empty placeholder)
-├── templates/                   # (Global) HTML assets if needed
-├── webapp/                      # Placeholder for a separate web client (package.json present)
-├── pyproject.toml               # Python project definition & dependencies
-├── dvc.yaml                     # (Stub) for future DVC stages
-└── README.md
+					Raw Dataset (6 classes)            Legacy 8-class (historical)
+										 |                                 |
+								 EDA Scan ------------------------------+
+										 |
+						Balancing & Augmentation (02_*)
+										 |
+				+------------+-------------+
+				|                          |
+ Synthetic Gen (Stable Diffusion)  |
+				| (quality filters, capping)|
+				+------------+--------------+
+										 |
+						Merged Processed Splits (train/val/test CSVs, label_map)
+										 |
+					 Transfer Learning Training (CNN/Vit, staged FT, EMA)
+										 |
+					Explainability (Grad-CAM, SHAP, LIME) & Metrics
+										 |
+				Export & Deployment (PyTorch .pth, ONNX, HF Hub, Real-time App)
+										 |
+				 Mobile / API / Web Inference (Flutter app, realtime_app FastAPI)
 ```
 
 ---
-
-## 🧪 Emotion Classes
-
-Current active model (`models/label_map.json`):
-
-```
-angry (0), fearful (1), happy (2), neutral (3), sad (4), surprised (5)
-```
-
-Historical / richer dataset (EDA) tracked 8 classes: Amusement, Anger, Awe, Contentment, Disgust, Excitement, Fear, Sadness. The production model distilled / remapped to 6 final classes (e.g. excitement→happy / amusement→happy, disgust removed due to severe sparsity, awe/contentment merged into neutral or positive class). Mapping decisions can be formalized in `docs/model_design.md` (TODO).
-
----
-
-## 📊 Dataset & EDA Summary
-
-Primary processed split: `data/processed/EmoSet_splits/` generated by `scripts/regenerate_emoset_splits.py`.
-
-Key points (from `docs/eda.md`):
-* Severe class imbalance (minority Disgust ~27 images originally; dropped / merged downstream).
-* Mitigation strategies considered: class-weighted loss, oversampling, synthetic generation (see `03_synthetic_gen_ai_generation.ipynb`).
-* Standard preprocessing: resize 224×224, normalization (ImageNet mean/std), augmentation (flip, rotate, color jitter) when training.
-
-Supplemental transformation scripts:
-* Face-centric crops: `crop_faces.py` (largest face, optional grayscale, stats + label_map output)
-* Grayscale conversion (two variants): `grayscale_dataset.py` & legacy `split_dataset.py`
-* Stratified splitting utilities: `split_train_val.py`, `regenerate_emoset_splits.py`
-* Label harmonization: `update_emotion_labels.py`
-* Merging external YOLO-style datasets: `merge_yolo_emotion.py`
+## 2. Repository Structure (Key Directories)
+| Path | Purpose |
+|------|---------|
+| `data/raw/FullDataEmoSet` | Source emotion images (6 current classes) |
+| `data/processed/EmoSet_splits_gen` | Generated merged splits (after balancing + synthetic) |
+| `notebooks/` | EDA, balancing, synthetic generation, transfer learning experiments |
+| `docs/` | Generated documentation (EDA, model design, balancing, XAI, GenAI) |
+| `scripts/` | Data prep utilities (splits, grayscale, ONNX export, etc.) |
+| `models/` | Saved artifacts (`best_model.pth`, `model.onnx`, `label_map.json`) |
+| `realtime_app/` | Python real‑time server (FastAPI + inference) |
+| `app/emotion_detector/` | Flutter mobile application consuming ONNX model |
+| `docker/` | Container definitions for training / API serving |
+| `deliverables/` | Presentation, packaging, demo collateral |
 
 ---
-
-## 🧬 Notebooks (Workflow Narrative)
-
-| Notebook | Purpose |
-|----------|---------|
-| `01_eda.ipynb` | Exploratory data analysis: distribution plots, imbalance visualization, sanity checks |
-| `02_feature_engineering_balancing.ipynb` | Experimenting with resampling, augmentation, potential embeddings |
-| `03_synthetic_gen_ai_generation.ipynb` | Prototype for generating synthetic faces/emotions via GenAI (WIP) |
-| `CNN_with_Transfer_Learning.ipynb` | Core training & fine-tuning of ResNet-based classifier (metrics, export) |
-
-Note: Summaries show cells present but unexecuted in repo snapshot—executed outputs may have been cleared before commit.
+## 3. Data Lifecycle
+| Stage | Description | Source Notebook / Script | Output Artifacts |
+|-------|-------------|--------------------------|------------------|
+| EDA | Scan counts, format, quality metrics | `01_eda.ipynb` | `docs/eda.md` |
+| Balancing & Aug | Oversample minorities with augmentations, split | `02_feature_engineering_balancing.ipynb` | Balanced tree + `train/val/test.csv` |
+| Synthetic GenAI | Diffusion-based class expansion (filtered) | `03_synthetic_gen_ai_generation.ipynb` | Synthetic images + `status.json` |
+| Merge & Splits | Combine original + synthetic within cap | GenAI notebook + scripts | Updated splits & label map |
+| Training | Staged fine‑tuning with explainability hooks | `CNN_with_Transfer_Learning.ipynb` | `best_model.pth`, `model_fixed.onnx` |
+| Deployment | Export, HF Hub, mobile integration | Notebook + `scripts/export_onnx.py` | HF model repo / ONNX asset |
 
 ---
+## 4. Current Dataset Snapshot (from EDA)
+| Class | Count | Percent |
+|-------|-------|---------|
+| angry | 5,089 | 11.63% |
+| fearful | 4,589 | 10.49% |
+| happy | 13,370 | 30.56% |
+| neutral | 8,268 | 18.90% |
+| sad | 7,504 | 17.15% |
+| surprised | 4,936 | 11.28% |
 
-## 🧠 Model Architecture & Training
-
-* Backbone: `torchvision.models.resnet50` with pretrained ImageNet weights (`ResNet50_Weights.IMAGENET1K_V2`).
-* Head: Replaced final FC layer with `Linear(in_features, num_classes)`.
-* Loss: (Inferred) CrossEntropy – (Consider adding class weighting if re-training).
-* Checkpoint: `models/best_model.pth` (robust loader handles various internal formats).
-* ONNX Export: `scripts/export_onnx.py` (dynamic batch axis, opset configurable, default 17).
-* Inference normalization pipeline matches training (Resize 224, ToTensor, Normalize ImageNet stats) – defined in `realtime_app/model.py`.
-* Explainability: Dependencies (`shap`, `lime`) included; comparison doc placeholder `docs/xai_comparison.md`.
-
-Potential future improvements:
-* Replace ResNet50 with more parameter-efficient backbones (EfficientNetV2, ConvNeXt-Tiny) for mobile.
-* Distillation to lightweight student model for Flutter / Web (quantization + INT8 calibration).
-* Expand label taxonomy if acquiring more balanced data.
+Total images: 43,756 (all grayscale). Legacy 8‑class schema retained for historical references (see `docs/eda.md`).
 
 ---
+## 5. Model Overview (Transfer Learning)
+Key techniques:
+* Two‑stage fine‑tuning (head warmup → full unfreeze with discriminative LRs)
+* Mixed precision + gradient clipping + EMA
+* Label smoothing + class weighting + MixUp (default) / optional CutMix
+* Rich monitoring: loss, accuracy, macro F1, LR schedules, per‑epoch weight/grad stats
+* ONNX export with operator fallback logic
+* Hugging Face publishing pipeline automation
 
-## 🚀 Inference & Serving
-
-### FastAPI Realtime Service (`realtime_app/`)
-Endpoints:
-* `GET /health` – liveness check
-* `POST /predict` – body: `{image_base64: str, detect_face: bool}` returns top label, ranked probabilities, optional face bounding box.
-* `GET /` – serves a minimal HTML demo (`realtime_app/templates/index.html`).
-
-Pipeline inside `predict`:
-1. Decode Base64 → PIL Image.
-2. (Optional) Haar cascade face detection (`realtime_app/face.py`).
-3. Crop (with slight expansion) → normalization → ResNet forward.
-4. Softmax ranking → JSON response.
-
-Singleton pattern caches model after first load (`realtime_app/model.py::get_model`).
-
-### Docker
-* `docker/Dockerfile.api` – build minimal FastAPI inference image.
-* `docker/Dockerfile.train` – environment for reproducible training (PyTorch, augmentation libs). (Details to be documented)
-
-### Flutter Mobile App (`app/emotion_detector/`)
-Contains multiple experimental entrypoints (`lib/main_*.dart`) indicating iterative development (e.g. ONNX vs simpler prototypes). Assets include `model.onnx` + `label_map.json`. Intended to run on-device inference via a Dart/FFI or platform plugin for ONNX Runtime (exact integration code not yet inspected—future README section can be expanded once inference wrapper is added).
-
-### Web / Other
-* `webapp/` placeholder Package.json suggests potential separate frontend build (no sources yet).
+Details: see `docs/model_design.md`.
 
 ---
-
-## 🛠️ Scripts Cheat-Sheet
-
-| Script | Function |
+## 6. Explainability (XAI) Toolkit
+| Method | Use Case |
 |--------|----------|
-| `regenerate_emoset_splits.py` | Build stratified train/val/test splits with label map + stats |
-| `update_emotion_labels.py` | Rename / reconcile class labels across CSV + directory structure |
-| `crop_faces.py` | Detect & crop faces, optional grayscale, produce metadata + stats |
-| `grayscale_dataset.py` | Convert dataset color mode (GRAY/RGB) recursively |
-| `split_train_val.py` | Simple two-way train/val split for class-folder dataset |
-| `merge_yolo_emotion.py` | Merge YOLO-format annotation splits & reorganize into class folders |
-| `export_onnx.py` | Convert PyTorch checkpoint → ONNX for mobile/web deployment |
-| `benchmark_api.py` | Placeholder for API performance testing |
-| `split_dataset.py` | (Legacy / alternate grayscale utility) |
-| `prepare_data.py` | (Placeholder – hook for DVC or composite preprocessing pipeline) |
+| Grad-CAM | Fast saliency sanity checks |
+| Grad-CAM++ | Finer localization when multiple micro‑regions matter |
+| SHAP | Global + local additive attribution, bias audits |
+| LIME | Local explanation for misclassifications |
+
+Extended comparison + evaluation guidance: `docs/xai_comparison.md`.
 
 ---
+## 7. Synthetic Data Generation (GenAI)
+Implemented with Stable Diffusion (`runwayml/stable-diffusion-v1-5`), prompt templating, and multi‑stage quality filters:
+| Filter | Purpose |
+|--------|---------|
+| Single face detection | Avoid ambiguous labels |
+| Blur variance threshold | Remove low-detail outputs |
+| Perceptual hash deduplication | Eliminate near duplicates |
+| Synthetic fraction cap | Control distributional drift |
 
-## 📦 Dependencies
-
-Defined in `pyproject.toml`:
-* Core: torch, torchvision, numpy, pandas, scikit-learn, opencv-python, pillow
-* Serving: fastapi, uvicorn, pydantic
-* Explainability: shap, lime
-* Experiment Tracking: mlflow
-* Augmentation: albumentations
-* Config: hydra-core (configs pending population)
-* Optional: google-cloud-storage (artifact/data sync)
-
-Tooling: `ruff` (lint/format), `pytest` (tests), DVC stub.
+Status & reproducibility metadata: `docs/genai_findings.md`.
 
 ---
+## 8. Real‑Time & Mobile Deployment
+| Component | Path | Description |
+|-----------|------|-------------|
+| FastAPI Inference | `realtime_app/` | Python service loading PyTorch or ONNX model |
+| Flutter App | `app/emotion_detector/` | Device camera → ONNX inference; environment variable for API fallback |
+| ONNX Assets | `models/model_fixed.onnx` (or `model.onnx`) | Shared inference format |
 
-## ▶️ Quickstart
+Dockerfiles at `docker/` support containerized training & serving.
 
-### 1. Environment
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -e .[gcs]  # add [gcs] if you need GCS uploads
+---
+## 9. Getting Started
+### 9.1 Environment Setup (Python)
+Use the provided `pyproject.toml` / `requirements.txt` (one may supersede the other; prefer the former if Poetry or PEP 621 tooling is used).
+
+### 9.2 Data Preparation
+```
+python scripts/prepare_data.py        # if required to stage processed splits
+python scripts/split_dataset.py       # alternative splitting utility
 ```
 
-### 2. Run Realtime API
-```bash
-uvicorn realtime_app.main:app --reload --port 8000
-```
-Open: http://localhost:8000 (web demo) or POST `/predict` with a base64 image.
+### 9.3 Training (Notebook)
+Open `notebooks/CNN_with_Transfer_Learning.ipynb`, adjust paths in `CFG` if not on Colab, run sequentially. After run, update metrics placeholders in `docs/model_design.md` & this README (Section 11).
 
-### 3. Export ONNX (optional)
-```bash
-python scripts/export_onnx.py --checkpoint models/best_model.pth --output mobile_exports/model.onnx
+### 9.4 ONNX Export (Script Shortcut)
+```
+python scripts/export_onnx.py --checkpoint models/best_model.pth --out models/model.onnx
 ```
 
-### 4. (Future) Train / Re-Train
-Populate `configs/model.yaml`, `configs/train.yaml`, then implement a `train.py` (not yet committed). DVC + Hydra can orchestrate reproducibility. For now training logic lives primarily in notebooks.
+### 9.5 Real-Time API
+```
+uvicorn realtime_app.main:app --reload
+```
 
----
-
-## ✅ Testing & Linting
-
-Tasks (VS Code tasks provided):
-```bash
-ruff check .        # Lint
-ruff format .       # Format
-pytest -q           # Run tests (currently limited test coverage)
+### 9.6 Flutter App (iOS/Android)
+Requires Flutter SDK & platform toolchains:
+```
+cd app/emotion_detector
+flutter pub get
+flutter run -d <device_id> --dart-define=HF_API_URL=<inference_endpoint>
 ```
 
 ---
-
-## 📐 Design Decisions (Highlights)
-* Adopted ResNet50 for a balance of accuracy and familiarity; future: lighter architecture.
-* Consolidated sparse emotion classes to stabilize training and improve per-class reliability.
-* Face detection is opportunistic (Haar) – fast & CPU-friendly. Could be upgraded to RetinaFace / MediaPipe.
-* Modular preprocessing scripts enable iterative dataset refinement without locking into a single pipeline.
-* ONNX export ensures a single canonical inference graph across API + mobile.
-
----
-
-## 🔮 Roadmap / TODO
-| Area | Next Steps |
-|------|------------|
-| Configs | Fill `configs/*.yaml` with Hydra-ready schemas (data, model, train, eval) |
-| Training Script | Add `src/train.py` with CLI + MLflow logging + checkpoint mgmt |
-| XAI | Populate `docs/xai_comparison.md` with SHAP vs LIME visual examples on misclassified samples |
-| GenAI | Integrate synthetic image generation & selection heuristics (quality filtering) |
-| Mobile | Document ONNX Runtime integration layer in Flutter (plugin / FFI) |
-| Benchmark | Implement `scripts/benchmark_api.py` (latency, throughput, warm start vs cold) |
-| Evaluation | Add confusion matrix, per-class precision/recall in `docs/model_design.md` |
-| Automation | Flesh out `dvc.yaml` stages (prepare -> train -> eval -> export) |
-| Testing | Create unit tests for preprocessing scripts + API response schema |
-| Security | Add input validation & size limits on `/predict` | 
+## 10. Configuration Highlights
+| Domain | Key Knobs |
+|--------|-----------|
+| Balancing | `BALANCE_STRATEGY`, `AUG_PER_IMAGE_LIMIT`, `SEED` |
+| Generation | `TARGET_TOTAL`, blur var threshold, pHash distance |
+| Training | `freeze_backbone_epochs`, `lr_backbone`, `lr_head`, `use_mixup`, `use_ema` |
+| Explainability | `run_gradcam`, `run_shap`, `run_lime` |
+| Export | ONNX opset fallback list, `dynamo=True` toggle |
 
 ---
-
-## 📄 Licensing & Attribution
-* License: See `LICENSE` (project root).
-* Datasets: Ensure original EmoSet / YOLO-style emotion dataset licenses permit redistribution (not bundled here beyond derived stats and structure).
+## 11. Metrics (Placeholders – Fill After Training Run)
+```
+Best validation macro F1: <float>
+Best validation accuracy: <float>
+Epoch of best model: <int>
+Final test accuracy: <float>
+Final test macro F1: <float>
+Synthetic fraction overall: <float>
+Train/Val/Test sizes: <t>/<v>/<te>
+Average epoch time: <sec>
+Total training wall time: <min>
+```
 
 ---
-
-## 🙌 Acknowledgements
-* PyTorch & TorchVision maintainers.
-* OpenCV Haar cascade resources.
-* SHAP / LIME authors for explainability tooling.
-* Community datasets enabling emotion recognition research.
+## 12. Quality & Risk Controls
+| Aspect | Control |
+|--------|---------|
+| Data integrity | Hashing (planned), format/mode validation |
+| Class imbalance | Weighted loss, augmentation, synthetic capping |
+| Overfitting | Early stopping (macro F1), EMA, MixUp |
+| Drift / bias | XAI audits (SHAP distributions), synthetic prompt diversity plan |
+| Reproducibility | Seeded config snapshot in checkpoint, prompt hash, environment capture |
 
 ---
+## 13. Roadmap
+| Area | Next Step | Impact |
+|------|-----------|--------|
+| Data | Finalize 6↔8 class mapping artifact | Historical continuity |
+| Synthetic | Add embedding (CLIP/FaceNet) dedup layer | Stronger uniqueness |
+| Training | Add focal / LDAM experiment script | Minority performance |
+| XAI | Implement deletion/insertion quantitative harness | Attribution rigor |
+| Deployment | Provide quantized ONNX (INT8) build path | Mobile latency |
+| Automation | Convert notebook to `scripts/train.py` + Hydra configs | CI reproducibility |
 
-## 🗨️ Questions / Contributions
-Issues & pull requests welcome. Please open an issue describing enhancements (model compression, new classes, improved detectors) or bugs (checkpoint load edge cases, API failure modes).
+---
+## 14. Contributing
+1. Fork & create a feature branch.
+2. Run lint & tests:
+```
+ruff check .
+pytest -q
+```
+3. Update relevant docs sections (EDA/model/XAI) if behavior changes.
+4. Open PR referencing any updated metrics or artifacts.
 
+---
+## 15. Related Documentation Index
+| File | Focus |
+|------|-------|
+| `docs/eda.md` | Raw dataset statistics & schema reconciliation |
+| `docs/feature_engineering_balancing.md` | Balancing & augmentation strategy |
+| `docs/genai_findings.md` | Synthetic generation pipeline & quality gates |
+| `docs/model_design.md` | Transfer learning architecture & training strategy |
+| `docs/xai_comparison.md` | Explainability method comparison & usage |
+
+---
+## 16. License
+Project license: MIT (see `LICENSE`). Models or datasets may have additional upstream licenses—verify before redistribution.
+
+---
+## 17. Acknowledgements
+* Pretrained models via `torchvision` & `timm`.
+* Diffusion pipeline (`diffusers`) for synthetic generation.
+* XAI libraries: `pytorch-grad-cam`, `shap`, `lime`.
+* Community open-source tooling that enabled rapid iteration.
+
+---
+_For detailed experimental reasoning and future design considerations, explore the documents in `docs/` and notebooks in `notebooks/`._
 
