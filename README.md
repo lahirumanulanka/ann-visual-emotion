@@ -15,15 +15,15 @@ End‑to‑end system for building, extending, explaining, and deploying a facia
 ---
 ## 1. High‑Level Architecture
 ```
-					Raw Dataset (6 classes)            Legacy 8-class (historical)
-										 |                                 |
+					Raw Dataset (6 classes)           
+										 |
 								 EDA Scan ------------------------------+
 										 |
-						Balancing & Augmentation (02_*)
+						Balancing & Augmentation (Balance Dataset features)
 										 |
 				+------------+-------------+
 				|                          |
- Synthetic Gen (Stable Diffusion)  |
+ Synthetic Gen (Stable Diffusion, Increase Dataset imagers and Model accuracy)  |
 				| (quality filters, capping)|
 				+------------+--------------+
 										 |
