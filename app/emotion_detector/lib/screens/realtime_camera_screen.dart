@@ -408,7 +408,10 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     _cooldownRemaining = _cooldownDuration.inSeconds;
     _cooldownTimer?.cancel();
     _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted) { t.cancel(); return; }
+      if (!mounted) {
+        t.cancel();
+        return;
+      }
       final now = DateTime.now();
       final remaining = _cooldownEndsAt!.difference(now).inSeconds;
       if (remaining <= 0) {

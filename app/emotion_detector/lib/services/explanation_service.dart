@@ -51,10 +51,12 @@ class ExplanationService {
         Color color;
         if (v < 0.5) {
           final t = v / 0.5;
-            color = Color.lerp(const Color(0xFF0000FF), const Color(0xFFFFFF00), t)!;
+          color =
+              Color.lerp(const Color(0xFF0000FF), const Color(0xFFFFFF00), t)!;
         } else {
           final t = (v - 0.5) / 0.5;
-          color = Color.lerp(const Color(0xFFFFFF00), const Color(0xFFFF0000), t)!;
+          color =
+              Color.lerp(const Color(0xFFFFFF00), const Color(0xFFFF0000), t)!;
         }
         final a = (160 + (v * 80)).clamp(0, 255).toInt();
         heat.setPixelRgba(x, y, color.red, color.green, color.blue, a);
