@@ -4,6 +4,8 @@ import 'dart:io';
 import 'services/face_detection_emotion_service.dart';
 import 'screens/realtime_camera_screen.dart';
 import 'screens/emotion_image_generator_screen.dart';
+import 'services/explanation_service.dart';
+import 'dart:typed_data';
 
 void main() {
   runApp(const EmotionDetectorApp());
@@ -100,10 +102,19 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
   String _statusMessage = '';
   bool _faceDetected = false;
   int _faceCount = 0;
+  bool _showExplanation = false;
+  bool _gradCamPlusPlus = false;
+  Uint8List? _heatmap;
+  Uint8List? _limeMask; // simple mask view
+  List<RegionAttribution>? _shap;
+  int _explanationPage = 0; // 0 original,1 heatmap,2 shap/lime
+  bool _loadingExplanation = false;
+  bool _showLime = false;
 
   final ImagePicker _picker = ImagePicker();
   final FaceDetectionEmotionService _emotionService =
       FaceDetectionEmotionService();
+  final ExplanationService _explanationService = ExplanationService();
 
   @override
   void initState() {
@@ -125,6 +136,7 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
 
     try {
       await _emotionService.initialize();
+      await _explanationService.initialize();
       setState(() {
         _isLoading = false;
         _statusMessage = 'Ready to detect emotions with face detection!';
@@ -177,6 +189,7 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
         _faceDetected = result.faceDetected;
         _faceCount = result.faceCount;
         _isLoading = false;
+        _showExplanation = true; // auto enable explanation after analysis
 
         if (result.faceDetected) {
           _statusMessage =
@@ -192,6 +205,62 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
         _statusMessage = 'Error analyzing emotion: $e';
       });
     }
+  }
+
+  Future<void> _generateHeatmap() async {
+    if (_selectedImage == null) return; // ensure image selected
+    setState(() => _loadingExplanation = true);
+    try {
+      final hm = await _explanationService.generateHeatmap(
+          width: 320, height: 320, gradCamPlusPlus: _gradCamPlusPlus);
+      if (!mounted) return;
+      setState(() => _heatmap = hm);
+    } finally {
+      if (mounted) setState(() => _loadingExplanation = false);
+    }
+  }
+
+  Future<void> _getShap() async {
+    setState(() => _loadingExplanation = true);
+    try {
+      final s = await _explanationService.shapAttributions();
+      if (!mounted) return;
+      setState(() {
+        _shap = s;
+        _showLime = false;
+      });
+    } finally {
+      if (mounted) setState(() => _loadingExplanation = false);
+    }
+  }
+
+  Future<void> _getLime() async {
+    setState(() => _loadingExplanation = true);
+    try {
+      final m = await _explanationService.limeMask(112, 112);
+      if (!mounted) return;
+      setState(() {
+        _limeMask = m;
+        _showLime = true;
+      });
+    } finally {
+      if (mounted) setState(() => _loadingExplanation = false);
+    }
+  }
+
+  void _showHelpDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('How to read explanations'),
+              content: const Text(
+                  'Swipe: Original -> Grad-CAM heatmap -> SHAP/LIME.\nHeatmap: red/yellow = higher contribution.\nSHAP list: positive (green) regions push towards the emotion, negative (red) reduce it. LIME mask: highlighted super-pixels important. These are probabilistic approximations.'),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'))
+              ],
+            ));
   }
 
   Widget _buildEmotionIcon(String emotion) {
@@ -239,6 +308,12 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  onPressed: _showHelpDialog,
+                  icon: const Icon(Icons.help_outline)),
+            ),
             // Status message
             Container(
               width: double.infinity,
@@ -301,18 +376,12 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
             if (_selectedImage != null) ...[
               Container(
                 width: double.infinity,
-                height: 300,
+                height: 360,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.file(
-                    _selectedImage!,
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                child: _buildSwipeExplanations(),
               ),
               const SizedBox(height: 20.0),
 
@@ -374,6 +443,8 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 12),
+                      if (_showExplanation) _buildExplanationControls(),
 
                       // All predictions
                       if (_allPredictions != null) ...[
@@ -434,6 +505,134 @@ class _EmotionDetectorHomeState extends State<EmotionDetectorHome> {
             const SizedBox(height: 20.0),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSwipeExplanations() {
+    final pages = <Widget>[
+      ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.file(_selectedImage!, fit: BoxFit.contain)),
+      if (_heatmap != null)
+        ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Opacity(
+                opacity: 0.85,
+                child: Image.memory(_heatmap!, fit: BoxFit.cover)))
+      else
+        Center(
+            child: Text('Heatmap not generated',
+                style: TextStyle(color: Colors.grey.shade600))),
+      _showLime ? _buildLimeMaskView() : _buildShapListView(),
+    ];
+    return Column(
+      children: [
+        Expanded(
+          child: PageView(
+            onPageChanged: (i) => setState(() => _explanationPage = i),
+            children: pages,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(_pageCaption(),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade700)),
+      ],
+    );
+  }
+
+  String _pageCaption() {
+    switch (_explanationPage) {
+      case 0:
+        return 'Original image (swipe left)';
+      case 1:
+        return 'Grad-CAM heatmap (${_gradCamPlusPlus ? '++' : ''})';
+      case 2:
+        return _showLime
+            ? 'LIME saliency mask'
+            : 'Top SHAP region attributions';
+      default:
+        return '';
+    }
+  }
+
+  Widget _buildExplanationControls() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(spacing: 8, runSpacing: 4, children: [
+          ElevatedButton.icon(
+              onPressed: _loadingExplanation
+                  ? null
+                  : () {
+                      _gradCamPlusPlus = !_gradCamPlusPlus;
+                      _generateHeatmap();
+                    },
+              icon: const Icon(Icons.tonality),
+              label: Text('Heatmap ${_gradCamPlusPlus ? '++' : ''}')),
+          ElevatedButton.icon(
+              onPressed: _loadingExplanation ? null : _generateHeatmap,
+              icon: const Icon(Icons.whatshot),
+              label: const Text('Gen Heatmap')),
+          ElevatedButton.icon(
+              onPressed: _loadingExplanation ? null : _getShap,
+              icon: const Icon(Icons.bar_chart),
+              label: const Text('SHAP')),
+          ElevatedButton.icon(
+              onPressed: _loadingExplanation ? null : _getLime,
+              icon: const Icon(Icons.grid_on),
+              label: const Text('LIME')),
+        ]),
+        const SizedBox(height: 8),
+        if (_loadingExplanation) const LinearProgressIndicator(),
+      ],
+    );
+  }
+
+  Widget _buildShapListView() {
+    if (_shap == null)
+      return Center(
+          child: Text('SHAP not requested',
+              style: TextStyle(color: Colors.grey.shade600)));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        children: _shap!.take(8).map((a) {
+          final positive = a.contribution >= 0;
+          return ListTile(
+            dense: true,
+            leading: Icon(positive ? Icons.add_circle : Icons.remove_circle,
+                color: positive ? Colors.green : Colors.red),
+            title: Text(a.region),
+            trailing: Text(a.contribution.toStringAsFixed(2),
+                style: TextStyle(color: positive ? Colors.green : Colors.red)),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildLimeMaskView() {
+    if (_limeMask == null)
+      return Center(
+          child: Text('LIME not requested',
+              style: TextStyle(color: Colors.grey.shade600)));
+    final w = 112;
+    final h = 112;
+    return Center(
+      child: SizedBox(
+        width: 224,
+        height: 224,
+        child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 16, mainAxisSpacing: 1, crossAxisSpacing: 1),
+            itemCount: w * h,
+            itemBuilder: (c, i) {
+              final v = _limeMask![i];
+              return Container(
+                  color: v > 0 ? Colors.orangeAccent : Colors.black12);
+            }),
       ),
     );
   }

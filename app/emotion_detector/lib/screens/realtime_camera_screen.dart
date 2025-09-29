@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import '../services/realtime_emotion_service.dart';
+import '../services/explanation_service.dart';
+import 'dart:typed_data';
 
 class RealtimeCameraScreen extends StatefulWidget {
   const RealtimeCameraScreen({super.key});
@@ -29,6 +31,16 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
   RealtimeEmotionResult? _currentResult;
   String _statusMessage = 'Initializing camera...';
   bool _isServiceInitialized = false;
+  bool _showHeatmap = true;
+  bool _gradCamPlusPlus = false;
+  Uint8List? _currentHeatmap;
+  bool _isGeneratingHeatmap = false;
+  bool _showExplanationPanel = true;
+  bool _loadingAttributions = false;
+  List<RegionAttribution>? _attributions;
+  bool _showLimeMask = false; // toggles between SHAP list and LIME mask
+  Uint8List? _limeMask;
+  final ExplanationService _explanationService = ExplanationService();
 
   @override
   void initState() {
@@ -65,6 +77,7 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
       });
 
       await _emotionService.initialize();
+      await _explanationService.initialize();
 
       setState(() {
         _isServiceInitialized = true;
@@ -122,6 +135,9 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
         if (!mounted) return;
         // Update current result always so bounding box & overlay stay fresh
         setState(() => _currentResult = result);
+        if (_showHeatmap && !_isGeneratingHeatmap) {
+          _generateHeatmap();
+        }
         // If we're already in cooldown, don't trigger a new announcement/cooldown
         if (_cooldownActive) return;
         // Start cooldown now that we've "announced" this emotion
@@ -135,6 +151,236 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
       if (_cooldownActive) return;
       _emotionService.processFrame(image);
     });
+  }
+
+  Future<void> _generateHeatmap() async {
+    if (!_isCameraInitialized) return;
+    setState(() => _isGeneratingHeatmap = true);
+    try {
+      // Use preview size as target for simplicity
+      final w = _cameraController!.value.previewSize!.width.toInt();
+      final h = _cameraController!.value.previewSize!.height.toInt();
+      final hm = await _explanationService.generateHeatmap(
+          width: w, height: h, gradCamPlusPlus: _gradCamPlusPlus);
+      if (!mounted) return;
+      setState(() => _currentHeatmap = hm);
+    } finally {
+      if (mounted) setState(() => _isGeneratingHeatmap = false);
+    }
+  }
+
+  Future<void> _fetchShap() async {
+    setState(() {
+      _loadingAttributions = true;
+      _showLimeMask = false;
+    });
+    try {
+      final att = await _explanationService.shapAttributions();
+      if (!mounted) return;
+      setState(() => _attributions = att);
+    } finally {
+      if (mounted) setState(() => _loadingAttributions = false);
+    }
+  }
+
+  Future<void> _fetchLime() async {
+    setState(() {
+      _loadingAttributions = true;
+      _showLimeMask = true;
+    });
+    try {
+      final w = 112;
+      final h = 112; // downsized mask
+      final mask = await _explanationService.limeMask(w, h);
+      if (!mounted) return;
+      setState(() => _limeMask = mask);
+    } finally {
+      if (mounted) setState(() => _loadingAttributions = false);
+    }
+  }
+
+  Widget _buildHeatmapOverlay() {
+    if (!_showHeatmap || _currentHeatmap == null || !_isProcessingStarted)
+      return const SizedBox.shrink();
+    final controller = _cameraController!;
+    final previewSize = controller.value.previewSize!;
+    return Positioned.fill(
+      child: Opacity(
+        opacity: 0.55,
+        child: Image.memory(
+          _currentHeatmap!,
+          width: previewSize.width,
+          height: previewSize.height,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExplanationPanel() {
+    if (!_showExplanationPanel || _currentResult == null)
+      return const SizedBox.shrink();
+    final predictions = _currentResult!.allPredictions.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.65),
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.psychology, color: Colors.white70),
+              const SizedBox(width: 8),
+              Expanded(
+                  child: Text('Explanation',
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold))),
+              IconButton(
+                onPressed: () => setState(() => _showExplanationPanel = false),
+                icon: const Icon(Icons.close, color: Colors.white70),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              itemCount: predictions.length,
+              itemBuilder: (c, i) {
+                final p = predictions[i];
+                return Row(
+                  children: [
+                    SizedBox(
+                        width: 70,
+                        child: Text(p.key,
+                            style: const TextStyle(color: Colors.white70))),
+                    Expanded(
+                      child: LinearProgressIndicator(
+                        value: p.value,
+                        backgroundColor: Colors.white24,
+                        valueColor: AlwaysStoppedAnimation(
+                            p.key == _currentResult!.emotion
+                                ? Colors.orangeAccent
+                                : Colors.blueGrey),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Text('${(p.value * 100).toStringAsFixed(1)}%',
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 10)),
+                  ],
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(_buildSummarySentence(),
+              style: const TextStyle(color: Colors.white, fontSize: 12)),
+          const SizedBox(height: 8),
+          Wrap(spacing: 8, children: [
+            ElevatedButton.icon(
+              onPressed: _loadingAttributions ? null : _fetchShap,
+              icon: const Icon(Icons.bar_chart),
+              label: const Text('Explain more (SHAP)'),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  textStyle: const TextStyle(fontSize: 12)),
+            ),
+            ElevatedButton.icon(
+              onPressed: _loadingAttributions ? null : _fetchLime,
+              icon: const Icon(Icons.grid_on),
+              label: const Text('LIME Mask'),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  textStyle: const TextStyle(fontSize: 12)),
+            ),
+          ]),
+          const SizedBox(height: 6),
+          if (_loadingAttributions)
+            const Center(child: CircularProgressIndicator(color: Colors.white))
+          else
+            _buildAttributionContent(),
+          const SizedBox(height: 4),
+          Text(
+              'Disclaimer: Model outputs are probabilistic; explanations approximate internal reasoning.',
+              style: const TextStyle(color: Colors.white60, fontSize: 10)),
+        ],
+      ),
+    );
+  }
+
+  String _buildSummarySentence() {
+    final e = _currentResult?.emotion ?? 'emotion';
+    return 'Key facial regions influenced the $e prediction.'; // Placeholder
+  }
+
+  Widget _buildAttributionContent() {
+    if (_showLimeMask) {
+      if (_limeMask == null) return const SizedBox.shrink();
+      // render as small grid image using black/white squares
+      final w = 112;
+      final h = 112;
+      return SizedBox(
+        height: 100,
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 16, mainAxisSpacing: 1, crossAxisSpacing: 1),
+          itemCount: w * h,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (c, i) {
+            final val = _limeMask![i];
+            return Container(
+                color: val > 0 ? Colors.orangeAccent : Colors.black12);
+          },
+        ),
+      );
+    }
+    if (_attributions == null) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: _attributions!.take(5).map((a) {
+        final positive = a.contribution >= 0;
+        return Row(children: [
+          Icon(positive ? Icons.add_circle : Icons.remove_circle,
+              size: 14,
+              color: positive ? Colors.greenAccent : Colors.redAccent),
+          const SizedBox(width: 4),
+          Expanded(
+              child: Text(a.region,
+                  style: const TextStyle(color: Colors.white70, fontSize: 12))),
+          Text(a.contribution.toStringAsFixed(2),
+              style: TextStyle(
+                  color: positive ? Colors.greenAccent : Colors.redAccent,
+                  fontSize: 11)),
+        ]);
+      }).toList(),
+    );
+  }
+
+  void _showHelpDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text('Interpreting Explanations'),
+              content: const SizedBox(
+                width: 400,
+                child: SingleChildScrollView(
+                    child: Text(
+                        'Heatmap colors: red/yellow highlight regions most influencing the predicted emotion; blue areas contribute less. SHAP list shows facial regions with positive (green) or negative (red) impact. LIME mask highlights super-pixels important for the prediction. These are model approximations, not absolute truths.')),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'))
+              ],
+            ));
   }
 
   void _stopRealtimeDetection() {
@@ -162,17 +408,21 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
     _cooldownRemaining = _cooldownDuration.inSeconds;
     _cooldownTimer?.cancel();
     _cooldownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted) return;
+      if (!mounted) { t.cancel(); return; }
       final now = DateTime.now();
       final remaining = _cooldownEndsAt!.difference(now).inSeconds;
       if (remaining <= 0) {
-        setState(() {
-          _cooldownActive = false;
-          _cooldownRemaining = 0;
-        });
+        if (mounted) {
+          setState(() {
+            _cooldownActive = false;
+            _cooldownRemaining = 0;
+          });
+        }
         t.cancel();
       } else {
-        setState(() => _cooldownRemaining = remaining);
+        if (mounted) {
+          setState(() => _cooldownRemaining = remaining);
+        }
       }
     });
   }
@@ -286,12 +536,43 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
         title: const Text('Real-time Emotion Detection'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          IconButton(
+              onPressed: _showHelpDialog, icon: const Icon(Icons.help_outline)),
           if (_isCameraInitialized)
             IconButton(
               icon: Icon(_isProcessingStarted ? Icons.stop : Icons.play_arrow),
               onPressed: _isProcessingStarted
                   ? _stopRealtimeDetection
                   : _startRealtimeDetection,
+            ),
+          if (_isProcessingStarted)
+            IconButton(
+              tooltip: 'Toggle heatmap overlay',
+              icon:
+                  Icon(_showHeatmap ? Icons.visibility : Icons.visibility_off),
+              onPressed: () => setState(() => _showHeatmap = !_showHeatmap),
+            ),
+          if (_isProcessingStarted)
+            IconButton(
+              tooltip: 'Switch Grad-CAM / Grad-CAM++',
+              icon: Icon(_gradCamPlusPlus
+                  ? Icons.auto_awesome
+                  : Icons.auto_awesome_outlined),
+              onPressed: () {
+                setState(() => _gradCamPlusPlus = !_gradCamPlusPlus);
+                _generateHeatmap();
+              },
+            ),
+          if (_isProcessingStarted)
+            IconButton(
+              tooltip: _showExplanationPanel
+                  ? 'Hide explanation'
+                  : 'Show explanation',
+              icon: Icon(_showExplanationPanel
+                  ? Icons.keyboard_arrow_down
+                  : Icons.keyboard_arrow_up),
+              onPressed: () => setState(
+                  () => _showExplanationPanel = !_showExplanationPanel),
             ),
         ],
       ),
@@ -385,6 +666,7 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
                             ),
                           ),
                           if (_isProcessingStarted) _buildFaceOverlay(),
+                          if (_isProcessingStarted) _buildHeatmapOverlay(),
                         ],
                       );
                     },
@@ -434,89 +716,55 @@ class _RealtimeCameraScreenState extends State<RealtimeCameraScreen>
           if (_currentResult != null)
             Expanded(
               flex: 2,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
-                  border: Border(top: BorderSide(color: Colors.grey.shade300)),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade50,
+                      border:
+                          Border(top: BorderSide(color: Colors.grey.shade300)),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildEmotionIcon(_currentResult!.emotion),
-                        const SizedBox(width: 16.0),
-                        Column(
+                        const SizedBox(width: 12),
+                        Expanded(
+                            child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Current Emotion:',
                                 style: Theme.of(context).textTheme.titleMedium),
+                            Text(_currentResult!.emotion.toUpperCase(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).primaryColor)),
                             Text(
-                              _currentResult!.emotion.toUpperCase(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                            ),
-                            Text(
-                                'Confidence: ${(_currentResult!.confidence * 100).toStringAsFixed(1)}%',
-                                style: Theme.of(context).textTheme.bodyLarge),
+                                'Confidence: ${(_currentResult!.confidence * 100).toStringAsFixed(1)}%'),
+                            const SizedBox(height: 8),
+                            if (!_showExplanationPanel)
+                              Text(
+                                  'Tap the arrow icon in the app bar to open detailed explanation panel.',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                      fontSize: 12)),
                           ],
-                        ),
+                        )),
                       ],
                     ),
-                    const SizedBox(height: 16.0),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: _currentResult!.allPredictions.entries
-                              .map((entry) {
-                            final percentage = entry.value * 100;
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 80,
-                                    child: Text(entry.key,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                  Expanded(
-                                    child: LinearProgressIndicator(
-                                      value: entry.value,
-                                      backgroundColor: Colors.grey.shade300,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        entry.key == _currentResult!.emotion
-                                            ? Theme.of(context).primaryColor
-                                            : Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  SizedBox(
-                                    width: 45,
-                                    child: Text(
-                                        '${percentage.toStringAsFixed(1)}%',
-                                        textAlign: TextAlign.right,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: _buildExplanationPanel(),
+                  )
+                ],
               ),
             ),
         ],

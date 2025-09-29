@@ -6,7 +6,7 @@
 -->
 
 ## 1. Objective
-Augment the existing emotion recognition dataset with high-quality, labeled synthetic facial expression images to reach a larger, more balanced corpus while maintaining quality, diversity, and ethical safeguards.
+Use controllably generated (GenAI) synthetic facial expression images to (a) expand and balance the training corpus and (b) measurably improve downstream model generalization (macro F1 / balanced accuracy) while preserving semantic fidelity, demographic diversity, and ethical safeguards. The synthetic program is considered SUCCESS only if it yields statistically significant accuracy / macro F1 gains versus a real‑only baseline without inflating calibration error or increasing misclassification concentration in minority classes.
 
 ## 2. Target & Scope
 | Aspect | Value / Strategy |
@@ -32,7 +32,7 @@ Augment the existing emotion recognition dataset with high-quality, labeled synt
 5. Apply filtering: single-face detection → blur threshold → perceptual hash dedup.
 6. Convert to grayscale + resize (enforced again in a safety pass).
 7. (Optional) Face cropping variant produced into a separate `*_cropped` directory.
-8. Aggregate metadata (`synthetic_meta.csv` / `.jsonl`).
+8. Aggregate metadata (`synthetic_meta.csv` / `.json`).
 9. Merge original + synthetic; compute per-class synthetic fractions.
 10. Apply stratified splitting with synthetic fraction enforcement for training split.
 11. Export curated image copies (or hardlinks) + CSV manifests + extended `status.json`.
@@ -158,6 +158,101 @@ Rejected (multi-face / blur / dup): <counts if logged>
 3. Run generation loop; capture real metrics and insert into Section 10.
 4. Validate per-class synthetic fraction cap not exceeded post-split.
 5. Export updated findings + link FID/KID evaluation (if added).
+
+---
+
+## 15. Model Accuracy Impact Strategy
+The synthesis initiative is tied directly to model performance uplift. We define a structured evaluation to isolate the causal effect of synthetic data.
+
+### 15.1 Key Performance Targets (Placeholders)
+| Metric | Real-Only Baseline (Current) | Target with Synthetic Phase 1 | Stretch Target | Notes |
+|--------|------------------------------|-------------------------------|----------------|-------|
+| Macro F1 (val) | <baseline_f1_val> | +3–5 pp | +7 pp | Improvements should appear consistently across ≥80% of classes |
+| Macro F1 (test) | <baseline_f1_test> | +3–4 pp | +6 pp | Confirm via blind holdout |
+| Balanced Accuracy | <baseline_bal_acc> | +2–3 pp | +5 pp | Guard against class bias |
+| Top-1 Accuracy | <baseline_top1> | +2 pp | +4 pp | Secondary metric |
+| ECE (Calibration) | <baseline_ece> | ≤ baseline | - | No regression allowed |
+| Inference Latency | <baseline_latency_ms> | ≈ baseline | ≈ baseline | No >3% slowdown |
+
+Populate after experimentation; do not claim success until test metrics reflect significance (Section 15.5).
+
+### 15.2 Integration Approaches Considered
+| Approach | Description | Pros | Cons | Default? |
+|----------|-------------|------|------|---------|
+| Full Merge | Concatenate real + synthetic then shuffle | Simple, fast | Risk of synthetic dominance early | No |
+| Curriculum Mix | Start with real-only epochs, gradually increase synthetic ratio (e.g., 0→40%) | Preserves real priors | More scheduler complexity | Yes (Preferred) |
+| Dynamic Reweight | Higher sampling weight for scarce real classes vs synthetic | Protects rare real signals | Requires adaptive sampler | Optional |
+| Hard Filtering | Only keep synthetic passing classifier agreement | Higher precision of labels | Throughput reduction | Phase 2 |
+
+### 15.3 Recommended Data Loader Mixing Schedule
+Let R be number of warmup epochs (real-only). After warmup, introduce a synthetic ratio ramp:
+```
+synthetic_ratio(epoch) = min(R_target, (epoch - R) / (R_ramp)) * R_target
+```
+Example: R=2, R_ramp=3, R_target=0.4 → synthetic reaches 40% by epoch 5 and stays capped. Real samples always included; per-class synthetic fraction not to exceed configured cap (Section 2).
+
+### 15.4 Ablation Matrix
+| Experiment Code | Description | Synthetic % (Train) | Extra Filters | Expected Insight |
+|-----------------|-------------|---------------------|---------------|------------------|
+| A0 | Baseline (real only) | 0% | - | Control |
+| A1 | Full merge naive | ~40% | Basic blur/dup | Upper-bound raw impact |
+| A2 | Curriculum ramp | 40% cap | Basic blur/dup | Stability vs A1 |
+| A3 | Curriculum + class weight rebalance | 40% | Class weight α tuned | Minority class impact |
+| A4 | Curriculum + classifier agreement gate | 35% | Agreement ≥ τ | Label precision effect |
+| A5 | Lower synthetic cap | 20% | Basic | Diminishing returns curve |
+
+### 15.5 Statistical Significance & Reporting
+1. Collect prediction logits for baseline and synthetic-enhanced models on the identical holdout test split.
+2. Apply paired bootstrap (≥1,000 resamples) on (image, label) pairs computing macro F1 difference distribution.
+3. Report mean ΔF1 and 95% CI; accept improvement if lower bound > 0.
+4. Complement with McNemar test per class for error pattern shifts (flag large asymmetries).
+5. Track calibration via ECE & reliability plots (ensure no overconfidence drift).
+
+### 15.6 Risk Controls Against Synthetic Overfitting
+| Risk | Signal | Mitigation |
+|------|--------|------------|
+| Over-reliance on synthetic texture patterns | Early epoch rapid F1 rise then plateau | Curriculum + cap + monitor real-only validation subset |
+| Class semantic drift | Confusion increase between similar emotions | Add agreement gate; refine prompts |
+| Mode collapse in generation | Low intra-class perceptual variance | Strengthen prompt diversity & dedup via embedding distance |
+| Latent bias amplification | Disparity in per-subgroup precision | Add stratified fairness evaluation (later) |
+
+### 15.7 Acceptance Criteria (Go/No-Go)
+All must hold:
+1. Test macro F1 Δ ≥ +3 pp (CI lower bound > 0).
+2. No per-class F1 degradation >1 pp relative to baseline (unless compensated by ≥2 pp average uplift elsewhere; justify explicitly).
+3. Calibration (ECE) non-inferior (ΔECE ≤ +0.01 absolute).
+4. Inference performance within ±3% latency & memory.
+5. Synthetic governance artefacts (prompts hash, env report, status.json) present and versioned.
+
+### 15.8 Metrics Logging Specification
+Add fields to `status.json` (or new `training_effect.json`):
+```
+{
+	"baseline_run_id": <str>,
+	"synthetic_run_id": <str>,
+	"macro_f1_baseline": <float>,
+	"macro_f1_synth": <float>,
+	"delta_macro_f1": <float>,
+	"balanced_acc_baseline": <float>,
+	"balanced_acc_synth": <float>,
+	"ece_baseline": <float>,
+	"ece_synth": <float>,
+	"latency_ms_baseline": <float>,
+	"latency_ms_synth": <float>,
+	"synthetic_ratio_train": <float>,
+	"mixing_strategy": "curriculum|full_merge|...",
+	"ablation_code": "A2",
+	"significance_ci_macro_f1": [lower, upper]
+}
+```
+
+### 15.9 Future Enhancements (Accuracy-Oriented)
+| Idea | Description | Potential Gain |
+|------|-------------|----------------|
+| Conditional diffusion fine-tune | Fine-tune diffusion on real faces to reduce domain gap | Higher realism & semantic fidelity |
+| Expression consistency scoring | Use pretrained emotion classifier ensemble to filter | Higher label precision |
+| Adversarial augmentation | Generate hard counterfactuals near class boundaries | Better decision boundary sharpness |
+| Active rejection loop | Train preliminary model → reject low-contribution synthetics | Efficiency & quality |
 
 ---
 

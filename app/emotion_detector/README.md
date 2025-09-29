@@ -167,6 +167,131 @@ Android example (already generated in base project): `android/app/src/main/Andro
 | ONNX adapter (future) | Golden test: known input tensor → expected class ordering |
 
 ---
+### 🧬 Model Interaction (Flutter Frontend ↔ Backend Inference)
+This mobile client will evolve from heuristic-only to a full client/backend interaction pattern for the fine‑tuned model. Two deployment modes are planned:
+
+| Mode | Description | Pros | Cons | When to Use |
+|------|-------------|------|------|-------------|
+| On-Device (ONNX) | Direct inference via embedded runtime (FFI plugin) | Low latency, offline, privacy | More integration effort, larger app size | Primary production target |
+| Remote Backend API | Flutter app sends image → server (FastAPI / lightweight Dart Shelf / Cloud Function) | Rapid iteration, centralized monitoring | Network latency, connectivity dependency | Interim, A/B testing, telemetry |
+
+#### Minimal Remote API Contract (v1)
+| Method | Endpoint | Body | Response (200) |
+|--------|----------|------|-----------------|
+| GET | `/health` | - | `{ "status": "ok", "model_version": "resnet50_v3" }` |
+| POST | `/predict` | multipart: `image=<file>` OR JSON: `{ "image_base64": "..." }` | `{ "emotion": "happy", "probs": {"happy":0.73,...}, "latency_ms":12.4 }` |
+
+Error shape:
+```
+{ "error": { "code": "UNSUPPORTED_MEDIA_TYPE", "message": "Only JPEG/PNG allowed" } }
+```
+
+#### Example Flutter API Call (Multipart)
+```dart
+final uri = Uri.parse('https://YOUR_API/predict');
+final request = http.MultipartRequest('POST', uri)
+   ..files.add(await http.MultipartFile.fromPath('image', file.path));
+final streamed = await request.send();
+final body = await streamed.stream.bytesToString();
+final jsonResp = jsonDecode(body);
+```
+
+#### Local Embedded (Experimental) Backend
+For rapid prototyping you can spin up a tiny Dart `shelf` server (debug build only) that proxies to a platform channel invoking native (or Python via PyTorch Mobile) inference. This allows using identical REST code paths before ONNX plugin lands.
+
+```
+flutter run --dart-define=USE_REMOTE_API=true --dart-define=API_BASE_URL=https://...
+```
+
+#### Image Preprocessing (Parity Checklist)
+| Step | Requirement | Done? |
+|------|-------------|-------|
+| Resize | 224×224 (bilinear) |  |
+| Channel order | RGB |  |
+| Normalize | ImageNet mean/std or model-specific |  |
+| Tensor shape | `[1,3,224,224]` float32 |  |
+| Softmax | Temperature = 1.0 |  |
+| Label map | Matches `assets/label_map.json` |  |
+
+Populate the Done column during integration PR.
+
+---
+### 🛠 Implementation Plan (Frontend + Backend)
+| Phase | Deliverable | Success Criteria |
+|-------|-------------|------------------|
+| P0 | Remote prediction wiring (hard-coded endpoint) | Single image returns probabilities in UI |
+| P1 | Error & timeout handling + retry | Graceful toast on network failure |
+| P2 | Loading + latency telemetry overlay | Latency shown; 95% < target threshold |
+| P3 | Batch / queued capture (optional) | Multiple pending frames safely skipped / deduped |
+| P4 | Offline ONNX integration | Matches remote within tolerance (KL divergence < ε) |
+| P5 | Fallback strategy (remote→local) | Automatic seamless switch with banner |
+
+---
+### 🧪 Expanded Testing & Quality Matrix (Mobile Focus)
+| Layer | Type | Tooling | What is Validated |
+|-------|------|---------|-------------------|
+| Pure logic (services) | Unit | `flutter test` | Probability math, normalization, smoothing |
+| HTTP client adapter | Unit | Mock HTTP (http_mock_adapter / mocktail) | Correct headers, error paths |
+| ONNX preprocessing | Unit | Golden tensor checksum | Deterministic float array creation |
+| Widget (UI) | Widget tests | `flutter test` | Rendering, loading states, error banners |
+| Integration (remote) | Integration tests | `flutter drive` / `integration_test` + mock server | End-to-end request → UI update |
+| Performance | Benchmark | `flutter drive` custom harness | Frame time, memory under stress |
+| Accessibility | Lints + semantics tests | `flutter_test` semantics | All interactive controls have labels |
+| Usability (manual) | Structured checklist | Test script | Task completion time & error rate |
+| Reliability | Soak test | Scripted loop | Memory leak, handle disposal errors |
+
+#### Usability Scenario Checklist
+| Scenario | Success Metric |
+|----------|---------------|
+| Capture frame in low light | Returns neutral/low-confidence, no crash |
+| No face present | Clear message, no stale previous result |
+| Slow network | Spinner + cancellation option; no freeze |
+| Rotate device mid-inference | Layout adapts; in-flight op completes or aborts safely |
+| Rapid camera toggles | No resource leak; camera stream stable |
+
+#### Definition of Done (Model Integration Story)
+All must pass:
+1. Unit + widget tests ≥ 90% service layer coverage; zero critical failures.
+2. Remote vs local (ONNX) prediction divergence: per-class absolute probability diff median < 0.02.
+3. P95 end-to-end inference latency: local < 120 ms (modern device), remote < 600 ms (4G). 
+4. Accessibility: All interactive widgets expose semantics labels.
+5. Error cases: simulated network down, 415 media type, timeout, no-face — each handled with user-friendly surfaced state.
+6. README preprocessing parity checklist completed (all marked Done).
+
+---
+### 👤 UX & Feedback Loop
+Lightweight in-app dev overlay (debug only):
+* Show current backend mode (Remote / Local / Fallback).
+* Display last inference latency + queue depth.
+* Toggle to log raw probability vectors for first N frames (privacy: disabled in release).
+
+Planned metrics events (if analytics later added):
+| Event | Fields |
+|-------|--------|
+| inference_success | backend_mode, latency_ms, top_label, confidence |
+| inference_error | backend_mode, error_code, retry_count |
+| mode_switch | from_mode, to_mode, reason |
+
+---
+### 🔐 Security & Privacy (Mobile + Backend Interaction)
+| Concern | Mitigation |
+|---------|-----------|
+| Interception of requests | Enforce HTTPS only; pin cert (later) |
+| Unauthorized backend use | (Future) API key / signed nonce in header |
+| Sensitive image retention | Do not store images by default; ephemeral memory only |
+| Crash logs leaking data | Scrub image paths / labels in error output |
+
+---
+### 🧾 Future Enhancements (Interaction Layer)
+| Idea | Benefit |
+|------|--------|
+| Progressive streaming of partial probabilities | Perceived responsiveness |
+| Local caching of last N probability vectors | Offline analytics / stability review |
+| On-device Grad-CAM overlay (after ONNX) | Explainability & trust |
+| Adaptive sampling (lower FPS when stable expression) | Battery & thermal savings |
+
+
+---
 ### 🔄 Migration Path to Real Model
 | Step | Action |
 |------|--------|
@@ -225,5 +350,3 @@ Open an issue in the main repository with the `[flutter]` prefix describing:
 * Logs (if crash)
 
 ---
-
-_Generated mobile README (2025-09-24)._
