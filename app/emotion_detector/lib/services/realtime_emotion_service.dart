@@ -32,6 +32,8 @@ class RealtimeEmotionService {
     if (prefix != null) _cropFilePrefix = prefix;
   }
 
+  bool get isRealtimeGallerySaving => _saveCropsToGallery;
+
   StreamController<RealtimeEmotionResult>? _emotionStreamController;
   Timer? _analysisTimer;
   bool _isAnalyzing = false;
