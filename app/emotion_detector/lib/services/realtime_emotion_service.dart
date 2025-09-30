@@ -1,6 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:image/image.dart' as img;
+import 'package:permission_handler/permission_handler.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart'; // for rootBundle, WriteBuffer
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -10,6 +15,22 @@ class RealtimeEmotionService {
   late List<String> _emotions;
   late FaceDetector _faceDetector;
   bool _isInitialized = false;
+
+  // iOS-only face crop saving configuration
+  bool _saveCropsToGallery = false; // disabled by default
+  Duration _cropSaveInterval = const Duration(seconds: 3);
+  int _lastCropSaveMs = 0;
+  String _cropFilePrefix = 'rt_emotion_face';
+
+  void enableRealtimeGallerySaving({
+    bool enabled = true,
+    Duration? minInterval,
+    String? prefix,
+  }) {
+    _saveCropsToGallery = enabled;
+    if (minInterval != null) _cropSaveInterval = minInterval;
+    if (prefix != null) _cropFilePrefix = prefix;
+  }
 
   StreamController<RealtimeEmotionResult>? _emotionStreamController;
   Timer? _analysisTimer;
@@ -103,7 +124,7 @@ class RealtimeEmotionService {
             topScore = kv.value;
           }
         }
-        _emotionStreamController?.add(RealtimeEmotionResult(
+        final result = RealtimeEmotionResult(
           emotion: topEmotion,
           confidence: topScore,
           allPredictions: predictions,
@@ -116,7 +137,13 @@ class RealtimeEmotionService {
           imageHeight: cameraImage.height,
           imageRotationDegrees: _rotationDegrees,
           isFrontCamera: _isFrontCamera,
-        ));
+        );
+        _emotionStreamController?.add(result);
+
+        // Attempt to save crop (iOS only, throttled)
+        if (_saveCropsToGallery) {
+          _maybeSaveFaceCrop(cameraImage, bestFace, result.emotion);
+        }
       } else {
         _emotionStreamController?.add(RealtimeEmotionResult(
           emotion: 'neutral',
@@ -292,6 +319,125 @@ class RealtimeEmotionService {
     stopRealtimeDetection();
     if (_isInitialized) {
       _faceDetector.close();
+    }
+  }
+
+  // --- iOS ONLY: Save cropped face to Photos for validation ---
+  Future<void> _maybeSaveFaceCrop(
+      CameraImage image, Face face, String emotion) async {
+    try {
+      if (!Platform.isIOS) return; // Only do this on iOS per requirement
+      final now = DateTime.now().millisecondsSinceEpoch;
+      if (now - _lastCropSaveMs < _cropSaveInterval.inMilliseconds) return;
+
+      // Permissions (try add-only then broader Photos)
+      var status = await Permission.photosAddOnly.request();
+      if (!status.isGranted) {
+        status = await Permission.photos.request();
+        if (!status.isGranted) return;
+      }
+
+      // Convert YUV420 -> RGB
+      final rgb = _yuv420ToImage(image);
+      if (rgb == null) return;
+
+      // Rotate to upright orientation
+      img.Image oriented = rgb;
+      switch (_rotationDegrees) {
+        case 90:
+          oriented = img.copyRotate(rgb, angle: 90);
+          break;
+        case 180:
+          oriented = img.copyRotate(rgb, angle: 180);
+          break;
+        case 270:
+          oriented = img.copyRotate(rgb, angle: 270);
+          break;
+      }
+      // Mirror if front camera (after rotation)
+      if (_isFrontCamera) {
+        oriented = img.flipHorizontal(oriented);
+      }
+
+      // Bounding box should correspond to upright orientation (because we passed rotation to ML Kit)
+      final bbox = face.boundingBox;
+      int x = bbox.left.floor();
+      int y = bbox.top.floor();
+      int w = bbox.width.floor();
+      int h = bbox.height.floor();
+      // Clamp
+      if (x < 0) x = 0;
+      if (y < 0) y = 0;
+      if (x + w > oriented.width) w = oriented.width - x;
+      if (y + h > oriented.height) h = oriented.height - y;
+      if (w <= 0 || h <= 0) return;
+
+      final crop = img.copyCrop(oriented, x: x, y: y, width: w, height: h);
+      final ts = now;
+      final fname = '${_cropFilePrefix}_${emotion.toLowerCase()}_$ts.jpg';
+      final jpg = img.encodeJpg(crop, quality: 90);
+      final saveRes = await ImageGallerySaver.saveImage(
+        Uint8List.fromList(jpg),
+        quality: 90,
+        name: fname,
+      );
+      if (saveRes is Map &&
+          (saveRes['isSuccess'] == true || saveRes['success'] == true)) {
+        _lastCropSaveMs = now;
+      }
+    } catch (_) {
+      // Swallow saving errors to avoid disrupting real-time pipeline
+    }
+  }
+
+  // Basic YUV420 (planar) to RGB conversion (performance trade-off: called only when throttled)
+  img.Image? _yuv420ToImage(CameraImage image) {
+    try {
+      final width = image.width;
+      final height = image.height;
+      final yPlane = image.planes[0];
+      final uPlane = image.planes.length > 1 ? image.planes[1] : null;
+      final vPlane = image.planes.length > 2 ? image.planes[2] : null;
+      // If planes missing, abort
+      if (uPlane == null || vPlane == null) return null;
+
+      final img.Image rgbImage = img.Image(width: width, height: height);
+      final int uvRowStride = uPlane.bytesPerRow;
+      final int uvPixelStride = uPlane.bytesPerPixel ?? 1;
+
+      for (int y = 0; y < height; y++) {
+        final yRow = y * yPlane.bytesPerRow;
+        final uvRow = (y >> 1) * uvRowStride;
+        for (int x = 0; x < width; x++) {
+          final int yIndex = yRow + x;
+          final int uvIndex = uvRow + (x >> 1) * uvPixelStride;
+          final yp = yPlane.bytes[yIndex];
+          final up = uPlane.bytes[uvIndex];
+          final vp = vPlane.bytes[uvIndex];
+
+          final double Y = yp.toDouble();
+          final double U = up.toDouble() - 128.0;
+          final double V = vp.toDouble() - 128.0;
+
+          // BT.601 conversion
+          double r = Y + 1.402 * V;
+          double g = Y - 0.344136 * U - 0.714136 * V;
+          double b = Y + 1.772 * U;
+          if (r < 0)
+            r = 0;
+          else if (r > 255) r = 255;
+          if (g < 0)
+            g = 0;
+          else if (g > 255) g = 255;
+          if (b < 0)
+            b = 0;
+          else if (b > 255) b = 255;
+          rgbImage.setPixelRgba(x, y, r.toInt(), g.toInt(), b.toInt(), 255);
+        }
+      }
+      return rgbImage;
+    } catch (_) {
+      return null;
     }
   }
 }

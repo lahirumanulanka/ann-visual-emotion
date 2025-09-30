@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image/image.dart' as img;
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 
@@ -10,6 +13,26 @@ class FaceDetectionEmotionService {
   late List<String> _emotions;
   late FaceDetector _faceDetector;
   bool _isInitialized = false;
+  // iOS-only: enable to save cropped face images to the system Photos app (for validation)
+  bool saveCroppedFacesToGallery = false; // iOS ONLY
+
+  // Optional prefix for saved images
+  String galleryFilePrefix = 'emotion_face';
+  Duration gallerySaveInterval =
+      const Duration(seconds: 2); // throttle interval
+  int _lastGallerySaveMs = 0;
+
+  /// Enable or disable saving cropped faces to iOS Photos.
+  /// Optionally adjust filename prefix and minimum interval between saves.
+  void enableGallerySaving({
+    bool enabled = true,
+    String? filePrefix,
+    Duration? minInterval,
+  }) {
+    saveCroppedFacesToGallery = enabled;
+    if (filePrefix != null) galleryFilePrefix = filePrefix;
+    if (minInterval != null) gallerySaveInterval = minInterval;
+  }
 
   Future<void> initialize() async {
     try {
@@ -134,6 +157,8 @@ class FaceDetectionEmotionService {
       final faceImage = img.copyCrop(originalImage,
           x: cropX, y: cropY, width: cropWidth, height: cropHeight);
 
+      // (iOS only) We'll save after determining emotion so filename can include label
+
       // Analyze the cropped face
       final faceAnalysis = await _analyzeImageProperties(faceImage, face);
 
@@ -162,6 +187,11 @@ class FaceDetectionEmotionService {
 
       print(
           'Face emotion detected: $detectedEmotion (${(confidence * 100).toStringAsFixed(1)}%)');
+
+      // Now save (iOS only) with emotion in filename
+      if (saveCroppedFacesToGallery) {
+        await _maybeSaveCroppedFace(faceImage, detectedEmotion);
+      }
 
       return EmotionResult(
         emotion: detectedEmotion,
@@ -431,6 +461,55 @@ class FaceDetectionEmotionService {
   void dispose() {
     if (_isInitialized) {
       _faceDetector.close();
+    }
+  }
+
+  Future<void> _maybeSaveCroppedFace(img.Image faceImage,
+      [String? emotion]) async {
+    try {
+      // Only support iOS saving as requested.
+      if (!Platform.isIOS) {
+        return; // Skip silently on other platforms
+      }
+
+      final now = DateTime.now().millisecondsSinceEpoch;
+      if (now - _lastGallerySaveMs < gallerySaveInterval.inMilliseconds) {
+        return; // throttled
+      }
+
+      // iOS permission (Add Only keeps minimal scope). Fallback to general photos if needed.
+      var status = await Permission.photosAddOnly.request();
+      if (!status.isGranted) {
+        // Try broader permission if user denied add-only.
+        status = await Permission.photos.request();
+        if (!status.isGranted) {
+          print('iOS photo permission not granted, skipping save');
+          return;
+        }
+      }
+
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final suffix = (emotion != null)
+          ? '_${emotion.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '_')}'
+          : '';
+      final filename = '${galleryFilePrefix}${suffix}_$timestamp.jpg';
+      final jpgBytes = img.encodeJpg(faceImage, quality: 95);
+
+      final result = await ImageGallerySaver.saveImage(
+        Uint8List.fromList(jpgBytes),
+        quality: 95,
+        name: filename,
+      );
+
+      if ((result is Map) &&
+          (result['isSuccess'] == true || result['success'] == true)) {
+        _lastGallerySaveMs = now;
+        print('Cropped face saved to gallery as $filename');
+      } else {
+        print('Failed to save cropped face to gallery: $result');
+      }
+    } catch (e) {
+      print('Error saving cropped face image: $e');
     }
   }
 }

@@ -46,6 +46,8 @@ dependencies:
   collection: ^1.18.0
   flutter_svg: ^2.0.10
   provider: ^6.1.2
+  image_gallery_saver: ^2.0.3
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:
