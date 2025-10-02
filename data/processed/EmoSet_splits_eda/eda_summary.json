@@ -1,0 +1,25 @@
+{
+  "original_dataset_size": 5000,
+  "balanced_dataset_size": 5250,
+  "synthetic_samples_generated": 250,
+  "num_features": 16,
+  "num_classes": 6,
+  "class_distribution_before": {
+    "neutral": 875,
+    "surprised": 857,
+    "sad": 844,
+    "fearful": 828,
+    "angry": 810,
+    "happy": 786
+  },
+  "class_distribution_after": {
+    "angry": 875,
+    "neutral": 875,
+    "sad": 875,
+    "happy": 875,
+    "fearful": 875,
+    "surprised": 875
+  },
+  "balance_ratio_before": 1.11323155216285,
+  "balance_ratio_after": 1.0
+}

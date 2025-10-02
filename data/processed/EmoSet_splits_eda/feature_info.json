@@ -1,0 +1,36 @@
+{
+  "engineered_features": [
+    "brightness",
+    "contrast",
+    "color_balance_rb",
+    "edge_density",
+    "rgb_variance",
+    "color_saturation"
+  ],
+  "all_features": [
+    "mean_intensity",
+    "std_intensity",
+    "min_intensity",
+    "max_intensity",
+    "mean_r",
+    "mean_g",
+    "mean_b",
+    "std_r",
+    "std_g",
+    "std_b",
+    "brightness",
+    "contrast",
+    "color_balance_rb",
+    "edge_density",
+    "rgb_variance",
+    "color_saturation"
+  ],
+  "label_encoding": {
+    "angry": 0,
+    "fearful": 1,
+    "happy": 2,
+    "neutral": 3,
+    "sad": 4,
+    "surprised": 5
+  }
+}
