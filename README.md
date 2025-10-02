@@ -59,6 +59,7 @@ End‑to‑end system for building, extending, explaining, and deploying a facia
 |-------|-------------|--------------------------|------------------|
 | EDA | Scan counts, format, quality metrics | `01_eda.ipynb` | `docs/eda.md` |
 | Balancing & Aug | Oversample minorities with augmentations, split | `02_feature_engineering_balancing.ipynb` | Balanced tree + `train/val/test.csv` |
+| **Comprehensive EDA** | **Feature extraction, outlier treatment, SMOTE balancing, feature engineering** | **`03_exploratory_data_analysis.ipynb`** | **Balanced dataset + features, visualizations, summary** |
 | Synthetic GenAI | Diffusion-based class expansion (filtered) | `03_synthetic_gen_ai_generation.ipynb` | Synthetic images + `status.json` |
 | Merge & Splits | Combine original + synthetic within cap | GenAI notebook + scripts | Updated splits & label map |
 | Training | Staged fine‑tuning with explainability hooks | `CNN_with_Transfer_Learning.ipynb` | `best_model.pth`, `model_fixed.onnx` |
